@@ -41,8 +41,6 @@
 
     </div>
   </div>
-  
-
 
   <div class="container" id="intro_sect">
     <div class="section">
@@ -84,7 +82,7 @@
   
   	<div class="container" id="articles_sect">
   		<div class="section">
-  		  <table class="responsive-table highlight">
+<!--   		  <table class="responsive-table highlight">
   			<thead>
   			  <tr>
   				  <th>Title</th>
@@ -107,21 +105,14 @@
     				<td>Satire <i class="material-icons">mood</i></td>
     				<td><a href"">Link</a></td>
   			  </tr>
-
-          <!-- for-each loop to show every entry in article list -->
-          <?php foreach (($artList?:[]) as $article): ?>
-            <tr>
-              <td><?= ($article[0]) ?></td>
-              <td><?= ($article[1]) ?></td>
-              <td><?= ($article[2]) ?></td>
-              <td><?= ($article[3]) ?></td>
-              <td><?= ($article[4]) ?></td>
-              <td><?= ($article[5]) ?></td>
-              <td><a href="<?= ($article[0]) ?>">Link</a></td>
-            </tr>
-          <?php endforeach; ?>
+          
   			</tbody> 
-  		  </table>
+  		  </table> -->
+
+        <ul class="collapsible" id="article_list">
+
+
+        </ul>
   		</div>
   	</div>
   
@@ -133,7 +124,7 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">About Verdad</h5>
-          <p class="grey-text text-lighten-4">Verdad is a thing... that exists on the interwebs.</p>
+          <p class="grey-text text-lighten-4">Verdad is an online peer review site for online news articles.</p>
 
 
         </div>
@@ -141,7 +132,7 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-        A special project by Justin Aaron S. Rombawa and Prof. Jaderick P. Pabico
+        A special project by Justin Aaron S. Rombawa and Prof. Jaderick P. Pabico<br/>
         Copyright 2018
       </div>
     </div>

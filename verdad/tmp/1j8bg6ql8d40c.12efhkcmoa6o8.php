@@ -41,7 +41,7 @@
 
     </div>
   </div>
-  
+
 
 
   <div class="container" id="intro_sect">
@@ -107,19 +107,6 @@
     				<td>Satire <i class="material-icons">mood</i></td>
     				<td><a href"">Link</a></td>
   			  </tr>
-
-          <!-- for-each loop to show every entry in article list -->
-          <?php foreach (($artList?:[]) as $article): ?>
-            <tr>
-              <td><?= ($article[0]) ?></td>
-              <td><?= ($article[1]) ?></td>
-              <td><?= ($article[2]) ?></td>
-              <td><?= ($article[3]) ?></td>
-              <td><?= ($article[4]) ?></td>
-              <td><?= ($article[5]) ?></td>
-              <td><a href="<?= ($article[0]) ?>">Link</a></td>
-            </tr>
-          <?php endforeach; ?>
   			</tbody> 
   		  </table>
   		</div>
@@ -133,7 +120,7 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">About Verdad</h5>
-          <p class="grey-text text-lighten-4">Verdad is a thing... that exists on the interwebs.</p>
+          <p class="grey-text text-lighten-4">Verdad is an online peer-review system for news articles.</p>
 
 
         </div>

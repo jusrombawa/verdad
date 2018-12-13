@@ -39,36 +39,48 @@ $(document).ready(function(){
                        /* text +=
                         '<form action="/article"><input class="hidden_id_form" id="' + articleList[i][8] '" type="hidden" name="id" value="' + articleList[i][8] + '"</form>';*/
                         //row opening tag
-                        text += "<tr>";
+                        text += "<li>";
+                        text += "<div class='collapsible-header'>"
+
+
                         //title
-                        text += "<td><a class='hidden_id' name='" + articleList[i][8] + "'>" + articleList[i][0] + "</a></td>";
+                        text += articleList[i][0];
+                        text += "<br/>";
                         //author
-                        text += "<td class='author'>" + articleList[i][1] + "</td>";
+                        text += articleList[i][1];
+                        text += "<br/>";
                         //date published
-                        text += "<td>" + articleList[i][2] + "</td>";
+                        text += articleList[i][2];
+                        text += "<br/>";
                         //publisher
-                        text += "<td>" + articleList[i][3] + "</td>";
+                        text += articleList[i][3];
+                        text += "<br/>";
+
                         //rating
                         //check for not enough ratings (null for now)
                         if(articleList[i][4] == null)
-                            text += "<td>No ratings</td>"
+                            text += "No ratings"
                         else
-                            text += "<td>" + articleList[i][4] + "</td>";
+                            text += "" + articleList[i][4] + "";
+                        text += "<br/>";
                         //check if satire and/or opinion
-                        if(articleList[i][5] && articleList[i][6]) text += "<td>Satire & Opinion</td>";
-                        else if(articleList[i][5] && !articleList[i][6]) text += "<td>Satire</td>";
-                        else if(!articleList[i][5] && articleList[i][6]) text += "<td>Opinion</td>";
-                        else text += "<td>No</td>";
-
-                        //url
-                        text += "<td><a href='" + articleList[i][7] + "'>Link</a></td>";
+                        if(articleList[i][5] && articleList[i][6]) text += "Satire & Opinion";
+                        else if(articleList[i][5] && !articleList[i][6]) text += "Satire";
+                        else if(!articleList[i][5] && articleList[i][6]) text += "Opinion";
+                        else text += "Not satire or opinion";
 
                         //row closing tag
-                        text += "</tr>";
+                        text += "</div>"
+                        text += "<div class='collapsible-body'>";
+                        text += "</div>";
+
+                        text += "<div class='collapsible-body'><iframe width='800' height='600' src=" + articleList[i][7] + "></iframe>";
+
+                        text += "</li>";
                     }
 
                     //write to table
-                    $("#article_table").html(text);
+                    $("#article_list").html(text);
 
                 },
 
@@ -81,17 +93,20 @@ $(document).ready(function(){
     });
 
     //read specific article
-    $(document).on("click",".hidden_id",function(){
+    /*$(document).on("click",".hidden_id",function(){
         //alert("hello");
         var articleID = $(this).attr("name");
+
+        //alert(articleID);
 
         $.ajax({
             type: 'GET',
             url: '/article',
             data: articleID,
 
-            success: function() {
-                alert("great success!");
+            success: function(data) {
+                articleBody = $.parseJSON(data);
+                //alert(articleBody[1]);
             },
 
             error: function() {
@@ -99,6 +114,8 @@ $(document).ready(function(){
             }
 
 
-        });
+        });*/
+
+    $(document).on("click",)
     });
 });

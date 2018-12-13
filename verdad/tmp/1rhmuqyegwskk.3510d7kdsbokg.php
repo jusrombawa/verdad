@@ -30,19 +30,19 @@
   <div class="container">
 	<div class="section">
 	
-		<h3>Article Title</h3>
-		<h4>Rating: n/a.0<i class="material-icons">star_rate</i></h4>
-		<h6>Author</h6>
-		<h6>Publisher</h6>
-		<h6>Link</h6>
+		<h3 id="article_title">Article Title</h3>
+		<h4 id="article_rating">Rating: n/a.0<i class="material-icons">star_rate</i></h4>
+		<h6 id="article_author">Author</h6>
+		<h6 id="id_publisher">Publisher</h6>
+		<h6 id="id_URL">Link</h6>
 		
-		<p>
+		<p id="id_body">
 			Article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body article body
 		</p>
 		
 		<h4>Reviews:</h4>
 		<div class="row">
-			<div class="col s4">
+			<div class="col s4" id="review_section">
 				<p>
 					Review body review body review body review body review body review body review body review body review body review body review body review body review body review body review body
 				</p>
