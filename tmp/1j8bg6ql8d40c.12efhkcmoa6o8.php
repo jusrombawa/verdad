@@ -7,8 +7,8 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="{{ @UI . 'css/materialize.css' }}" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{{ @UI . 'css/style.css' }}" rel="stylesheet" media="screen,projection"/>
+  <link href="<?= ($UI . 'css/materialize.css') ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="<?= ($UI . 'css/style.css') ?>" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 
@@ -41,6 +41,8 @@
 
     </div>
   </div>
+
+
 
   <div class="container" id="intro_sect">
     <div class="section">
@@ -82,7 +84,7 @@
   
   	<div class="container" id="articles_sect">
   		<div class="section">
-<!--   		  <table class="responsive-table highlight">
+  		  <table class="responsive-table highlight">
   			<thead>
   			  <tr>
   				  <th>Title</th>
@@ -105,14 +107,8 @@
     				<td>Satire <i class="material-icons">mood</i></td>
     				<td><a href"">Link</a></td>
   			  </tr>
-          
   			</tbody> 
-  		  </table> -->
-
-        <ul class="collapsible" id="article_list">
-
-
-        </ul>
+  		  </table>
   		</div>
   	</div>
   
@@ -124,7 +120,7 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">About Verdad</h5>
-          <p class="grey-text text-lighten-4">Verdad is an online peer review site for online news articles.</p>
+          <p class="grey-text text-lighten-4">Verdad is an online peer-review system for news articles.</p>
 
 
         </div>
@@ -132,7 +128,7 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-        A special project by Justin Aaron S. Rombawa and Prof. Jaderick P. Pabico<br/>
+        A special project by Justin Aaron S. Rombawa and Prof. Jaderick P. Pabico
         Copyright 2018
       </div>
     </div>
@@ -145,10 +141,10 @@
   
   <!--  Scripts-->
  <!--  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
-  <script src="{{ @UI. 'js/jquery.min.js'}}"></script>
-  <script src="{{ @UI . 'js/jquery-ui.min.js' }}"></script>
-  <script src="{{ @UI . 'js/materialize.js' }}"></script>
-  <script src="{{ @UI . 'js/init.js' }}"></script>
+  <script src="<?= ($UI. 'js/jquery.min.js') ?>"></script>
+  <script src="<?= ($UI . 'js/jquery-ui.min.js') ?>"></script>
+  <script src="<?= ($UI . 'js/materialize.js') ?>"></script>
+  <script src="<?= ($UI . 'js/init.js') ?>"></script>
   <script src="app/views/verdad.js" type="application/javascript"></script>
   </body>
 </html>

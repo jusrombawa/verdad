@@ -4,7 +4,7 @@ class MainController extends Controller{
 
 	function home(){
 		$this->renderView('home.htm');
-		$this->getArticles();
+		//$this->getArticles();
 	}
 
 	function getArticles()
@@ -50,7 +50,25 @@ class MainController extends Controller{
 	}
 
 	function readArticle(){
-		$this->renderView("article.htm");
+
+		$am = new ArticleMapper($this->db);
+		//retrieve id to be viewed from GET
+		//but for now...
+		//$articleID = 1;
+		$articleID = $this->f3->get('GET.articleID');
+		$article = $am->load(array("id=?",$articleID));
+		
+
+		//$articleID = $_GET['articleID'];
+
+		$output = array();
+
+		array_push($output,$article->body);
+		array_push($output, $articleID);
+
+		echo json_encode($output);
+
+		//$this->renderView("article.htm");
 	}
 
 	function sayhello(){
