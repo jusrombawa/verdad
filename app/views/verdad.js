@@ -73,6 +73,8 @@ $(document).ready(function(){
                         /*text += "<div class='collapsible-body'>Text goes here.";
                         text += "</div>";
 */
+                        //might slow things down since this loads all urls, fix later, but for now, disable
+                        //text += "<div class='collapsible-body '><iframe class='article-frame' height='600' src='"+articleList[i][7]+"''></iframe></div>";
                         text += "<div class='collapsible-body '><iframe class='article-frame' height='600' ></iframe></div>";
 
                         //src=" + articleList[i][7] + "
@@ -118,7 +120,7 @@ $(document).ready(function(){
 
         });*/
 
-/*
+
     //resize frame when article listing is clicked
     $(document).on("click",".article-listing",function(){
         var collapsiblewidth = $(".article-listing").width()-50; //50 pixels is just approximate, might not be right for bigger screens
@@ -129,5 +131,5 @@ $(document).ready(function(){
     $(window).resize(function(){
        var collapsiblewidth = $(".article-listing").width()-50;
         $(".article-frame").width(collapsiblewidth); 
-    });*/
+    });
 });

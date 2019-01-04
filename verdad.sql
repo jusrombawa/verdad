@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2018 at 01:04 PM
+-- Generation Time: Jan 04, 2019 at 06:23 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -105,6 +105,31 @@ CREATE TABLE `publish_sites` (
 INSERT INTO `publish_sites` (`id`, `name`, `url`, `avg_score`, `published_by`) VALUES
 (1, 'Rappler', 'https://rappler.com', NULL, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `article_fk` int(11) NOT NULL,
+  `reviewer_fk` int(11) NOT NULL,
+  `score` float NOT NULL,
+  `comments` text NOT NULL,
+  `satire_flag` tinyint(1) NOT NULL,
+  `opinion_flag` tinyint(1) NOT NULL,
+  `erroneous_flag` tinyint(1) NOT NULL,
+  `report_fk` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `article_fk`, `reviewer_fk`, `score`, `comments`, `satire_flag`, `opinion_flag`, `erroneous_flag`, `report_fk`) VALUES
+(1, 1, 1, 5, 'Similarly reported by GMA News[1] on the same day and almost the same time.\r\n\r\nhttps://www.gmanetwork.com/news/news/nation/677571/house-summons-diokno-to-a-question-hour-on-2019-budget/story/', 0, 0, 0, 0);
+
 --
 -- Indexes for dumped tables
 --
@@ -129,6 +154,14 @@ ALTER TABLE `publish_sites`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `article_fk` (`article_fk`),
+  ADD UNIQUE KEY `reviewer_fk` (`reviewer_fk`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -149,6 +182,12 @@ ALTER TABLE `messages`
 --
 ALTER TABLE `publish_sites`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
