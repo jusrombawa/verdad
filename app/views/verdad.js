@@ -31,13 +31,12 @@ $(document).ready(function(){
                 url: '/getArticles',
 
                 success: function(data) {
+                    alert(data);
                     var articleList = $.parseJSON(data);
                     var text = "";
                     for (var i=0; i<articleList.length; i++)
                     {
-                        //hidden form for id
-                       /* text +=
-                        '<form action="/article"><input class="hidden_id_form" id="' + articleList[i][8] '" type="hidden" name="id" value="' + articleList[i][8] + '"</form>';*/
+                       
                         //row opening tag
                         text += "<li>";
                         text += "<div class='collapsible-header article-listing'>"
@@ -79,7 +78,20 @@ $(document).ready(function(){
 
                         //src=" + articleList[i][7] + "
 
-                        text += "<div class='collapsible-body'>Body goes here but this is supposed to be review.</div>"
+                        text += "<div class='collapsible-body'>";
+
+                        text += "<div class='row'>"
+
+                        //reviews
+                        text += "<div class='col s4'>Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 Review 1 </div>"
+                        text += "<div class='col s4'>Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 </div>"
+                        text += "<div class='col s4'>Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 Review 2 </div>"
+                        
+                        
+
+                        text +="</div>"
+
+                        text += "</div>";
                         text += "</li>";
                     }
 
@@ -95,30 +107,6 @@ $(document).ready(function(){
 
             });
     });
-
-    //read specific article
-    /*$(document).on("click",".hidden_id",function(){
-        //alert("hello");
-        var articleID = $(this).attr("name");
-
-        //alert(articleID);
-
-        $.ajax({
-            type: 'GET',
-            url: '/article',
-            data: articleID,
-
-            success: function(data) {
-                articleBody = $.parseJSON(data);
-                //alert(articleBody[1]);
-            },
-
-            error: function() {
-                
-            }
-
-
-        });*/
 
 
     //resize frame when article listing is clicked

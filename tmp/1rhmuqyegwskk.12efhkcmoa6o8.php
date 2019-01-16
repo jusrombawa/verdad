@@ -13,7 +13,7 @@
 <body>
 
   <nav class="blue darken-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Verdad</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
       
 
       <ul id="nav-mobile" class="sidenav">
@@ -119,7 +119,7 @@
   <div>
   </div>
   
-  <footer class="page-footer blue darken-3">
+ <!--  <footer class="page-footer blue darken-3">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
@@ -136,7 +136,7 @@
         Copyright 2018
       </div>
     </div>
-  </footer>
+  </footer> -->
   
   <!-- Modals -->
   
