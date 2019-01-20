@@ -39,7 +39,7 @@ class MainController extends Controller{
 			$review_list = array();
 
 			//ERROR!!! Infinite loop
-			while($reviews != FALSE)
+			while(!$rm->dry())
 			{
 				$review_entry = array();
 				//reviewer to be pushed later
@@ -48,10 +48,11 @@ class MainController extends Controller{
 				array_push($review_entry, $rm->satire_flag);
 				array_push($review_entry, $rm->opinion_flag);
 				array_push($review_list,$review_entry);
-
-				echo json_encode($review_list);
+				$rm->next();
+		
 			}
-			
+			//push review list into article entry
+			array_push($entry, $review_list);
 
 			//push entry to artList
 			array_push($artList,$entry);
@@ -63,7 +64,7 @@ class MainController extends Controller{
 		//toggle to show artList in home.htm
 		$this->f3->set('showArtList',TRUE);*/
 		//ET phone home
-		//echo json_encode($artList);
+		echo json_encode($artList);
 
 	}
 
