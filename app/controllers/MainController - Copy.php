@@ -13,7 +13,6 @@ class MainController extends Controller{
 
 		$am = new ArticleMapper($this->db);
 		$pm = new PublisherMapper($this->db);
-		$rm = new ReviewMapper($this->db);
 
 		$am->load("1",array('order'=>'submit_date DESC'));
 
@@ -27,42 +26,24 @@ class MainController extends Controller{
 			array_push($entry,$am->author);
 			array_push($entry,$am->publish_date);
 			array_push($entry,$publisher->name);
+			//array_push($entry,$am->publisher_fk);
 			array_push($entry,$am->avg_score);
 			array_push($entry,$am->satire);
 			array_push($entry,$am->opinion);
 			array_push($entry,$am->url);
-			//array_push($entry,$am->id);
-
-			//build array of reviews then push to entry
-			$article_id = $am->id;
-			$reviews = $rm->load(array("article_fk=?",$article_id));
-			$review_list = array();
-
-			//ERROR!!! Infinite loop
-			while(!$rm->dry())
-			{
-				$review_entry = array();
-				//reviewer to be pushed later
-				array_push($review_entry, $rm->score);
-				array_push($review_entry, $rm->comments);
-				array_push($review_entry, $rm->satire_flag);
-				array_push($review_entry, $rm->opinion_flag);
-				array_push($review_list,$review_entry);
-				$rm->next();
-		
-			}
-			//push review list into article entry
-			array_push($entry, $review_list);
+			array_push($entry,$am->id);
 
 			//push entry to artList
 			array_push($artList,$entry);
 			$am->next();
 		}
 
+		//echo json_encode($artList);
+
 		//push artList into f3 instance
-		/*$this->f3->set('artList',$artList);
+		$this->f3->set('artList',$artList);
 		//toggle to show artList in home.htm
-		$this->f3->set('showArtList',TRUE);*/
+		$this->f3->set('showArtList',TRUE);
 		//ET phone home
 		echo json_encode($artList);
 

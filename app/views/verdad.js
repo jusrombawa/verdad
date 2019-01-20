@@ -31,13 +31,12 @@ $(document).ready(function(){
                 url: '/getArticles',
 
                 success: function(data) {
+                    //alert(data); //used to check if sent JSON is correct
                     var articleList = $.parseJSON(data);
                     var text = "";
                     for (var i=0; i<articleList.length; i++)
                     {
-                        //hidden form for id
-                       /* text +=
-                        '<form action="/article"><input class="hidden_id_form" id="' + articleList[i][8] '" type="hidden" name="id" value="' + articleList[i][8] + '"</form>';*/
+                       
                         //row opening tag
                         text += "<li>";
                         text += "<div class='collapsible-header article-listing'>"
@@ -70,16 +69,45 @@ $(document).ready(function(){
                         else text += "Not satire or opinion";
                         text += "</div>"
 
-                        /*text += "<div class='collapsible-body'>Text goes here.";
-                        text += "</div>";
-*/
                         //might slow things down since this loads all urls, fix later, but for now, disable
-                        //text += "<div class='collapsible-body '><iframe class='article-frame' height='600' src='"+articleList[i][7]+"''></iframe></div>";
-                        text += "<div class='collapsible-body '><iframe class='article-frame' height='600' ></iframe></div>";
+                        text += "<div class='collapsible-body '><iframe class='article-frame' height='600' src='"+articleList[i][7]+"''></iframe></div>";
+                        //text += "<div class='collapsible-body '><iframe class='article-frame' height='600' ></iframe></div>";
 
                         //src=" + articleList[i][7] + "
+                        text += "<div class='collapsible-body'>";
 
-                        text += "<div class='collapsible-body'>Body goes here but this is supposed to be review.</div>"
+                        if(articleList[i][8].length == 0){ //no reviews to be shown
+                            text += "<div class='row'><p>No reviews yet</p>";
+                        }
+
+                        else{
+                        //display reviews
+                            for(var k=0; k < articleList[i][8].length; k++) //loop through 4D array!!!
+                            {
+                                text += "<div class='row'>"
+                                //score
+                                text += "Rating: " + articleList[i][8][k][0]+" stars<br/>";
+                                //comments
+                                text += "<p><i>" + articleList[i][8][k][1] +"</i></p>";
+                                //check if satire or not
+                                if(articleList[i][8][k][2] == false)
+                                    text += "Not satire <br/>";
+                                else
+                                    text += "Satire <br/>";
+                                //check if opinion or not
+                                if(articleList[i][8][k][2] == false)
+                                    text += "Not opinion <br/>"
+                                else
+                                    text += "Opinion <br/>";
+
+                                //end of row
+                                text +="</div>";
+                            }
+                        }                        
+                        
+
+
+                        text += "</div>";
                         text += "</li>";
                     }
 
@@ -95,30 +123,6 @@ $(document).ready(function(){
 
             });
     });
-
-    //read specific article
-    /*$(document).on("click",".hidden_id",function(){
-        //alert("hello");
-        var articleID = $(this).attr("name");
-
-        //alert(articleID);
-
-        $.ajax({
-            type: 'GET',
-            url: '/article',
-            data: articleID,
-
-            success: function(data) {
-                articleBody = $.parseJSON(data);
-                //alert(articleBody[1]);
-            },
-
-            error: function() {
-                
-            }
-
-
-        });*/
 
 
     //resize frame when article listing is clicked
