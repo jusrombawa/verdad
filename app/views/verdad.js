@@ -71,8 +71,8 @@ $(document).ready(function(){
                         text += "</div>"
 
                         //might slow things down since this loads all urls, fix later, but for now, disable
-                        text += "<div class='collapsible-body '><iframe class='article-frame' height='600' src='"+articleList[i][7]+"''></iframe></div>";
-                        //text += "<div class='collapsible-body '><iframe class='article-frame' height='600' ></iframe></div>";
+                        //text += "<div class='collapsible-body '><iframe class='article-frame' height='600' src='"+articleList[i][7]+"''></iframe></div>";
+                        text += "<div class='collapsible-body '><iframe class='article-frame' height='600' ></iframe></div>";
 
                         //src=" + articleList[i][7] + "
                         text += "<div class='collapsible-body'>";
