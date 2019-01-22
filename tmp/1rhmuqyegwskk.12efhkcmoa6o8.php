@@ -12,15 +12,45 @@
 </head>
 <body>
 
+<!--   <div class="navbar-fixed">
+    <nav class="blue darken-3">
+      <div class="nav-wrapper">
+        <a id="logo-container" href="" class="brand-logo center">Verdad</a>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul id="nav-desktop" class="right hide-on-med-and-down">
+          <li><a href="#loginModal">Login</a></li>
+          <li><a href="#registerModal">Register</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">About Verdad</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="sidenav">
+          <li><a href="#loginModal">Login</a></li>
+          <li><a href="#registerModal">Register</a></li>
+          <li><a href="">FAQs</a></li>
+          <li><a href="#">About Verdad</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div> -->
+
+
   <nav class="blue darken-3" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
       
+      <ul id="nav-desktop" class="right hide-on-med-and-down">
+          <li><a href="#loginModal">Login</a></li>
+          <li><a href="#registerModal">Register</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">About Verdad</a></li>
+        </ul>
 
       <ul id="nav-mobile" class="sidenav">
         <li><a href="#loginModal">Login</a></li>
         <li><a href="#registerModal">Register</a></li>
-		<li><a href="#>Frequently Asked Questions</a></li>
-		<li><a href="#>About Verdad</a></li>
+		    <li><a href="#">Frequently Asked Questions</a></li>
+		    <li><a href="#">About Verdad</a></li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>

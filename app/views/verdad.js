@@ -4,6 +4,7 @@ $(document).ready(function(){
     $('select').formSelect();
     $('.collapsible').collapsible();
     $('.datepicker').datepicker();
+    $('.sidenav').sidenav();
 
     //hide initially hidden components
     $("#articles_sect").hide();
