@@ -91,7 +91,8 @@
           </ul>
         </div>
         <div class="col s7">
-          <iframe src="https://duckduckgo.com/" style="width:100%; height:100%"> </iframe>
+
+          <iframe src="http://duckduckgo.com/" id="article_frame" style="width:100%; height:100%; margin: 0.5rem 0 1rem 0;"> </iframe>
         </div>
       </div>
   	</div>
