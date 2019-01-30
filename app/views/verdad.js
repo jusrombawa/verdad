@@ -9,12 +9,6 @@ $(document).ready(function(){
     //hide initially hidden components
     $("#articles_sect").hide();
 
-    /*function setTabParams(name, value1, value2){
-            value1 = encodeURIComponent(value1);
-            value2 = encodeURIComponent(value2);
-            var newUrl = name + "/" + value1 + "/" + value2;
-            window.history.pushState(,"",newUrl)
-    }*/
 
     //start reading articles
     $("#read_button").click(function(){
@@ -32,7 +26,11 @@ $(document).ready(function(){
                 url: '/getArticles',
 
                 success: function(data) {
-                    //alert(data); //used to check if sent JSON is correct
+
+                    //resize article_frame
+                    var frameheight = $("#articles_sect").height();
+                    $("#article_frame").height(frameheight);       
+
                     var articleList = $.parseJSON(data);
                     var text = "";
                     for (var i=0; i<articleList.length; i++)
@@ -61,10 +59,6 @@ $(document).ready(function(){
 
                         text += "<a class='waves-effect waves-light btn blue article-button' href='"+ articleList[i][7] +"' target='article_frame'>Read article</a>";
                         text += "</div>"
-
-                        //might slow things down since this loads all urls, fix later, but for now, disable
-                        //text += "<div class='collapsible-body '><iframe class='article-frame' height='600' src='"+articleList[i][7]+"''></iframe></div>";
-                        //text += "<div class='collapsible-body '><iframe class='article-frame' height='600' ></iframe></div>";
 
                         //src=" + articleList[i][7] + "
                         text += "<div class='collapsible-body'>";
@@ -140,28 +134,19 @@ $(document).ready(function(){
             });
     });
 
+    //resize article frame on window resize
+    $(window).resize(function(){
 
-    /*//resize frame when article listing is clicked
-    $(document).on("click",".article-listing",function(){
-        var collapsiblewidth = $(".article-listing").width()-50; //50 pixels is just approximate, might not be right for bigger screens
-        $(".article-frame").width(collapsiblewidth);
+        var frameheight = $("#articles_sect").height();
+        $("#article_frame").height(frameheight);       
+        
     });
 
-    //resize frame on window resize
-    $(window).resize(function(){
-        var collapsiblewidth = $(".article-listing").width()-50;
-        $(".article-frame").width(collapsiblewidth); 
-
-    });*/
-
+    //push href from article buttons to frame
     $(document).on("click",".article-button",function(e){
 
         e.preventDefault();
         $("#article_frame").attr("src", $(this).attr("href"));
-/*    
-
-
-        alert($(this).attr("href"));
-        alert("hey");*/
+        
     });    
 });

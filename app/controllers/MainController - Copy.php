@@ -7,6 +7,11 @@ class MainController extends Controller{
 		//$this->getArticles();
 	}
 
+	function frame_placeholder(){
+		$this->renderView('frame-placeholder.htm');
+		//$this->getArticles();
+	}
+
 	function getArticles()
 	{
 		$artList = array();
