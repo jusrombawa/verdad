@@ -87,7 +87,7 @@
   		
       <div class="row">
         <div class="col s5">
-          <ul class="collapsible" id="article_list">
+          <ul class="collapsible popout" id="article_list">
           </ul>
         </div>
         <div class="col s7">

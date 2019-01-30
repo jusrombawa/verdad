@@ -59,7 +59,7 @@ $(document).ready(function(){
                         text += "<br/>";
 
 
-                        text += "<a class='waves-effect waves-light btn' href='"+articleList[i][7]+"' target='article_frame'>Read article</a>"
+                        text += "<a class='waves-effect waves-light btn blue' href='"+ articleList[i][7] +"' target='_blank'>Read article</a>";
                         text += "</div>"
 
                         //might slow things down since this loads all urls, fix later, but for now, disable
