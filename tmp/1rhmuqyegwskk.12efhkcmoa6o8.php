@@ -91,10 +91,16 @@
           </ul>
         </div>
         <div class="col s7">
-
-          <iframe src="http://duckduckgo.com/" id="article_frame" style="width:100%; height:100%; margin: 0.5rem 0 1rem 0;"> </iframe>
+            <iframe src="http://duckduckgo.com/" id="article_frame" height="600px" style="width:100%; margin: 0.5rem 0 1rem 0;"> </iframe>
         </div>
       </div>
+
+<!-- 
+      <ul class="collapsible popout" id="article_list">
+      </ul>
+      <br/>
+      <iframe src="http://duckduckgo.com/" id="article_frame" height="800px" style="width:100%; height:100%; margin: 0.5rem 0 1rem 0;"> </iframe> -->
+
   	</div>
 
   

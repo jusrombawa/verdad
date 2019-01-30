@@ -56,10 +56,10 @@ $(document).ready(function(){
                             text += "No ratings"
                         else
                             text += "Average score: " + articleList[i][4] + "";
-                        text += "<br/>";
+                        text += "<br/><br/>";
 
 
-                        text += "<a class='waves-effect waves-light btn blue' href='"+ articleList[i][7] +"' target='_blank'>Read article</a>";
+                        text += "<a class='waves-effect waves-light btn blue article-button' href='"+ articleList[i][7] +"' target='article_frame'>Read article</a>";
                         text += "</div>"
 
                         //might slow things down since this loads all urls, fix later, but for now, disable
@@ -141,7 +141,7 @@ $(document).ready(function(){
     });
 
 
-    //resize frame when article listing is clicked
+    /*//resize frame when article listing is clicked
     $(document).on("click",".article-listing",function(){
         var collapsiblewidth = $(".article-listing").width()-50; //50 pixels is just approximate, might not be right for bigger screens
         $(".article-frame").width(collapsiblewidth);
@@ -152,5 +152,16 @@ $(document).ready(function(){
         var collapsiblewidth = $(".article-listing").width()-50;
         $(".article-frame").width(collapsiblewidth); 
 
-    });
+    });*/
+
+    $(document).on("click",".article-button",function(e){
+
+        e.preventDefault();
+        $("#article_frame").attr("src", $(this).attr("href"));
+/*    
+
+
+        alert($(this).attr("href"));
+        alert("hey");*/
+    });    
 });
