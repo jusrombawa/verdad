@@ -9,12 +9,6 @@ $(document).ready(function(){
     //hide initially hidden components
     $("#articles_sect").hide();
 
-    /*function setTabParams(name, value1, value2){
-            value1 = encodeURIComponent(value1);
-            value2 = encodeURIComponent(value2);
-            var newUrl = name + "/" + value1 + "/" + value2;
-            window.history.pushState(,"",newUrl)
-    }*/
 
     //start reading articles
     $("#read_button").click(function(){
@@ -32,7 +26,11 @@ $(document).ready(function(){
                 url: '/getArticles',
 
                 success: function(data) {
-                    //alert(data); //used to check if sent JSON is correct
+
+                    //resize article_frame
+                    var frameheight = $("#articles_sect").height();
+                    $("#article_frame").height(frameheight);       
+
                     var articleList = $.parseJSON(data);
                     var text = "";
                     for (var i=0; i<articleList.length; i++)
@@ -46,14 +44,8 @@ $(document).ready(function(){
                         //title
                         text += articleList[i][0];
                         text += "<br/>";
-                        //author
-                        text += articleList[i][1];
-                        text += "<br/>";
                         //date published
                         text += articleList[i][2];
-                        text += "<br/>";
-                        //publisher
-                        text += articleList[i][3];
                         text += "<br/>";
 
                         //rating
@@ -61,21 +53,36 @@ $(document).ready(function(){
                         if(articleList[i][4] == null)
                             text += "No ratings"
                         else
-                            text += "" + articleList[i][4] + "";
-                        text += "<br/>";
-                        //check if satire and/or opinion
-                        if(articleList[i][5] && articleList[i][6]) text += "Satire & Opinion";
-                        else if(articleList[i][5] && !articleList[i][6]) text += "Satire";
-                        else if(!articleList[i][5] && articleList[i][6]) text += "Opinion";
-                        else text += "Not satire or opinion";
-                        text += "</div>"
+                            text += "Average score: " + articleList[i][4] + "";
+                        text += "<br/><br/>";
 
-                        //might slow things down since this loads all urls, fix later, but for now, disable
-                        text += "<div class='collapsible-body '><iframe class='article-frame' height='600' src='"+articleList[i][7]+"''></iframe></div>";
-                        //text += "<div class='collapsible-body '><iframe class='article-frame' height='600' ></iframe></div>";
+
+                        text += "<a class='waves-effect waves-light btn blue article-button' href='"+ articleList[i][7] +"' target='article_frame'>Read article</a>";
+                        text += "</div>"
 
                         //src=" + articleList[i][7] + "
                         text += "<div class='collapsible-body'>";
+
+                        //check if satire and/or opinion
+                        text += "<div class='row'>";
+    
+                            //author
+                            text += "Written by: " + articleList[i][1];
+                            text += "<br/>";
+                            
+                            //publisher
+                            text += "Published by: " + articleList[i][3];
+                            text += "<br/>";
+
+                            if(articleList[i][5] && articleList[i][6]) text += "Satire & Opinion";
+                            else if(articleList[i][5] && !articleList[i][6]) text += "Satire";
+                            else if(!articleList[i][5] && articleList[i][6]) text += "Opinion";
+                            else text += "Not satire or opinion";
+                        
+                        text += "</div>";
+                        //check if there are reviews
+                        text += "<div class='row divider'></div>"
+                        text += "<div class='row'> <h6>Reviews:</h6> </div>";
 
                         if(articleList[i][8].length == 0){ //no reviews to be shown
                             text += "<div class='row'><p>No reviews yet</p>";
@@ -85,6 +92,7 @@ $(document).ready(function(){
                         //display reviews
                             for(var k=0; k < articleList[i][8].length; k++) //loop through 4D array!!!
                             {
+                                text += "<div class='row divider'></div>"
                                 text += "<div class='row'>"
                                 //score
                                 text += "Rating: " + articleList[i][8][k][0]+" stars<br/>";
@@ -115,6 +123,7 @@ $(document).ready(function(){
                     //write to table
                     $("#article_list").html(text);
 
+
                 },
 
                 error: function(jqXHR, exception)
@@ -125,16 +134,19 @@ $(document).ready(function(){
             });
     });
 
-
-    //resize frame when article listing is clicked
-    $(document).on("click",".article-listing",function(){
-        var collapsiblewidth = $(".article-listing").width()-50; //50 pixels is just approximate, might not be right for bigger screens
-        $(".article-frame").width(collapsiblewidth); 
-    });
-
-    //resize frame on window resize
+    //resize article frame on window resize
     $(window).resize(function(){
-       var collapsiblewidth = $(".article-listing").width()-50;
-        $(".article-frame").width(collapsiblewidth); 
+
+        var frameheight = $("#articles_sect").height();
+        $("#article_frame").height(frameheight);       
+        
     });
+
+    //push href from article buttons to frame
+    $(document).on("click",".article-button",function(e){
+
+        e.preventDefault();
+        $("#article_frame").attr("src", $(this).attr("href"));
+        
+    });    
 });

@@ -4,8 +4,11 @@ class MainController extends Controller{
 
 	function home(){
 		$this->renderView('home.htm');
-		//$this->getArticles();
 	}
+
+	function framePlaceholder(){
+		$this->renderView('article-placeholder.htm');
+	}	
 
 	function getArticles()
 	{
