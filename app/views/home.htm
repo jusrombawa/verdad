@@ -16,17 +16,27 @@
     <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
       
       <ul id="nav-desktop" class="right hide-on-med-and-down">
-          <li><a href="#loginModal">Login</a></li>
-          <li><a href="#registerModal">Register</a></li>
           <li><a href="#">FAQs</a></li>
-          <li><a href="#">About Verdad</a></li>
+          <li><a href="#registerModal">Register</a></li>
+          <!-- <li>
+            <form>
+              <div class="input-field inline white-text">
+                <input id="loginUsername">
+                <label for="loginUsername">Username</label>
+              </div>
+              <div class="input-field inline white-text">
+                <input id="loginPassword" type="password">
+                <label for="loginPassword">Password</label>
+              </div>
+            </form>
+          </li> -->
+          <li><a href="#loginModal">Login</a></li>
         </ul>
 
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="#loginModal">Login</a></li>
-        <li><a href="#registerModal">Register</a></li>
-		    <li><a href="#">Frequently Asked Questions</a></li>
-		    <li><a href="#">About Verdad</a></li>
+        <li><a href="loginModal">Login</a></li>
+        <li><a href="registerModal">Register</a></li>
+		    <li><a href="">Frequently Asked Questions</a></li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
@@ -101,7 +111,15 @@
 
   <!-- Modals -->
   
-  
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <!-- <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div> -->
+  </div>
   
   
   <!--  Scripts-->

@@ -149,4 +149,5 @@ $(document).ready(function(){
         $("#article_frame").attr("src", $(this).attr("href"));
         
     });    
+
 });
