@@ -18,31 +18,65 @@
       <ul id="nav-desktop" class="right hide-on-med-and-down">
           <li><a href="#">FAQs</a></li>
           <li><a href="#registerModal">Register</a></li>
-          <!-- <li>
-            <form>
-              <div class="input-field inline white-text">
-                <input id="loginUsername">
-                <label for="loginUsername">Username</label>
-              </div>
-              <div class="input-field inline white-text">
-                <input id="loginPassword" type="password">
-                <label for="loginPassword">Password</label>
-              </div>
-            </form>
-          </li> -->
-          <li><a href="#loginModal">Login</a></li>
+          <li><a id="login-popup">Login</a></li>
         </ul>
 
       <ul id="nav-mobile" class="sidenav">
+        <li>
+          <div class="container">
+              <div class="row">
+              <form>
+                <div class="input-field">
+                  <input id="loginUsername">
+                  <label for="loginUsername">Username</label>
+                </div>
+
+                <div class="input-field">
+                  <input id="loginPassword" type="password">
+                  <label for="loginPassword">Password</label>
+                </div>
+  <!-- 
+                <button class="btn waves-effect waves-light blue" type="submit" name="action">Log In
+                </button> -->
+               </form>
+                <br/>
+              </div>
+            </div>
+        </li>
         <li><a href="loginModal">Login</a></li>
         <li><a href="registerModal">Register</a></li>
 		    <li><a href="">Frequently Asked Questions</a></li>
       </ul>
+
+
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-  
-  
+
+
+        <div id="login-area" class="container">
+          <div class="row">
+            <div class="col s3 offset-s9 z-depth-2">
+              <form class="right-align">
+                <div class="input-field">
+                  <input id="loginUsername">
+                  <label for="loginUsername">Username</label>
+                </div>
+                <div class="input-field">
+                  <input id="loginPassword" type="password">
+                  <label for="loginPassword">Password</label>
+                </div>
+
+                <button class="btn waves-effect waves-light blue" type="submit" name="action">Log In
+                  <i class="material-icons right">send</i>
+                </button>
+              </form>
+              <br/>
+            </div>  
+          </div>
+        </div>
+
+
   <div id="title_header" class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>

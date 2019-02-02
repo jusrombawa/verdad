@@ -1,5 +1,6 @@
 $(document).ready(function(){
     //initialize materialize components
+
     $('.modal').modal();
     $('select').formSelect();
     $('.collapsible').collapsible();
@@ -8,6 +9,7 @@ $(document).ready(function(){
 
     //hide initially hidden components
     $("#articles_sect").hide();
+    $("#login-area").hide();
 
 
     //start reading articles
@@ -26,11 +28,6 @@ $(document).ready(function(){
                 url: '/getArticles',
 
                 success: function(data) {
-
-                    //resize article_frame
-                    var frameheight = $("#articles_sect").height();
-                    $("#article_frame").height(frameheight);       
-
                     var articleList = $.parseJSON(data);
                     var text = "";
                     for (var i=0; i<articleList.length; i++)
@@ -123,7 +120,9 @@ $(document).ready(function(){
                     //write to table
                     $("#article_list").html(text);
 
-
+                    //resize article_frame
+                    var frameheight = $("#articles_sect").height();
+                    $("#article_frame").height(frameheight);       
                 },
 
                 error: function(jqXHR, exception)
@@ -132,6 +131,18 @@ $(document).ready(function(){
                 }
 
             });
+    });
+
+
+    $("#login-popup").click(function(){
+
+        /*if ($("#login-area").is(":visible"))
+            $("#login-area").hide("slide", {direction: "up"}, 500);
+        else
+            $("#login-area").show("slide", {direction: "down"}, 500);*/
+
+        $("#login-area").slideToggle("slow");
+
     });
 
     //resize article frame on window resize
