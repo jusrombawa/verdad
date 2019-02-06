@@ -133,15 +133,57 @@ $(document).ready(function(){
             });
     });
 
-
+    //pop up login for desktop
     $("#login-popup").click(function(){
-
-        /*if ($("#login-area").is(":visible"))
-            $("#login-area").hide("slide", {direction: "up"}, 500);
-        else
-            $("#login-area").show("slide", {direction: "down"}, 500);*/
-
         $("#login-area").slideToggle("slow");
+
+    });
+
+    //login form submit for desktop
+
+    $("#loginButtonDesktop").click(function(e){
+
+        var username = $("#loginUsernameDesktop").val().trim();
+        var password = $("#loginPasswordDesktop").val().trim();
+
+        alert("Logging in as " + username + " with password " + password); //THIS IS FOR TEST PURPOSE ONLY OH MY GOD I SWEAR IF YOU FORGET TO REMOVE THIS
+
+        //check if non-empty login
+        if(username != '' && password != '')
+        {
+            $.ajax({
+                type:"POST",
+                url:"/login",
+                data: {
+                    "username": username,
+                    "password": password
+                },
+
+                success: function(data)
+                {
+                    var response = $.parseJSON(data)
+                    
+                    if(response == true)
+                        alert("Login successful");
+                    else
+                        alert("WTF");
+                },
+
+                error: function(jqXHR, exception)
+                {
+
+                }
+            });
+        }
+
+        else if (username == '')
+            alert("E-mail field cannot be empty.");
+
+        else if (password == '')
+            alert("Password field cannot be empty.");
+
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
 
     });
 

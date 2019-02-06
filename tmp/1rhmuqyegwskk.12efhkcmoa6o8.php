@@ -25,15 +25,15 @@
         <li>
           <div class="container">
               <div class="row">
-              <form>
+              <form id="loginMobile" action>
                 <div class="input-field">
-                  <input id="loginUsername">
-                  <label for="loginUsername">Username</label>
+                  <input id="loginUsernameMobile">
+                  <label for="loginUsernameMobile">E-mail</label>
                 </div>
 
                 <div class="input-field">
-                  <input id="loginPassword" type="password">
-                  <label for="loginPassword">Password</label>
+                  <input id="loginPasswordMobile" type="password">
+                  <label for="loginPasswordMobile">Password</label>
                 </div>
   <!-- 
                 <button class="btn waves-effect waves-light blue" type="submit" name="action">Log In
@@ -57,17 +57,17 @@
         <div id="login-area" class="container">
           <div class="row">
             <div class="col s3 offset-s9 z-depth-2">
-              <form class="right-align">
+              <form id="loginDesktop" class="right-align">
                 <div class="input-field">
-                  <input id="loginUsername">
-                  <label for="loginUsername">Username</label>
+                  <input id="loginUsernameDesktop">
+                  <label for="loginUsernameDesktop">E-mail</label>
                 </div>
                 <div class="input-field">
-                  <input id="loginPassword" type="password">
-                  <label for="loginPassword">Password</label>
+                  <input id="loginPasswordDesktop" type="password">
+                  <label for="loginPasswordDesktop">Password</label>
                 </div>
 
-                <button class="btn waves-effect waves-light blue" type="submit" name="action">Log In
+                <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="submit" name="action">Log In
                   <i class="material-icons right">send</i>
                 </button>
               </form>

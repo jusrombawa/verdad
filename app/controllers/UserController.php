@@ -12,7 +12,7 @@ class UserController extends Controller{
 
     function authenticate() {
 
-        $username = $this->f3->get('POST.username');
+        /*$username = $this->f3->get('POST.username');
         $password = $this->f3->get('POST.password');
 
         $user = new User($this->db);
@@ -29,5 +29,7 @@ class UserController extends Controller{
             //$this->f3->reroute('/login');
             echo "Login failed"
         }
+*/
+        echo json_encode (true);
     }
 }
