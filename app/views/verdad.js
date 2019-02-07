@@ -163,15 +163,27 @@ $(document).ready(function(){
                 {
                     var response = $.parseJSON(data)
                     
-                    if(response == true)
+                    /*if(response == true)
                         alert("Login successful");
                     else
-                        alert("WTF");
+                        alert("WTF");*/
+
+                    alert(response);
+
+                   /* if(response->status == true)
+                    {
+                        alert("Logged in as " + response->username);
+                    }
+
+                    else
+                    {
+                        alert("Log in failed.");
+                    }*/
                 },
 
                 error: function(jqXHR, exception)
                 {
-
+                    alert(jqXHR.responseText);
                 }
             });
         }
