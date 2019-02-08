@@ -170,15 +170,15 @@ $(document).ready(function(){
 
                     alert(response);
 
-                   /* if(response->status == true)
+                    if(response[0] == true)
                     {
-                        alert("Logged in as " + response->username);
+                        alert("Logged in as " + response[1]);
                     }
 
                     else
                     {
                         alert("Log in failed.");
-                    }*/
+                    }
                 },
 
                 error: function(jqXHR, exception)

@@ -67,7 +67,7 @@
                   <label for="loginPasswordDesktop">Password</label>
                 </div>
 
-                <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="submit" name="action">Log In
+                <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In
                   <i class="material-icons right">send</i>
                 </button>
               </form>

@@ -24,7 +24,7 @@ class UserController extends Controller{
         if($user->dry()) {
             //$this->f3->reroute('/login');
             $loginStatus = false;
-            $loginUsername = 'a';
+            $loginUsername = 'Username not found';
         }
 
         //successful login
@@ -40,13 +40,11 @@ class UserController extends Controller{
         else {
             //$this->f3->reroute('/login');
             $loginStatus = false;
-            $loginUsername = 'b';
+            $loginUsername = 'Password incorrect';
         }
 
-        array_push($loginInfo, $loginStatus);
-        array_push($loginInfo, $loginUsername);
-        array_push($loginInfo, $user->password);
-        array_push($loginInfo, $password);
+        array_push($loginInfo, $loginStatus);// send status
+        array_push($loginInfo, $loginUsername); //send session username
 
         echo json_encode($loginInfo);
 
