@@ -159,9 +159,10 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
+                    alert(data);
                     var response = $.parseJSON(data)
 
-                    //alert(response);
+                    alert(response);
 
                     if(response[0] == true)
                     {
