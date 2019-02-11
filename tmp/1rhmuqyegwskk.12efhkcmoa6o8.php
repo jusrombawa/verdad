@@ -11,70 +11,113 @@
   <link href="<?= ($UI . 'css/style.css') ?>" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  
-  <nav class="blue darken-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
-      
-      <ul id="nav-desktop" class="right hide-on-med-and-down">
-          <li><a href="#">FAQs</a></li>
-          <li><a href="#registerModal">Register</a></li>
-          <li><a id="login-popup">Login</a></li>
-        </ul>
 
-      <ul id="nav-mobile" class="sidenav">
-        <li>
-          <div class="container">
-              <div class="row">
-              <form id="loginMobile" action>
-                <div class="input-field">
-                  <input id="loginUsernameMobile">
-                  <label for="loginUsernameMobile">E-mail</label>
+    <?php if ($loggedIn == false): ?>
+      <nav class="blue darken-3" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
+          
+          <ul id="nav-desktop" class="right hide-on-med-and-down">
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#registerModal">Register</a></li>
+              <li><a id="login-popup">Login</a></li>
+            </ul>
+
+          <ul id="nav-mobile" class="sidenav">
+            <br/>
+            <li>
+              <div class="container">
+                  <div class="row">
+                  <form id="loginMobile" action>
+                    <div class="input-field">
+                      <input id="loginUsernameMobile">
+                      <label for="loginUsernameMobile">E-mail</label>
+                    </div>
+
+                    <div class="input-field">
+                      <input id="loginPasswordMobile" type="password">
+                      <label for="loginPasswordMobile">Password</label>
+                    </div>
+                    <button id="loginButtonMobile" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
+                   </form>
+                    <br/>
+                  </div>
                 </div>
-
-                <div class="input-field">
-                  <input id="loginPasswordMobile" type="password">
-                  <label for="loginPasswordMobile">Password</label>
-                </div>
-  <!-- 
-                <button class="btn waves-effect waves-light blue" type="submit" name="action">Log In
-                </button> -->
-               </form>
-                <br/>
-              </div>
-            </div>
-        </li>
-        <li><a href="loginModal">Login</a></li>
-        <li><a href="registerModal">Register</a></li>
-		    <li><a href="">Frequently Asked Questions</a></li>
-      </ul>
+            </li>
+            <li><a href="registerModal">Register</a></li>
+    		    <li><a href="">Frequently Asked Questions</a></li>
+          </ul>
 
 
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
-
-
-        <div id="login-area" class="container">
-          <div class="row">
-            <div class="col s3 offset-s9 z-depth-2">
-              <form id="loginDesktop" class="right-align">
-                <div class="input-field">
-                  <input id="loginUsernameDesktop">
-                  <label for="loginUsernameDesktop">E-mail</label>
-                </div>
-                <div class="input-field">
-                  <input id="loginPasswordDesktop" type="password">
-                  <label for="loginPasswordDesktop">Password</label>
-                </div>
-
-                <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In
-                  <i class="material-icons right">send</i>
-                </button>
-              </form>
-              <br/>
-            </div>  
-          </div>
+          <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
+      </nav>
+    <?php endif; ?>
+
+    <div id="login-area" class="container">
+      <div class="row">
+        <div class="col s3 offset-s9 z-depth-2">
+          <form id="loginDesktop" class="right-align">
+            <div class="input-field">
+              <input id="loginUsernameDesktop">
+              <label for="loginUsernameDesktop">E-mail</label>
+            </div>
+            <div class="input-field">
+              <input id="loginPasswordDesktop" type="password">
+              <label for="loginPasswordDesktop">Password</label>
+            </div>
+
+            <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
+          </form>
+          <br/>
+        </div>  
+      </div>
+    </div>
+
+    <?php if ($loggedIn == true): ?>
+      <nav class="blue darken-3" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
+          
+          <ul id="nav-desktop" class="right hide-on-med-and-down">
+              <li><a>Hello, <?= ($SESSION['user']) ?></a></li>
+              <li><a>FAQs</a></li>
+              <li><a id="logoutDesktop">Logout</a></li>
+            </ul>
+
+          <ul id="nav-mobile" class="sidenav">
+            <li>Hello, <?= ($SESSION['user']) ?></li>
+            <li><a href="">Frequently Asked Questions</a></li>
+            <li><a id="logoutMobile">Logout</a></li>
+
+          </ul>
+
+
+          <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+
+
+      <div id="login-area" class="container">
+        <div class="row">
+          <div class="col s3 offset-s9 z-depth-2">
+            <form id="loginDesktop" class="right-align">
+              <div class="input-field">
+                <input id="loginUsernameDesktop">
+                <label for="loginUsernameDesktop">E-mail</label>
+              </div>
+              <div class="input-field">
+                <input id="loginPasswordDesktop" type="password">
+                <label for="loginPasswordDesktop">Password</label>
+              </div>
+
+              <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In
+                <i class="material-icons right">send</i>
+              </button>
+            </form>
+            <br/>
+          </div>  
+        </div>
+      </div>
+    <?php endif; ?>
 
 
   <div id="title_header" class="section no-pad-bot" id="index-banner">
@@ -144,17 +187,6 @@
   
 
   <!-- Modals -->
-  
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <!-- <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div> -->
-  </div>
-  
   
   <!--  Scripts-->
   <!--  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->

@@ -1,6 +1,5 @@
 $(document).ready(function(){
     //initialize materialize components
-
     $('.modal').modal();
     $('select').formSelect();
     $('.collapsible').collapsible();
@@ -10,7 +9,6 @@ $(document).ready(function(){
     //hide initially hidden components
     $("#articles_sect").hide();
     $("#login-area").hide();
-
 
     //start reading articles
     $("#read_button").click(function(){
@@ -141,12 +139,12 @@ $(document).ready(function(){
 
     //login form submit for desktop
 
+    //$(document).on("click","#loginButtonDesktop").click(function(e){
     $("#loginButtonDesktop").click(function(e){
-
         var username = $("#loginUsernameDesktop").val().trim();
         var password = $("#loginPasswordDesktop").val().trim();
 
-        alert("Logging in as " + username + " with password " + password); //THIS IS FOR TEST PURPOSE ONLY OH MY GOD I SWEAR IF YOU FORGET TO REMOVE THIS
+        //alert("Logging in as " + username + " with password " + password); //THIS IS FOR TEST PURPOSE ONLY OH MY GOD I SWEAR IF YOU FORGET TO REMOVE THIS
 
         //check if non-empty login
         if(username != '' && password != '')
@@ -162,17 +160,14 @@ $(document).ready(function(){
                 success: function(data)
                 {
                     var response = $.parseJSON(data)
-                    
-                    /*if(response == true)
-                        alert("Login successful");
-                    else
-                        alert("WTF");*/
 
-                    alert(response);
+                    //alert(response);
 
                     if(response[0] == true)
                     {
                         alert("Logged in as " + response[1]);
+                        
+                        window.location.reload();
                     }
 
                     else

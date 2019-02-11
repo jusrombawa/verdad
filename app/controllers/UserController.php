@@ -46,6 +46,9 @@ class UserController extends Controller{
         array_push($loginInfo, $loginStatus);// send status
         array_push($loginInfo, $loginUsername); //send session username
 
+        $this->f3->set('loggedIn', $loginStatus);
+        $this->f3->set('logInUsername', $loginUsername);
+
         echo json_encode($loginInfo);
 
     }
