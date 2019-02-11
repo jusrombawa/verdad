@@ -29,7 +29,7 @@ class UserController extends Controller{
             array_push($loginInfo, $loginStatus);// send status
             array_push($loginInfo, $loginError); //send session username
 
-            $this->f3->set('SESSION.user', $user->'');
+            $this->f3->clear('SESSION.user');
 
             echo json_encode($loginInfo);
         }
@@ -49,7 +49,7 @@ class UserController extends Controller{
             $loginStatus = false;
             $loginError = 'Password incorrect';
 
-            $this->f3->set('SESSION.user', '');
+            $this->f3->clear('SESSION.user');
             array_push($loginInfo, $loginStatus);// send status
             array_push($loginInfo, $loginError); //send session username
 
@@ -59,6 +59,7 @@ class UserController extends Controller{
     }
 
     function logout() {
-        
+        $this->f3->clear('SESSION.user');
+        $this->f3->reroute('/');
     }
 }

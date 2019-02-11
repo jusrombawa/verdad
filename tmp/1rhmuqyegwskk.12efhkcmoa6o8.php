@@ -45,7 +45,7 @@
       </div>
     <?php endif; ?>
 
-  <?php if ($SESSION­.user != ''): ?>
+  <?php if (SESSION.user != null): ?>
     
     
       <nav class="blue darken-3" role="navigation">

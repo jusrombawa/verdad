@@ -209,6 +209,25 @@ $(document).ready(function(){
         e.preventDefault();
         $("#article_frame").attr("src", $(this).attr("href"));
         
-    });    
+    });
+
+    $(document).on("click", "#logoutDesktop", function(){
+        alert("Logging out.");
+
+        $.ajax({
+            type: 'POST',
+            url: '/logout',
+            success: function() {
+                alert("Logout successful.");
+            },
+
+            error: function(jqXHR, exception)
+            {
+                alert("Logout failed.");
+                alert(jqXHR.responseText);
+            }
+
+        });
+    });
 
 });
