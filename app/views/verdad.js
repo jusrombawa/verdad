@@ -159,22 +159,7 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
-                    alert(data);
-                    var response = $.parseJSON(data)
-
-                    alert(response);
-
-                    if(response[0] == true)
-                    {
-                        alert("Logged in as " + response[1]);
-                        
-                        window.location.reload();
-                    }
-
-                    else
-                    {
-                        alert("Log in failed.");
-                    }
+                    window.location.reload();
                 },
 
                 error: function(jqXHR, exception)
@@ -212,18 +197,17 @@ $(document).ready(function(){
     });
 
     $(document).on("click", "#logoutDesktop", function(){
-        alert("Logging out.");
 
         $.ajax({
             type: 'POST',
             url: '/logout',
-            success: function() {
-                alert("Logout successful.");
+            success: function(data) {
+                window.location.reload();
             },
 
             error: function(jqXHR, exception)
             {
-                alert("Logout failed.");
+                alert("Error logging out.");
                 alert(jqXHR.responseText);
             }
 

@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <?php if ($loggedIn == false): ?>
+<!--     <?php if ($loggedIn == false): ?>
       
     <?php endif; ?>
 
@@ -43,9 +43,9 @@
           </div>  
         </div>
       </div>
-    <?php endif; ?>
+    <?php endif; ?> -->
 
-  <?php if (SESSION.user != null): ?>
+  <?php if ($SESSION['user'] != null): ?>
     
     
       <nav class="blue darken-3" role="navigation">

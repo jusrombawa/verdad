@@ -30,8 +30,6 @@ class UserController extends Controller{
             array_push($loginInfo, $loginError); //send session username
 
             $this->f3->clear('SESSION.user');
-
-            echo json_encode($loginInfo);
         }
 
         //successful login
@@ -52,14 +50,20 @@ class UserController extends Controller{
             $this->f3->clear('SESSION.user');
             array_push($loginInfo, $loginStatus);// send status
             array_push($loginInfo, $loginError); //send session username
-
-            echo json_encode($loginInfo);
         }
 
     }
 
     function logout() {
-        $this->f3->clear('SESSION.user');
-        $this->f3->reroute('/');
+        if($this->f3->get('SESSION.user') != null)
+        {
+            $this->f3->clear('SESSION.user');
+            $this->f3->reroute('/');
+        }
+
+        else
+        {
+        }
+        
     }
 }
