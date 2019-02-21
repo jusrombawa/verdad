@@ -139,10 +139,49 @@ $(document).ready(function(){
 
     //login form submit for desktop
 
-    //$(document).on("click","#loginButtonDesktop").click(function(e){
     $("#loginButtonDesktop").click(function(e){
         var username = $("#loginUsernameDesktop").val().trim();
         var password = $("#loginPasswordDesktop").val().trim();
+
+        //alert("Logging in as " + username + " with password " + password); //THIS IS FOR TEST PURPOSE ONLY OH MY GOD I SWEAR IF YOU FORGET TO REMOVE THIS
+
+        //check if non-empty login
+        if(username != '' && password != '')
+        {
+            $.ajax({
+                type:"POST",
+                url:"/login",
+                data: {
+                    "username": username,
+                    "password": password
+                },
+
+                success: function(data)
+                {
+                    window.location.reload();
+                },
+
+                error: function(jqXHR, exception)
+                {
+                    alert(jqXHR.responseText);
+                }
+            });
+        }
+
+        else if (username == '')
+            alert("E-mail field cannot be empty.");
+
+        else if (password == '')
+            alert("Password field cannot be empty.");
+
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    });
+
+    $("#loginButtonMobile").click(function(e){
+        var username = $("#loginUsernameMobile").val().trim();
+        var password = $("#loginPasswordMobile").val().trim();
 
         //alert("Logging in as " + username + " with password " + password); //THIS IS FOR TEST PURPOSE ONLY OH MY GOD I SWEAR IF YOU FORGET TO REMOVE THIS
 
@@ -213,5 +252,25 @@ $(document).ready(function(){
 
         });
     });
+
+
+    $(document).on("click", "#logoutMobile", function(){
+
+        $.ajax({
+            type: 'POST',
+            url: '/logout',
+            success: function(data) {
+                window.location.reload();
+            },
+
+            error: function(jqXHR, exception)
+            {
+                alert("Error logging out.");
+                alert(jqXHR.responseText);
+            }
+
+        });
+    });
+
 
 });
