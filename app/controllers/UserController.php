@@ -17,7 +17,7 @@ class UserController extends Controller{
         $username = $this->f3->get('POST.username');
         $password = $this->f3->get('POST.password');
 
-        $user = new User($this->db);
+        $user = new UserMapper($this->db);
         $user->getByName($username);
 
         //username not found
