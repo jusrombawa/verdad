@@ -26,9 +26,10 @@ class UserController extends Controller{
             $loginStatus = false;
             $loginError = 'Username not found';
 
-            array_push($loginInfo, $loginStatus);// send status
-            array_push($loginInfo, $loginError); //send session username
+            array_push($loginInfo, $loginStatus);
+            array_push($loginInfo, $loginError);
 
+            //echo json_encode($loginInfo);
             $this->f3->clear('SESSION.user');
         }
 
@@ -48,8 +49,11 @@ class UserController extends Controller{
             $loginError = 'Password incorrect';
 
             $this->f3->clear('SESSION.user');
-            array_push($loginInfo, $loginStatus);// send status
-            array_push($loginInfo, $loginError); //send session username
+
+            array_push($loginInfo, $loginStatus);
+            array_push($loginInfo, $loginError);
+
+            //echo json_encode($loginInfo);
         }
 
     }

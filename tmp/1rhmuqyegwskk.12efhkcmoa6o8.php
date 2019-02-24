@@ -11,40 +11,7 @@
   <link href="<?= ($UI . 'css/style.css') ?>" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-
-<!--     <?php if ($loggedIn == false): ?>
-      
-    <?php endif; ?>
-
-    
-
-    <?php if ($loggedIn == true): ?>
-      
-
-
-      <div id="login-area" class="container">
-        <div class="row">
-          <div class="col s3 offset-s9 z-depth-2">
-            <form id="loginDesktop" class="right-align">
-              <div class="input-field">
-                <input id="loginUsernameDesktop">
-                <label for="loginUsernameDesktop">E-mail</label>
-              </div>
-              <div class="input-field">
-                <input id="loginPasswordDesktop" type="password">
-                <label for="loginPasswordDesktop">Password</label>
-              </div>
-
-              <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In
-                <i class="material-icons right">send</i>
-              </button>
-            </form>
-            <br/>
-          </div>  
-        </div>
-      </div>
-    <?php endif; ?> -->
-
+  
   <?php if ($SESSION['user'] != null): ?>
     
     
