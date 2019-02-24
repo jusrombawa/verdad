@@ -1,9 +1,9 @@
 <?php
 
-class User extends DB\SQL\Mapper{
+class UserMapper extends DB\SQL\Mapper{
 
     public function __construct(DB\SQL $db) {
-        parent::__construct($db,'test');
+        parent::__construct($db,'users');
     }
 
     public function all() {

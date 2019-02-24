@@ -17,39 +17,57 @@ class UserController extends Controller{
         $username = $this->f3->get('POST.username');
         $password = $this->f3->get('POST.password');
 
-        $user = new User($this->db);
+        $user = new UserMapper($this->db);
         $user->getByName($username);
 
         //username not found
         if($user->dry()) {
             //$this->f3->reroute('/login');
             $loginStatus = false;
-            $loginUsername = 'Username not found';
+            $loginError = 'Username not found';
+
+            array_push($loginInfo, $loginStatus);
+            array_push($loginInfo, $loginError);
+
+            //echo json_encode($loginInfo);
+            $this->f3->clear('SESSION.user');
         }
 
         //successful login
-        if(password_verify($password, $user->password)) {
+        else if(password_verify($password, $user->password)) {
             $this->f3->set('SESSION.user', $user->username);
 
-            //$this->f3->reroute('/');
-            $loginStatus = true;
-            $loginUsername = $this->f3->get('SESSION.user');
+            $this->f3->reroute('/');
+            /*$loginStatus = true;
+            $loginUsername = $this->f3->get('SESSION.user');*/
         }
 
         //wrong password
         else {
             //$this->f3->reroute('/login');
             $loginStatus = false;
-            $loginUsername = 'Password incorrect';
+            $loginError = 'Password incorrect';
+
+            $this->f3->clear('SESSION.user');
+
+            array_push($loginInfo, $loginStatus);
+            array_push($loginInfo, $loginError);
+
+            //echo json_encode($loginInfo);
         }
 
-        array_push($loginInfo, $loginStatus);// send status
-        array_push($loginInfo, $loginUsername); //send session username
+    }
 
-        $this->f3->set('loggedIn', $loginStatus);
-        $this->f3->set('logInUsername', $loginUsername);
+    function logout() {
+        if($this->f3->get('SESSION.user') != null)
+        {
+            $this->f3->clear('SESSION.user');
+            $this->f3->reroute('/');
+        }
 
-        echo json_encode($loginInfo);
-
+        else
+        {
+        }
+        
     }
 }
