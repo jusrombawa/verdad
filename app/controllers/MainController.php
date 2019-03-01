@@ -70,7 +70,7 @@ class MainController extends Controller{
 		echo json_encode($artList);
 
 	}
-
+/*
 	function readArticle(){
 
 		$am = new ArticleMapper($this->db);
@@ -91,7 +91,7 @@ class MainController extends Controller{
 		echo json_encode($output);
 
 		//$this->renderView("article.htm");
-	}
+	}*/
 
 	function sayhello(){
 		echo 'Hola!';

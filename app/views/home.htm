@@ -164,9 +164,50 @@
 
   	</div>
 
-  
+  <check if= "{{ @SESSION.user != null }}">
+    <div id="art_submit_modal_button" class="fixed-action-btn right-align">
+      <a class="btn-floating btn-large waves-effect waves-light blue modal-trigger" href="#article_submit_modal"><i class="material-icons">add</i></a>
+    </div>
+  </check>
 
   <!-- Modals -->
+
+  <div id="article_submit_modal" class="modal">
+    <div class="modal-content">
+      <h4>Submit article</h4>
+      <form>
+        <div class="input-field">
+          <input id="articleURL">
+          <label for="articleURL">Link to the article</label>
+        </div>
+
+        <div class="input-field">
+          <input id="articleTitle">
+          <label for="articleTitle">Title</label>
+        </div>
+        <div class="input-field">
+          <input id="articleAuthor">
+          <label for="articleAuthor">Author</label>
+        </div>
+        <div class="input-field">
+          <input id="articlePublisher">
+          <label for="articlePublisher">Publisher</label>
+        </div>
+        <div class="input-field">
+          <input id="articlePubDate" type="text" class="datepicker">
+          <label for="articlePubDate">Publish Date</label>
+        </div>
+        <div class="input-field">
+          <input id="articlePubTime" type="text" class="timepicker">
+          <label for="articlePubTime">Publish Time</label>
+        </div>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
+    </div>
+  </div>
   
   <!--  Scripts-->
   <!--  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->

@@ -5,10 +5,13 @@ $(document).ready(function(){
     $('.collapsible').collapsible();
     $('.datepicker').datepicker();
     $('.sidenav').sidenav();
+    $('.fixed-action-btn').floatingActionButton();
+    $('.timepicker').timepicker();
 
     //hide initially hidden components
     $("#articles_sect").hide();
     $("#login-area").hide();
+    $("#art_submit_modal_button").hide();
 
     //start reading articles
     $("#read_button").click(function(){
@@ -18,6 +21,7 @@ $(document).ready(function(){
             $("#title_header").hide(1000);
             $("#subtitle_header").hide(1000);
             $("#articles_sect").show(2000);
+            $("#art_submit_modal_button").show(2000);
         });
 
         //request to get articles
@@ -236,7 +240,6 @@ $(document).ready(function(){
     });
 
     $(document).on("click", "#logoutDesktop", function(){
-
         $.ajax({
             type: 'POST',
             url: '/logout',
@@ -272,5 +275,8 @@ $(document).ready(function(){
         });
     });
 
+/*    $(document).on("click", "#art_submit_modal_button",function(){
+
+    });*/
 
 });
