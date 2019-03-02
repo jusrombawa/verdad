@@ -11,7 +11,7 @@ $(document).ready(function(){
     //hide initially hidden components
     $("#articles_sect").hide();
     $("#login-area").hide();
-    $("#art_submit_modal_button").hide();
+    $("#art-submit-modal-button").hide();
 
     //start reading articles
     $("#read_button").click(function(){
@@ -21,7 +21,7 @@ $(document).ready(function(){
             $("#title_header").hide(1000);
             $("#subtitle_header").hide(1000);
             $("#articles_sect").show(2000);
-            $("#art_submit_modal_button").show(2000);
+            $("#art-submit-modal-button").show(2000);
         });
 
         //request to get articles
@@ -275,8 +275,34 @@ $(document).ready(function(){
         });
     });
 
-/*    $(document).on("click", "#art_submit_modal_button",function(){
+    $(document).on("click", "#art-submit-button", function(){
 
-    });*/
+        alert("submitting article");
+
+        $.ajax({
+            type: 'POST',
+            url: 'submit-article',
+            data: {
+                "articleURL": $("#articleURL").val().trim();
+                "articleTitle": $("articleTitle").val().trim();
+                "articleAuthor": $("articleAuthor").val().trim();
+                "articlePublisher": $("articlePublisher").val().trim();
+                "articlePubDate": $("articlePubDate").val().trim();
+                "articlePubTime": $("articlePubTime").val().trim();
+            },
+            success: function(data)
+            {
+                alert("Hello there.")
+            },
+
+            error: function(jqXHR, exception)
+            {
+                alert("Error submiting article.");
+                alert(jqXHR.responseText);
+            }
+        });
+
+    });
+
 
 });

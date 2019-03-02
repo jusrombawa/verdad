@@ -77,7 +77,6 @@
         </div>
       </nav>
     
-
   <?php endif; ?>
 
   <div id="login-area" class="container">
@@ -165,47 +164,67 @@
   	</div>
 
   <?php if ($SESSION['user'] != null): ?>
-    <div id="art_submit_modal_button" class="fixed-action-btn right-align">
-      <a class="btn-floating btn-large waves-effect waves-light blue modal-trigger" href="#article_submit_modal"><i class="material-icons">add</i></a>
+    <div id="art-submit-modal-button" class="fixed-action-btn right-align">
+      <a class="btn-floating btn-large waves-effect waves-light blue modal-trigger" href="#article-submit-modal"><i class="material-icons">add</i></a>
     </div>
   <?php endif; ?>
 
   <!-- Modals -->
 
-  <div id="article_submit_modal" class="modal">
+  <div id="article-submit-modal" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Submit article</h4>
-      <form>
-        <div class="input-field">
-          <input id="articleURL">
-          <label for="articleURL">Link to the article</label>
-        </div>
+      <form id="article-submit-form">
+          <div class="row">
+            <div class="input-field">
+              <input id="articleURL">
+              <label for="articleURL">Link to the article</label>
+            </div>
+          </div>
 
-        <div class="input-field">
-          <input id="articleTitle">
-          <label for="articleTitle">Title</label>
-        </div>
-        <div class="input-field">
-          <input id="articleAuthor">
-          <label for="articleAuthor">Author</label>
-        </div>
-        <div class="input-field">
-          <input id="articlePublisher">
-          <label for="articlePublisher">Publisher</label>
-        </div>
-        <div class="input-field">
-          <input id="articlePubDate" type="text" class="datepicker">
-          <label for="articlePubDate">Publish Date</label>
-        </div>
-        <div class="input-field">
-          <input id="articlePubTime" type="text" class="timepicker">
-          <label for="articlePubTime">Publish Time</label>
-        </div>
+          <div class="row">
+            <div class="input-field">
+              <input id="articleTitle">
+              <label for="articleTitle">Title</label>
+            </div>
+          </div>
 
+          <div class="row">
+            <div class="col s6">
+              <div class="input-field">
+                <input id="articleAuthor">
+                <label for="articleAuthor">Author</label>
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="input-field">
+                <input id="articlePublisher">
+                <label for="articlePublisher">Publisher</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s6">
+              <div class="input-field">
+                <input id="articlePubDate" type="text" class="datepicker">
+                <label for="articlePubDate">Publish Date</label>
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="input-field">
+                <input id="articlePubTime" type="text" class="timepicker">
+                <label for="articlePubTime">Publish Time</label>
+              </div>
+            </div>
+          
+
+        </div>
       </form>
     </div>
     <div class="modal-footer">
       <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
+      <a id="art-submit-button" class="modal-close waves-effect waves-blue btn-flat">Submit</a>
     </div>
   </div>
   

@@ -62,36 +62,10 @@ class MainController extends Controller{
 			$am->next();
 		}
 
-		//push artList into f3 instance
-		/*$this->f3->set('artList',$artList);
-		//toggle to show artList in home.htm
-		$this->f3->set('showArtList',TRUE);*/
 		//ET phone home
 		echo json_encode($artList);
 
 	}
-/*
-	function readArticle(){
-
-		$am = new ArticleMapper($this->db);
-		//retrieve id to be viewed from GET
-		//but for now...
-		//$articleID = 1;
-		$articleID = $this->f3->get('GET.articleID');
-		$article = $am->load(array("id=?",$articleID));
-		
-
-		//$articleID = $_GET['articleID'];
-
-		$output = array();
-
-		array_push($output,$article->body);
-		array_push($output, $articleID);
-
-		echo json_encode($output);
-
-		//$this->renderView("article.htm");
-	}*/
 
 	function sayhello(){
 		echo 'Hola!';
