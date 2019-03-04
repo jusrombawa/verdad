@@ -68,6 +68,24 @@ class UserController extends Controller{
 
     function submitArticle()
     {
+        $am = new ArticleMapper($this->db);
 
+        $articleURL = $this->f3->get('POST.articleURL');
+        $articleTitle = $this->f3->get('POST.articleTitle');
+        $articleAuthor = $this->f3->get('POST.articleAuthor');
+        $articlePublisher = $this->f3->get('POST.articlePublisher');
+        $articlePubDate = $this->f3->get('POST.articlePubDate');
+        $articlePubTime = $this->f3->get('POST.articlePubTime');
+
+        //id is autoincrement
+        $am->title = $articleTitle;
+        $am->author = $articleAuthor;
+        $am->url = $articleURL;
+        //write publisher to publish_sites
+        $am->publish_date = $articlePubDate;
+        $am->publish_time = $articlePubTime;
+        //submit_date is current_timestamp
+        //avg_score is null
+        //note to self, make sure js deals with null satire and opinion fields because they should both be null by default
     }
 }

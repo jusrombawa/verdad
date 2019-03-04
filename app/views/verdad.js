@@ -283,12 +283,12 @@ $(document).ready(function(){
             type: 'POST',
             url: 'submit-article',
             data: {
-                "articleURL": $("#articleURL").val().trim();
-                "articleTitle": $("articleTitle").val().trim();
-                "articleAuthor": $("articleAuthor").val().trim();
-                "articlePublisher": $("articlePublisher").val().trim();
-                "articlePubDate": $("articlePubDate").val().trim();
-                "articlePubTime": $("articlePubTime").val().trim();
+                "articleURL": $("#articleURL").val().trim(),
+                "articleTitle": $("articleTitle").val().trim(),
+                "articleAuthor": $("articleAuthor").val().trim(),
+                "articlePublisher": $("articlePublisher").val().trim(),
+                "articlePubDate": $("articlePubDate").val().trim(),
+                "articlePubTime": $("articlePubTime").val().trim()
             },
             success: function(data)
             {
