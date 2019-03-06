@@ -169,6 +169,8 @@
     </div>
   <?php endif; ?>
 
+  <!-- <input id="test" type="text" class="timepicker"> -->
+
   <!-- Modals -->
 
   <div id="article-submit-modal" class="modal modal-fixed-footer">
@@ -177,29 +179,30 @@
       <form id="article-submit-form">
           <div class="row">
             <div class="input-field">
+              <h6>Link to the Article</h6>
               <input id="articleURL">
-              <label for="articleURL">Link to the article</label>
+<!--               <label for="articleURL">Link to the article</label> -->
             </div>
           </div>
 
           <div class="row">
             <div class="input-field">
+              <h6>Title</h6>
               <input id="articleTitle">
-              <label for="articleTitle">Title</label>
             </div>
           </div>
 
           <div class="row">
             <div class="col s6">
               <div class="input-field">
+                <h6>Author</h6>
                 <input id="articleAuthor">
-                <label for="articleAuthor">Author</label>
               </div>
             </div>
             <div class="col s6">
               <div class="input-field">
+                <h6>Publisher</h6>
                 <input id="articlePublisher">
-                <label for="articlePublisher">Publisher</label>
               </div>
             </div>
           </div>
@@ -207,19 +210,18 @@
           <div class="row">
             <div class="col s6">
               <div class="input-field">
-                <input id="articlePubDate" type="text" class="datepicker">
-                <label for="articlePubDate">Publish Date</label>
+                <h6>Publish Date</h6>
+                <input id="articlePubDate" type="date">
               </div>
             </div>
             <div class="col s6">
               <div class="input-field">
-                <input id="articlePubTime" type="text" class="timepicker">
-                <label for="articlePubTime">Publish Time</label>
+                <h6>Publish Time</h6>
+                <input id="articlePubTime" type="time">
               </div>
             </div>
-          
+          </div>
 
-        </div>
       </form>
     </div>
     <div class="modal-footer">
@@ -227,7 +229,7 @@
       <a id="art-submit-button" class="modal-close waves-effect waves-blue btn-flat">Submit</a>
     </div>
   </div>
-  
+
   <!--  Scripts-->
   <!--  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
   <script src="<?= ($UI. 'js/jquery.min.js') ?>"></script>

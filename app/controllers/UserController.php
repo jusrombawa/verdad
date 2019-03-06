@@ -69,6 +69,7 @@ class UserController extends Controller{
     function submitArticle()
     {
         $am = new ArticleMapper($this->db);
+        $pm = new PublisherMapper($this->db);
 
         $articleURL = $this->f3->get('POST.articleURL');
         $articleTitle = $this->f3->get('POST.articleTitle');
@@ -81,11 +82,35 @@ class UserController extends Controller{
         $am->title = $articleTitle;
         $am->author = $articleAuthor;
         $am->url = $articleURL;
+
         //write publisher to publish_sites
+        //check if publisher is already in database
+        $publisher = $pm->load(array("name=?",$articlePublisher));
+        //found in publish_sites
+        if(!$publisher->dry())
+        {
+            $am->publiser_fk = $pubisher->id;
+        }
+        //new publisher, add to publish_sites then write new id as fk to article publisher
+        else
+        {
+            //use new mapper just to be safe
+            $pm2 = new PublisherMapper($this->db);
+            //id is auto increment
+            $pm2->name = $articlePublisher;
+            //url is null for now but I'll bust out some cool regex shit to extract the homepage from a url
+            //avg_score and published_by fk are all null by default but filling in that published_by organization fk may pose a problem for later
+            //but for now...
+            $pm2->save();
+
+            $am->publisher_fk = $pm2->id;
+        }
+
         $am->publish_date = $articlePubDate;
         $am->publish_time = $articlePubTime;
         //submit_date is current_timestamp
         //avg_score is null
         //note to self, make sure js deals with null satire and opinion fields because they should both be null by default
+        $am->save();
     }
 }

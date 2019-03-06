@@ -284,15 +284,17 @@ $(document).ready(function(){
             url: 'submit-article',
             data: {
                 "articleURL": $("#articleURL").val().trim(),
-                "articleTitle": $("articleTitle").val().trim(),
-                "articleAuthor": $("articleAuthor").val().trim(),
-                "articlePublisher": $("articlePublisher").val().trim(),
-                "articlePubDate": $("articlePubDate").val().trim(),
-                "articlePubTime": $("articlePubTime").val().trim()
+                "articleTitle": $("#articleTitle").val().trim(),
+                "articleAuthor": $("#articleAuthor").val().trim(),
+                "articlePublisher": $("#articlePublisher").val().trim(),
+                "articlePubDate": $("#articlePubDate").val().trim(),
+                "articlePubTime": $("#articlePubTime").val().trim()
             },
             success: function(data)
             {
                 alert("Hello there.")
+                //I should probably find a way to reload just the article list
+                window.location.reload();
             },
 
             error: function(jqXHR, exception)
