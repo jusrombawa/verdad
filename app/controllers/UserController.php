@@ -86,13 +86,9 @@ class UserController extends Controller{
         //write publisher to publish_sites
         //check if publisher is already in database
         $publisher = $pm->load(array("name=?",$articlePublisher));
-        //found in publish_sites
-        if(!$publisher->dry())
-        {
-            $am->publiser_fk = $pubisher->id;
-        }
+
         //new publisher, add to publish_sites then write new id as fk to article publisher
-        else
+        if($pm->dry())
         {
             //use new mapper just to be safe
             $pm2 = new PublisherMapper($this->db);
@@ -104,6 +100,11 @@ class UserController extends Controller{
             $pm2->save();
 
             $am->publisher_fk = $pm2->id;
+        }
+        //found in publish_sites
+        else
+        {
+            $am->publiser_fk = $pubisher->id;
         }
 
         $am->publish_date = $articlePubDate;
