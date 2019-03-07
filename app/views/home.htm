@@ -180,15 +180,19 @@
           <div class="row">
             <div class="input-field">
               <h6>Link to the Article</h6>
-              <input id="articleURL">
-<!--               <label for="articleURL">Link to the article</label> -->
+                <input id="articleURL">
             </div>
           </div>
 
           <div class="row">
             <div class="input-field">
-              <h6>Title</h6>
-              <input id="articleTitle">
+            <h6>Title</h6>
+              <div class="col s9">
+                <input type="text" id="articleTitle">
+              </div>
+              <div class="col s3 right-align">
+                <a id="suggest-title" class="waves-effect waves-teal btn-flat">Suggest Title</a>
+              </div>
             </div>
           </div>
 

@@ -292,7 +292,7 @@ $(document).ready(function(){
             },
             success: function(data)
             {
-                alert("Hello there.")
+                //alert("Hello there.")
                 //I should probably find a way to reload just the article list
                 window.location.reload();
             },
@@ -306,5 +306,27 @@ $(document).ready(function(){
 
     });
 
+    //suggest titles for article submission
+    $(document).on("click","#suggest-title", function(){
+        
+        //found out about textance on https://stackoverflow.com/questions/7901760/how-can-i-get-the-title-of-a-webpage-given-the-url-an-external-url-using-jquer
+        //more info at http://textance.herokuapp.com/index.html
+        //and by more info I mean some description text and some other misc utils
+
+       /* alert("suggesting title");*/
+
+        var articleURL = $("#articleURL").val().trim();
+        var apiURL = "http://textance.herokuapp.com/title/" + articleURL; //append article url to textance url
+
+        $.ajax({
+          url: apiURL,
+          complete: function(data) {
+            alert(data.responseText);
+            var suggestedTitle = data.responseText;
+            $("#articleTitle").val(suggestedTitle);
+          }
+        });
+
+    });
 
 });
