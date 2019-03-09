@@ -77,6 +77,7 @@ class UserController extends Controller{
         $articlePublisher = $this->f3->get('POST.articlePublisher');
         $articlePubDate = $this->f3->get('POST.articlePubDate');
         $articlePubTime = $this->f3->get('POST.articlePubTime');
+        $hostURL = $this->f3->get('POST.hostURL');
 
         //id is autoincrement
         $am->title = $articleTitle;
@@ -94,9 +95,10 @@ class UserController extends Controller{
             $pm2 = new PublisherMapper($this->db);
             //id is auto increment
             $pm2->name = $articlePublisher;
-            //url is null for now but I'll bust out some cool regex shit to extract the homepage from a url
-            //avg_score and published_by fk are all null by default but filling in that published_by organization fk may pose a problem for later
-            //but for now...
+            $pm2->url = $hostURL;
+            //apparently I didn't need to use regex, just regular-ass JS URL stuff. Yaaaaay!
+            //but I think imma have to deal with some multiple url bullshit. Example: opinion.inquirer.net vs newsinfo.inquirer.net are all inquirer.
+            //avg_score and published_by fk are all null by default
             $pm2->save();
 
             $am->publisher_fk = $pm2->id;

@@ -277,7 +277,16 @@ $(document).ready(function(){
 
     $(document).on("click", "#art-submit-button", function(){
 
-        alert("submitting article");
+        //alert("submitting article");
+
+        //get website host
+
+        var templink = document.createElement("a");
+        templink.href = $("#articleURL").val().trim();
+
+        var hostURL = templink.protocol + templink.hostname;
+
+        //alert(hostURL);
 
         $.ajax({
             type: 'POST',
@@ -288,7 +297,8 @@ $(document).ready(function(){
                 "articleAuthor": $("#articleAuthor").val().trim(),
                 "articlePublisher": $("#articlePublisher").val().trim(),
                 "articlePubDate": $("#articlePubDate").val().trim(),
-                "articlePubTime": $("#articlePubTime").val().trim()
+                "articlePubTime": $("#articlePubTime").val().trim(),
+                "hostURL": hostURL
             },
             success: function(data)
             {
@@ -321,7 +331,7 @@ $(document).ready(function(){
         $.ajax({
           url: apiURL,
           complete: function(data) {
-            alert(data.responseText);
+            //alert(data.responseText);
             var suggestedTitle = data.responseText;
             $("#articleTitle").val(suggestedTitle);
           }
