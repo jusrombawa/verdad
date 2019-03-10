@@ -11,6 +11,10 @@
   <link href="<?= ($UI . 'css/style.css') ?>" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
+
+
+  <span id="loginInfo" hidden> <?= ($SESSION['loginStatus']) ?> </span>
+
   
   <?php if ($SESSION['user'] != null): ?>
     

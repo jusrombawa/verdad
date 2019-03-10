@@ -24,13 +24,15 @@ class UserController extends Controller{
             array_push($loginInfo, $loginStatus);
             array_push($loginInfo, $loginError);
 
-            //echo json_encode($loginInfo);
+            
+            $this->f3->set('SESSION.loginStatus', $loginError);
             $this->f3->clear('SESSION.user');
         }
 
         //successful login
         else if(password_verify($password, $user->password)) {
             $this->f3->set('SESSION.user', $user->username);
+            $this->f3->set('SESSION.loginStatus', "Login succesful. Hello, " + $user->username + ".");
 
             $this->f3->reroute('/');
             /*$loginStatus = true;
@@ -43,12 +45,11 @@ class UserController extends Controller{
             $loginStatus = false;
             $loginError = 'Password incorrect';
 
-            $this->f3->clear('SESSION.user');
-
             array_push($loginInfo, $loginStatus);
             array_push($loginInfo, $loginError);
 
-            //echo json_encode($loginInfo);
+            $this->f3->set('SESSION.loginStatus', $loginError);
+            $this->f3->clear('SESSION.user');
         }
 
     }
@@ -57,6 +58,7 @@ class UserController extends Controller{
         if($this->f3->get('SESSION.user') != null)
         {
             $this->f3->clear('SESSION.user');
+            $this->f3->clear('SESSION.loginStatus');
             $this->f3->reroute('/');
         }
 

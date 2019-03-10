@@ -13,6 +13,23 @@ $(document).ready(function(){
     $("#login-area").hide();
     $("#art-submit-modal-button").hide();
 
+    //notify about login status
+
+
+    //M.toast({html:$("#loginInfo")});
+    if($("#loginStatus").text() != '')
+    {
+        M.toast({html:"<span>" + $("#loginStatus").text() + "</span>"});
+        alert("a");
+    }
+    else
+    {
+        M.toast({html:"<span>the fuck</span>"});
+        alert("b");
+
+    }
+
+
     //start reading articles
     $("#read_button").click(function(){
         //hide extra stuff
