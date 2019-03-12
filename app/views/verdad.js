@@ -14,21 +14,10 @@ $(document).ready(function(){
     $("#art-submit-modal-button").hide();
 
     //notify about login status
+    var loginInfo = $("#loginInfo").text().trim();
 
-
-    //M.toast({html:$("#loginInfo")});
-    if($("#loginStatus").text() != '')
-    {
-        M.toast({html:"<span>" + $("#loginStatus").text() + "</span>"});
-        alert("a");
-    }
-    else
-    {
-        M.toast({html:"<span>the fuck</span>"});
-        alert("b");
-
-    }
-
+    if(loginInfo != '')
+        M.toast({html:"<span>" + loginInfo + "</span>"});
 
     //start reading articles
     $("#read_button").click(function(){

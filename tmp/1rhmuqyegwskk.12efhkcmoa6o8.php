@@ -13,7 +13,7 @@
 <body>
 
 
-  <span id="loginInfo" hidden> <?= ($SESSION['loginStatus']) ?> </span>
+  <span id="loginInfo" hidden> <?= ($SESSION['loginInfo']) ?> </span>
 
   
   <?php if ($SESSION['user'] != null): ?>

@@ -7,8 +7,6 @@ class UserController extends Controller{
 
     function authenticate() {
 
-        $loginInfo = array();
-
         $username = $this->f3->get('POST.username');
         $password = $this->f3->get('POST.password');
 
@@ -17,38 +15,30 @@ class UserController extends Controller{
 
         //username not found
         if($user->dry()) {
-            //$this->f3->reroute('/login');
-            $loginStatus = false;
-            $loginError = 'Username not found';
+            $loginInfo = 'Username not found';
 
-            array_push($loginInfo, $loginStatus);
-            array_push($loginInfo, $loginError);
-
-            
-            $this->f3->set('SESSION.loginStatus', $loginError);
+            $this->f3->set('SESSION.loginInfo', $loginInfo);
             $this->f3->clear('SESSION.user');
         }
 
         //successful login
         else if(password_verify($password, $user->password)) {
-            $this->f3->set('SESSION.user', $user->username);
-            $this->f3->set('SESSION.loginStatus', "Login succesful. Hello, " + $user->username + ".");
+            $username = $user->username;
+
+            $this->f3->set('SESSION.user', $username);
+            //$this->f3->set('SESSION.loginInfo', $loginInfo);
+            $this->f3->clear('SESSION.loginInfo');
 
             $this->f3->reroute('/');
-            /*$loginStatus = true;
-            $loginUsername = $this->f3->get('SESSION.user');*/
+
         }
 
         //wrong password
         else {
-            //$this->f3->reroute('/login');
-            $loginStatus = false;
-            $loginError = 'Password incorrect';
+            $loginInfo = 'Password incorrect';
 
-            array_push($loginInfo, $loginStatus);
-            array_push($loginInfo, $loginError);
 
-            $this->f3->set('SESSION.loginStatus', $loginError);
+            $this->f3->set('SESSION.loginInfo', $loginInfo);
             $this->f3->clear('SESSION.user');
         }
 
@@ -58,7 +48,7 @@ class UserController extends Controller{
         if($this->f3->get('SESSION.user') != null)
         {
             $this->f3->clear('SESSION.user');
-            $this->f3->clear('SESSION.loginStatus');
+            $this->f3->clear('SESSION.loginInfo');
             $this->f3->reroute('/');
         }
 
