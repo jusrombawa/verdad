@@ -12,6 +12,10 @@
 </head>
 <body>
 
+  <?php if ($SESSION['reviewerStatus'] == true): ?>
+    <p>Reviewer account</p>
+  <?php endif; ?>
+
 
   <span id="loginInfo" hidden> <?= ($SESSION['loginInfo']) ?> </span>
 

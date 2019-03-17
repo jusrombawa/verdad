@@ -19,6 +19,7 @@ class UserController extends Controller{
 
             $this->f3->set('SESSION.loginInfo', $loginInfo);
             $this->f3->clear('SESSION.user');
+            $this->f3->clear('SESSION.reviewerStatus');
         }
 
         //successful login
@@ -28,6 +29,17 @@ class UserController extends Controller{
             $this->f3->set('SESSION.user', $username);
             //$this->f3->set('SESSION.loginInfo', $loginInfo);
             $this->f3->clear('SESSION.loginInfo');
+
+            //check if user is reviewer
+            $rm = new ReviewerMapper($this->db);
+            $reviewer = $rm->load(array("user_fk", $user->id));
+
+            if($rm->dry()) //not a reviewer
+                $reviewerStatus = false;
+
+            else
+                $reviewerStatus = true;
+            $this->f3->set("SESSION.reviewerStatus", $reviewerStatus);
 
             $this->f3->reroute('/');
 
@@ -40,6 +52,7 @@ class UserController extends Controller{
 
             $this->f3->set('SESSION.loginInfo', $loginInfo);
             $this->f3->clear('SESSION.user');
+            $this->f3->clear('SESSION.reviewerStatus');
         }
 
     }
@@ -49,6 +62,7 @@ class UserController extends Controller{
         {
             $this->f3->clear('SESSION.user');
             $this->f3->clear('SESSION.loginInfo');
+            $this->f3->clear('SESSION.reviewerStatus');
             $this->f3->reroute('/');
         }
 

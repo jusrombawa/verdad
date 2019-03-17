@@ -12,6 +12,10 @@
 </head>
 <body>
 
+  <check if="{{ @SESSION.reviewerStatus == true}}">
+    <p>Reviewer account</p>
+  </check>
+
 
   <span id="loginInfo" hidden> {{ @SESSION.loginInfo }} </span>
 
