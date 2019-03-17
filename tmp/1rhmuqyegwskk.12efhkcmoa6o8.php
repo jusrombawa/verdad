@@ -56,28 +56,18 @@
             </ul>
 
           <ul id="nav-mobile" class="sidenav">
-            <br/>
-            <li>
-              <div class="container">
-                  <div class="row">
-                  <form id="loginMobile" action>
-                    <div class="input-field">
-                      <input id="loginUsernameMobile">
-                      <label for="loginUsernameMobile">E-mail</label>
-                    </div>
-
-                    <div class="input-field">
-                      <input id="loginPasswordMobile" type="password">
-                      <label for="loginPasswordMobile">Password</label>
-                    </div>
-                    <button id="loginButtonMobile" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
-                   </form>
-                    <br/>
-                  </div>
-                </div>
-            </li>
-            <li><a href="registerModal">Register</a></li>
-            <li><a href="">Frequently Asked Questions</a></li>
+          <div class="container black-text">
+            <form id="loginMobile" action>
+              <li><h6>Username<h6></li>
+              <li><input id="loginUsernameMobile"></li>
+              <li><h6>Password<h6></li>
+              <li><input id="loginPasswordMobile" type="password">
+              </li>
+              <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button></li>
+            </form>
+              <li><a href="registerModal">Register</a></li>
+              <li><a href="">Frequently Asked Questions</a></li>
+          </div>
           </ul>
 
 
@@ -102,7 +92,6 @@
 
             <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
           </form>
-          <br/>
         </div>  
       </div>
     </div>
