@@ -12,10 +12,10 @@
 </head>
 <body>
 
-  <?php if ($SESSION['reviewerStatus'] == true): ?>
+  <!-- <?php if ($SESSION['reviewerStatus'] == true): ?>
     <p>Reviewer account</p>
   <?php endif; ?>
-
+ -->
 
   <span id="loginInfo" hidden> <?= ($SESSION['loginInfo']) ?> </span>
 
@@ -92,6 +92,7 @@
 
             <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
           </form>
+          <br/>
         </div>  
       </div>
     </div>

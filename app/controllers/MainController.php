@@ -34,7 +34,6 @@ class MainController extends Controller{
 			array_push($entry,$am->satire);
 			array_push($entry,$am->opinion);
 			array_push($entry,$am->url);
-			//array_push($entry,$am->id);
 
 			//build array of reviews then push to entry
 			$article_id = $am->id;
@@ -56,6 +55,9 @@ class MainController extends Controller{
 			}
 			//push review list into article entry
 			array_push($entry, $review_list);
+
+			//push id to list to identify what to review
+			array_push($entry,$am->id);
 
 			//push entry to artList
 			array_push($artList,$entry);

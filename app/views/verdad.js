@@ -119,7 +119,10 @@ $(document).ready(function(){
                             }
                         }                        
                         
-
+                        //add button to allow review submission
+                        text += "<check if='{{ @SESSION.reviewerStatus == true}}'>";
+                        text += "<a id='review"+articleList[i][9]+"' class='btn waves-effect waves-light blue submit-review'>Write a review <i class='material-icons'>rate_review</i></a>"
+                        text += "</check>";
 
                         text += "</div>";
                         text += "</li>";
@@ -343,6 +346,11 @@ $(document).ready(function(){
           }
         });
 
+    });
+
+    $(document).on("click", ".submit-review", function(){
+
+        alert($(this).attr('id'));
     });
 
 });
