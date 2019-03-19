@@ -122,4 +122,8 @@ class UserController extends Controller{
         //note to self, make sure js deals with null satire and opinion fields because they should both be null by default
         $am->save();
     }
+
+    function submitReview(){
+        
+    }
 }

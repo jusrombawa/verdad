@@ -351,7 +351,9 @@ $(document).ready(function(){
     $(document).on("click", ".submit-review", function(){
 
         var artinput = $(this).attr('id');
-        var artID = parseInt(artinput.substr(6));
+        var artID = artinput.substr(6);
+
+        $("#article-review-id").text(artID);
 
         var instance = M.Modal.getInstance($("#review-submit-modal"));
         instance.open();
@@ -360,6 +362,8 @@ $(document).ready(function(){
     $(document).on("click", "#review-submit-button", function(){
 
         var reviewRating = $("#review-rating").val();
+        var reviewArtID = parseInt($("#article-review-id").text());
+        var reviewUser = $("#loggedInUser").text();
         var reviewComments = $("#review-comments").val();
         
         //check if satire
@@ -374,9 +378,41 @@ $(document).ready(function(){
         else
             var reviewOpinion = false;
 
+        //simple input sanitation
+        if(reviewRating == null)
+            alert("Please input a rating.");
+        else if (reviewComments == '')
+            alert("Please include comments on your review.")
+        else if (reviewRating == null & reviewComments == '')
+            alert("Please provide a rating and comments.")
+        else
+        {
+            alert(reviewRating + " " + reviewArtID + " " + reviewComments + " " + reviewSatire + " " + reviewOpinion);
+            $.ajax({
+                type:"POST",
+                url: "/submitReview",
+                data:{
+                    'articleID': reviewArtID,
+                    'reviewerUsername': reviewUser,
+                    'score': reviewRating,
+                    'comments': reviewComments,
+                    'satire': reviewSatire,
+                    'opinion': reviewOpinion
+                },
 
+                success: function(data)
+                {
+                   
+                },
 
-        alert(reviewRating + " " + reviewComments + " " + reviewSatire + " " + reviewOpinion);
+                error: function(jqXHR, exception)
+                {
+                    alert("Error submiting review.");
+                    alert(jqXHR.responseText);
+                }
+                });
+        }
+
     });
 
 });

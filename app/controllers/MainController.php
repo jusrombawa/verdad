@@ -68,7 +68,7 @@ class MainController extends Controller{
 
 	}
 
-	function submitReview(){}
+	
 
 	function sayhello(){
 		echo 'Hola!';

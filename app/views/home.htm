@@ -236,6 +236,7 @@
   <div id="review-submit-modal" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h5>Submit review</h5>
+      <span hidden id="article-review-id"></span>
       <form id="review-submit">
         <div class="input-field">
           <div class="row">
