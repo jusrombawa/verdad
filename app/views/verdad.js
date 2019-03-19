@@ -350,7 +350,33 @@ $(document).ready(function(){
 
     $(document).on("click", ".submit-review", function(){
 
-        alert($(this).attr('id'));
+        var artinput = $(this).attr('id');
+        var artID = parseInt(artinput.substr(6));
+
+        var instance = M.Modal.getInstance($("#review-submit-modal"));
+        instance.open();
+    });
+
+    $(document).on("click", "#review-submit-button", function(){
+
+        var reviewRating = $("#review-rating").val();
+        var reviewComments = $("#review-comments").val();
+        
+        //check if satire
+        if($("#review-satire").is(":checked"))
+            var reviewSatire = true;
+        else
+            var reviewSatire = false;
+
+        //check if opinion
+        if($("#review-opinion").is(":checked"))
+            var reviewOpinion = true;
+        else
+            var reviewOpinion = false;
+
+
+
+        alert(reviewRating + " " + reviewComments + " " + reviewSatire + " " + reviewOpinion);
     });
 
 });

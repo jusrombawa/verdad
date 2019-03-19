@@ -40,7 +40,6 @@ class MainController extends Controller{
 			$reviews = $rm->load(array("article_fk=?",$article_id));
 			$review_list = array();
 
-			//ERROR!!! Infinite loop
 			while(!$rm->dry())
 			{
 				$review_entry = array();
@@ -68,6 +67,8 @@ class MainController extends Controller{
 		echo json_encode($artList);
 
 	}
+
+	function submitReview(){}
 
 	function sayhello(){
 		echo 'Hola!';

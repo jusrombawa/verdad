@@ -18,6 +18,7 @@
  -->
 
   <span id="loginInfo" hidden> <?= ($SESSION['loginInfo']) ?> </span>
+  <span id="loggedInUser" hidden> <?= ($SESSION['user']) ?> </span>
 
   
   <?php if ($SESSION['user'] != null): ?>
@@ -229,6 +230,50 @@
     <div class="modal-footer">
       <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
       <a id="art-submit-button" class="modal-close waves-effect waves-blue btn-flat">Submit</a>
+    </div>
+  </div>
+
+  <div id="review-submit-modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h5>Submit review</h5>
+      <form id="review-submit">
+        <div class="input-field">
+          <div class="row">
+            <select id="review-rating">
+              <option value="no" disabled selected>Choose the rating</option>
+              <option value="5">5 star</option>
+              <option value="4">4 star</option>
+              <option value="3">3 star</option>
+              <option value="2">2 star</option>
+              <option value="1">1 star</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <textarea id="review-comments" class="materialize-textarea"></textarea>
+            <label for="review-comments">Comments</label>
+          </div>
+
+          <div class="row">
+            <label>
+              <input type="checkbox" id="review-satire" class="filled-in"/>
+              <span>Satire article</span>
+            </label>
+          </div>
+
+          <div class="row">
+            <label>
+              <input type="checkbox" id="review-opinion" class="filled-in"/>
+              <span>Opinion article</span>
+            </label>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="modal-footer">
+      <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
+      <a id="review-submit-button" class="modal-close waves-effect waves-blue btn-flat">Submit</a>
     </div>
   </div>
 
