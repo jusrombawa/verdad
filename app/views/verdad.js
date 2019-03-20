@@ -387,7 +387,7 @@ $(document).ready(function(){
             alert("Please provide a rating and comments.")
         else
         {
-            alert(reviewRating + " " + reviewArtID + " " + reviewComments + " " + reviewSatire + " " + reviewOpinion);
+            //alert(reviewComments);
             $.ajax({
                 type:"POST",
                 url: "/submitReview",
@@ -402,7 +402,7 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
-                   
+                   window.location.reload();
                 },
 
                 error: function(jqXHR, exception)

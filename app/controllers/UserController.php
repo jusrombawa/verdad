@@ -124,6 +124,32 @@ class UserController extends Controller{
     }
 
     function submitReview(){
+
+        $rm = new ReviewMapper($this->db);
+        $um = new UserMapper($this->db);
         
+        $reviewArtID = $this->f3->get("POST.articleID");
+        $reviewUsername = $this->f3->get("POST.reviewUsername");
+        $reviewScore = $this->f3->get("POST.score");
+        $reviewComments = $this->f3->get("POST.comments");
+        $reviewSatire = $this->f3->get("POST.satire");
+        $reviewOpinion = $this->f3->get("POST.opinion");
+
+        $user = $um->load(array("username",$reviewUsername));
+        if(!$um->dry())
+            $userID = $user->id;
+
+        //id is auto-increment
+        $rm->article_fk = $reviewArtID;
+        $rm->reviewer_fk = $userID;
+        $rm->score = $reviewScore;
+        $rm->comments = $reviewComments;
+        $rm->satire_flag = $reviewSatire;
+        $rm->opinion_flag = $reviewOpinion;
+        //erroneous flag is default false
+        $rm->erroneous_flag = false;
+
+        $rm->save();
+
     }
 }
