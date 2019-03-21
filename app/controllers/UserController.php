@@ -135,25 +135,24 @@ class UserController extends Controller{
         $reviewSatire = $this->f3->get("POST.satire");
         $reviewOpinion = $this->f3->get("POST.opinion");
 
+        $reviewUsername = trim($reviewUsername);
+
         $user = $um->load(array("username=?",$reviewUsername));
-        if(!$um->dry())
-            $userID = $user->id;
-        else
-            $userID = 69;
+        $userID = $user->id;
 
         //check if user already submitted a review for article
         $rm2 = new ReviewMapper($this->db);
         $checkreview = $rm2->load(array("article_fk=?",$reviewArtID));
         //found a match
-        $test = $userID;
-        echo json_encode($test);
-        /*if(!$rm2->dry() && $checkreview->reviewer_fk == $reviewUsername)
+        
+        if(!$rm2->dry() & $checkreview->reviewer_fk == $reviewUsername)
         {
             $info = "You already submitted a review for this article.";
             $this->f3->set("SESSION.info",$info);
+            echo json_encode($info);
         }
         //no match, valid review submission
-        else
+        /*else
         {
             //id is auto-increment
             $rm->article_fk = $reviewArtID;
@@ -167,5 +166,8 @@ class UserController extends Controller{
 
             $rm->save();
         }*/
+
+        else
+            echo json_encode("Everything's fine");
     }
 }

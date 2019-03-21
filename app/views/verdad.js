@@ -403,7 +403,6 @@ $(document).ready(function(){
                 success: function(data)
                 {
                    //window.location.reload();
-                   alert("this should be ID for: " + reviewUser)
                    alert($.parseJSON(data));
                 },
 
