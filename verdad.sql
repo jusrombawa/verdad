@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2019 at 03:19 PM
+-- Generation Time: Mar 21, 2019 at 03:21 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -50,19 +50,26 @@ CREATE TABLE `articles` (
   `publish_date` date DEFAULT NULL,
   `publish_time` time DEFAULT NULL,
   `submit_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `body` text CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `avg_score` float DEFAULT NULL,
-  `satire` tinyint(1) NOT NULL,
-  `opinion` tinyint(1) NOT NULL
+  `satire` tinyint(1) DEFAULT NULL,
+  `opinion` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`id`, `title`, `author`, `url`, `publisher_fk`, `publish_date`, `publish_time`, `submit_date`, `body`, `avg_score`, `satire`, `opinion`) VALUES
-(1, 'House to hold question hour for Diokno over 2019 budget', 'Mara Cepeda', 'https://www.rappler.com/nation/218551-house-question-hour-benjamin-diokno-december-11-2018', 1, '2018-12-09', '13:06:00', '2018-12-09 16:42:32', '(UPDATED) The question hour comes after Senator Panfilo Lacson accused the House of passing a national budget riddled with alleged pork barrel funds \r\n\r\nMANILA, Philippines (UPDATED) – The House of Representatives is set to subject Budget Secretary Benjamin Diokno to a question hour at 3 pm on Tuesday, December 11.\r\n\r\nLawmakers summoned Diokno to a question hour – a period during the plenary session wherein legislators can ask questions to a department head regarding all matters concerning his agency – after the plenary adopted Minority Leader Danilo Suarez’s House Resolution (HR) 2307 on December 4.\r\n\r\nSuarez and other minority lawmakers have previously aired concerns over the proposed P3.757-trillion budget for 2019, which the House had approved on 3rd and final reading.\r\n\r\nThe congressmen are wary that the 2019 budget may be used by politicians to campaign in the 2019 elections. They also slammed the underspending under President Rodrigo Duterte’s administration.\r\n\r\nMajority Leader Rolando Andaya Jr already wrote a letter to Diokno informing him that he is “hereby required to appear” at the Batasang Pambansa’s session hall on Tuesday.\r\n\r\nDiokno confirmed to Rappler that he would attend the question hour on Tuesday.\r\n\r\nSenator Panfilo Lacson recently accused the House of passing a 2019 budget riddled with pork barrel funds. He disclosed that P2.4 billion was allocated for Pampanga’s 2nd District alone, which is represented by Speaker Gloria Macapagal Arroyo.\r\n\r\nAndaya himself previously admitted that every lawmaker got P60 million and each senator P200 million to allot for their pet projects. But he and other minority lawmakers denied these discretionary funds were a form of Priority Development Assistance Fund, which the Supreme Court declared unconstitutional in 2013.\r\n\r\nDiokno himself had denied the presence of pork barrel funds in the 2019 budget that the Department of Budget and Management helped prepare.\r\n\r\nAndaya also said that the House got delayed in passing the proposed 2019 budget as several departments in the executive branch were still requesting more reallocations, which will be finalized only at the bicameral conference committee level with the Senate.\r\n\r\nThe goverment is already expected to operate on a reenacted budget until February 2019, given the limited time senators have to deliberate on the 2019 budget before the 17th Congress suspends session for the holidays by Wednesday, December 12. – With a report from Aika Rey/Rappler.com', NULL, 0, 0),
-(2, 'Malacañang to Trillanes: Stop \'smearing\' Duterte, face libel charges', 'Rappler.com', 'https://www.rappler.com/nation/218558-malacanang-statement-antonio-trillanes-libel-charges', 1, '2018-12-09', '16:55:00', '2018-12-09 18:50:48', 'Presidential Spokesperson Salvador Panelo calls Senator Antonio Trillanes IV a \'perennial whiner\' for saying that plunderers are being set free while critics are being jailed\r\n\r\nMANILA, Philippines – Malacañang on Sunday, December 9, slammed Senator Antonio Trillanes IV, calling him \"out of his wits\" after he condemned the arrest warrants issued against him by a Davao City court.\r\n\r\nIn a statement, Presidential Spokesperson Salvador Panelo called out Trillanes for \"attacking\" President Rodrigo Duterte before the media instead of focusing on the libel complaints filed by the President\'s son Paolo Duterte and son-in-law Manases Carpio.\r\n\r\n\"His latest remarks prove once and for all that he is an incorrigible [rabble]-rouser and perennial whiner, a false accuser who, when hailed to court, cries like a baby reminiscent of staging a coup and surrenders instantly even without a gun being fired from the government forces,\" Panelo said.\r\n\r\nJudge Melinda Alconcel Dayanghirang of Davao City Regional Trial Court Branch 54 had issued 4 arrest warrants against Trillanes, one for each libel complaint.\r\n\r\nTrillanes, on Friday, December 7, denounced what he called \"topsy-turvy\" justice under the Duterte administration, citing the acquittal of former senator Ramon \"Bong\" Revilla Jr in relation to the pork barrel scam. He said plunderers are being set free, while critics are being jailed.\r\n\r\nPanelo said the President\'s fiercest critic should focus on legal remedies instead of \"employing squid tactics and smearing the administration.\"\r\n\r\nPlan to pos\r\n\r\nt bail\r\n\r\nNational Capital Region Police Office Director Guillermo Eleazar confirmed that his office now has copies of the arrest warrants for Trillanes.\r\n\r\nBut he added that they are coordinating with the Senate regarding Trillanes\' plan to post bail on Monday, December 10.\r\n\r\n\"If the senator wishes to turn himself [in] to us, then we will get him from the Senate,\" Eleazar said on Sunday.\r\n\r\nBack in September, Trillanes was arrested for rebellion over the 2003 Oakwood mutiny and the 2007 Manila Peninsula siege, after a Duterte proclamation sought to void his amnesty. The senator, a former soldier, posted bail of P200,000. (READ: INSIDE STORY: How Duterte handled Trillanes fiasco from Israel, Jordan)\r\n\r\nTrillanes is the second opposition senator to be arrested following Senator Leila de Lima, another critic of Duterte, who was jailed over drug charges in February 2017. – Rappler.com', NULL, 0, 0);
+INSERT INTO `articles` (`id`, `title`, `author`, `url`, `publisher_fk`, `publish_date`, `publish_time`, `submit_date`, `avg_score`, `satire`, `opinion`) VALUES
+(1, 'House to hold question hour for Diokno over 2019 budget', 'Mara Cepeda', 'https://www.rappler.com/nation/218551-house-question-hour-benjamin-diokno-december-11-2018', 1, '2018-12-09', '13:06:00', '2018-12-09 16:42:32', NULL, 0, 0),
+(2, 'Malacañang to Trillanes: Stop \'smearing\' Duterte, face libel charges', 'Rappler.com', 'https://www.rappler.com/nation/218558-malacanang-statement-antonio-trillanes-libel-charges', 1, '2018-12-09', '16:55:00', '2018-12-09 18:50:48', NULL, 0, 0),
+(3, 'Malaysian Prime Minister Mahathir arrives in Manila for official visit', 'Pia Ranada', 'https://www.rappler.com/nation/225056-mahathir-mohamad-arrives-manila-march-6-2019', 1, '2019-03-06', '19:47:00', '2019-03-06 23:04:33', NULL, NULL, NULL),
+(4, 'EU says talks with UK ’difficult’ as Brexit impasse drags on', 'Associated Press', 'https://newsinfo.inquirer.net/1092900/eu-says-talks-with-uk-difficult-as-brexit-impasse-drags-on?utm_expid=.XqNwTug2W6nwDVUSgFJXed.1', 2, '2019-03-06', '21:29:00', '2019-03-06 23:34:15', NULL, NULL, NULL),
+(5, 'Mon Tulfo refuses to apologize for calling Filipino workers \'lazy\'', 'Aika Rey', 'https://www.rappler.com/nation/225350-mon-tulfo-refuse-apologize-statement-against-filipino-workers', 1, '2019-03-09', '20:57:00', '2019-03-09 23:10:05', NULL, NULL, NULL),
+(6, 'Ex-PCSO chief Balutan rejects corruption allegations', 'Frances G. Mangosing', 'https://newsinfo.inquirer.net/1093867/ex-pcso-chief-balutan-rejects-corruption-allegations?utm_expid=.XqNwTug2W6nwDVUSgFJXed.1', 2, '2019-03-09', '14:34:00', '2019-03-09 23:11:12', NULL, NULL, NULL),
+(7, 'Comelec hopes VRVM pilot test to go smoothly', 'Philippine News Agency', 'https://news.mb.com.ph/2019/03/09/comelec-hopes-vrvm-pilot-test-to-go-smoothly/', 3, '2019-03-09', '21:47:00', '2019-03-09 23:21:19', NULL, NULL, NULL),
+(8, '‘Find alternative to sugar import liberalization’: Zubiri', 'Philippine News Agency', 'https://news.mb.com.ph/2019/03/09/find-alternative-to-sugar-import-liberalization-zubiri/', 3, '2019-03-09', '22:47:00', '2019-03-09 23:26:53', NULL, NULL, NULL),
+(9, 'Go not violating poll rules: Comelec chief', 'Philippine News Agency', 'https://news.mb.com.ph/2019/03/09/go-not-violating-poll-rules-comelec-chief/', 3, '2019-03-09', '21:55:00', '2019-03-09 23:31:14', NULL, NULL, NULL),
+(10, 'Senior citizens deserve to live a life of dignity', 'Mario Casayuran', 'https://news.mb.com.ph/2019/03/09/senior-citizens-deserve-to-live-a-life-of-dignity/', 3, '2019-03-09', '18:55:00', '2019-03-09 23:39:36', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -106,7 +113,7 @@ INSERT INTO `messages` (`id`, `msgkey`, `message`) VALUES
 CREATE TABLE `publish_sites` (
   `id` int(11) NOT NULL,
   `name` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
-  `url` text NOT NULL,
+  `url` text,
   `avg_score` float DEFAULT NULL,
   `published_by` int(11) DEFAULT NULL COMMENT 'foreign key'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -116,7 +123,9 @@ CREATE TABLE `publish_sites` (
 --
 
 INSERT INTO `publish_sites` (`id`, `name`, `url`, `avg_score`, `published_by`) VALUES
-(1, 'Rappler', 'https://rappler.com', NULL, NULL);
+(1, 'Rappler', 'https://rappler.com', NULL, NULL),
+(2, 'Inquirer', 'https://newsinfo.inquirer.net', NULL, NULL),
+(3, 'Manila Bulletin', 'https:news.mb.com.ph', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -136,6 +145,13 @@ CREATE TABLE `reviewers` (
   `affiliation_fk` int(11) NOT NULL,
   `user_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reviewers`
+--
+
+INSERT INTO `reviewers` (`id`, `last_name`, `first_name`, `middle_name`, `name_qualifier`, `profile_img_path`, `phone_number`, `phone_area`, `affiliation_fk`, `user_fk`) VALUES
+(1, 'Rombawa', 'Justin Aaron', 'Santiago', NULL, NULL, '09677062985', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -160,7 +176,9 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `article_fk`, `reviewer_fk`, `score`, `comments`, `satire_flag`, `opinion_flag`, `erroneous_flag`, `report_fk`) VALUES
-(1, 1, 1, 5, 'Similarly reported by GMA News[1] on the same day and almost the same time.\r\n\r\nhttps://www.gmanetwork.com/news/news/nation/677571/house-summons-diokno-to-a-question-hour-on-2019-budget/story/', 0, 0, 0, 0);
+(1, 1, 1, 5, 'Similarly reported by GMA News[1] on the same day and almost the same time.\r\n\r\nhttps://www.gmanetwork.com/news/news/nation/677571/house-summons-diokno-to-a-question-hour-on-2019-budget/story/', 0, 0, 0, 0),
+(2, 5, 1, 5, 'Mr. Tulfo\'s tweet is still shown in his Twitter account. https://twitter.com/RamonTulfoII/status/1104232510886535168?ref_src=twsrc%5Etfw', 0, 0, 0, NULL),
+(3, 4, 0, 5, 'Original report by the Associated Press can be seen here: https://apnews.com/01725bac555d49758e563f2b317816d9', 0, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -201,7 +219,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `reviewer_status`, `reviewer_fk`) VALUES
-(1, 'username1', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jusrombawa@gmail.com', 0, NULL);
+(1, 'username1', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jusrombawa@gmail.com', 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -242,9 +260,7 @@ ALTER TABLE `reviewers`
 -- Indexes for table `reviews`
 --
 ALTER TABLE `reviews`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `article_fk` (`article_fk`),
-  ADD UNIQUE KEY `reviewer_fk` (`reviewer_fk`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `test`
@@ -272,7 +288,7 @@ ALTER TABLE `affiliation`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -284,19 +300,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `publish_sites`
 --
 ALTER TABLE `publish_sites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `reviewers`
 --
 ALTER TABLE `reviewers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `test`

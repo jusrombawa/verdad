@@ -15,9 +15,9 @@ class UserController extends Controller{
 
         //username not found
         if($user->dry()) {
-            $loginInfo = 'Username not found';
+            $info = 'Username not found';
 
-            $this->f3->set('SESSION.loginInfo', $loginInfo);
+            $this->f3->set('SESSION.info', $info);
             $this->f3->clear('SESSION.user');
             $this->f3->clear('SESSION.reviewerStatus');
         }
@@ -27,8 +27,8 @@ class UserController extends Controller{
             $username = $user->username;
 
             $this->f3->set('SESSION.user', $username);
-            //$this->f3->set('SESSION.loginInfo', $loginInfo);
-            $this->f3->clear('SESSION.loginInfo');
+            //$this->f3->set('SESSION.info', $info);
+            $this->f3->clear('SESSION.info');
 
             //check if user is reviewer
             $rm = new ReviewerMapper($this->db);
@@ -47,10 +47,10 @@ class UserController extends Controller{
 
         //wrong password
         else {
-            $loginInfo = 'Password incorrect';
+            $info = 'Password incorrect';
 
 
-            $this->f3->set('SESSION.loginInfo', $loginInfo);
+            $this->f3->set('SESSION.info', $info);
             $this->f3->clear('SESSION.user');
             $this->f3->clear('SESSION.reviewerStatus');
         }
@@ -61,7 +61,7 @@ class UserController extends Controller{
         if($this->f3->get('SESSION.user') != null)
         {
             $this->f3->clear('SESSION.user');
-            $this->f3->clear('SESSION.loginInfo');
+            $this->f3->clear('SESSION.info');
             $this->f3->clear('SESSION.reviewerStatus');
             $this->f3->reroute('/');
         }
@@ -129,27 +129,43 @@ class UserController extends Controller{
         $um = new UserMapper($this->db);
         
         $reviewArtID = $this->f3->get("POST.articleID");
-        $reviewUsername = $this->f3->get("POST.reviewUsername");
+        $reviewUsername = $this->f3->get("POST.reviewerUsername");
         $reviewScore = $this->f3->get("POST.score");
         $reviewComments = $this->f3->get("POST.comments");
         $reviewSatire = $this->f3->get("POST.satire");
         $reviewOpinion = $this->f3->get("POST.opinion");
 
-        $user = $um->load(array("username",$reviewUsername));
+        $user = $um->load(array("username=?",$reviewUsername));
         if(!$um->dry())
             $userID = $user->id;
+        else
+            $userID = 69;
 
-        //id is auto-increment
-        $rm->article_fk = $reviewArtID;
-        $rm->reviewer_fk = $userID;
-        $rm->score = $reviewScore;
-        $rm->comments = $reviewComments;
-        $rm->satire_flag = $reviewSatire;
-        $rm->opinion_flag = $reviewOpinion;
-        //erroneous flag is default false
-        $rm->erroneous_flag = false;
+        //check if user already submitted a review for article
+        $rm2 = new ReviewMapper($this->db);
+        $checkreview = $rm2->load(array("article_fk=?",$reviewArtID));
+        //found a match
+        $test = $userID;
+        echo json_encode($test);
+        /*if(!$rm2->dry() && $checkreview->reviewer_fk == $reviewUsername)
+        {
+            $info = "You already submitted a review for this article.";
+            $this->f3->set("SESSION.info",$info);
+        }
+        //no match, valid review submission
+        else
+        {
+            //id is auto-increment
+            $rm->article_fk = $reviewArtID;
+            $rm->reviewer_fk = $userID;
+            $rm->score = $reviewScore;
+            $rm->comments = $reviewComments;
+            $rm->satire_flag = $reviewSatire;
+            $rm->opinion_flag = $reviewOpinion;
+            //erroneous flag is default false
+            $rm->erroneous_flag = false;
 
-        $rm->save();
-
+            $rm->save();
+        }*/
     }
 }

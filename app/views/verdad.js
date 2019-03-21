@@ -14,10 +14,10 @@ $(document).ready(function(){
     $("#art-submit-modal-button").hide();
 
     //notify about login status
-    var loginInfo = $("#loginInfo").text().trim();
+    var info = $("#info").text().trim();
 
-    if(loginInfo != '')
-        M.toast({html:"<span>" + loginInfo + "</span>"});
+    if(info != '')
+        M.toast({html:"<span>" + info + "</span>"});
 
     //start reading articles
     $("#read_button").click(function(){
@@ -402,7 +402,9 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
-                   window.location.reload();
+                   //window.location.reload();
+                   alert("this should be ID for: " + reviewUser)
+                   alert($.parseJSON(data));
                 },
 
                 error: function(jqXHR, exception)

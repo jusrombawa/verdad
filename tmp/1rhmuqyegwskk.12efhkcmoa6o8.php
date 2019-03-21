@@ -17,7 +17,7 @@
   <?php endif; ?>
  -->
 
-  <span id="loginInfo" hidden> <?= ($SESSION['loginInfo']) ?> </span>
+  <span id="info" hidden> <?= ($SESSION['info']) ?> </span>
   <span id="loggedInUser" hidden> <?= ($SESSION['user']) ?> </span>
 
   
