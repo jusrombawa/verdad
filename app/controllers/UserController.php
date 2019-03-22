@@ -177,11 +177,12 @@ class UserController extends Controller{
             //reuse rm2 to collect all reviews for same article
             $rm2->load(array("article_fk=?",$reviewArtID));
 
-           /* while(!$rm2->dry())
+            while(!$rm2->dry())
             {
                 array_push($scores,$rm2->score);
                 array_push($satireFlags,$rm2->satire_flag);
                 array_push($opinionFlags,$rm2->opinion_flag);
+                $rm2->next();
             }
 
             //get average score
@@ -212,7 +213,7 @@ class UserController extends Controller{
             $article->avg_score = $avgScore;
             $article->satire = $satMaj;
             $article->opinion = $opMaj;
-            $article->save();*/
+            $article->save();
 
         }
     }

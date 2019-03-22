@@ -423,8 +423,8 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
-                   //window.location.reload();
-                   alert($.parseJSON(data));
+                   window.location.reload();
+                   //alert($.parseJSON(data));
                 },
 
                 error: function(jqXHR, exception)
