@@ -22,6 +22,20 @@ $(document).ready(function(){
     info = "";
     $("#info").text("");
 
+    //check if logged in, automatically show article list
+    if($("#loggedInUser").text().trim() != '')
+    {
+        $("#intro_sect").hide( function() {
+            $("#read_button").hide();
+            $("#title_header").hide();
+            $("#subtitle_header").hide();
+            $("#articles_sect").show();
+            $("#art-submit-modal-button").show();
+        });
+
+        getArticles();
+    }
+
     //start reading articles
     $("#read_button").click(function(){
         //hide extra stuff
@@ -33,6 +47,10 @@ $(document).ready(function(){
             $("#art-submit-modal-button").show(2000);
         });
 
+        getArticles();
+    });
+
+    function getArticles(){
         //request to get articles
         $.ajax({
                 type: 'GET',
@@ -145,7 +163,7 @@ $(document).ready(function(){
                 }
 
             });
-    });
+    }
 
     //pop up login for desktop
     $("#login-popup").click(function(){
@@ -405,8 +423,8 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
-                   window.location.reload();
-                   /*alert($.parseJSON(data));*/
+                   //window.location.reload();
+                   alert($.parseJSON(data));
                 },
 
                 error: function(jqXHR, exception)

@@ -127,6 +127,7 @@ class UserController extends Controller{
 
         $rm = new ReviewMapper($this->db);
         $um = new UserMapper($this->db);
+        $am = new ArticleMapper($this->db);
         
         $reviewArtID = $this->f3->get("POST.articleID");
         $reviewUsername = $this->f3->get("POST.reviewerUsername");
@@ -143,7 +144,7 @@ class UserController extends Controller{
         //check if user already submitted a review for article
         $rm2 = new ReviewMapper($this->db);
         $checkreview = $rm2->load(array("article_fk=? AND reviewer_fk=?",$reviewArtID, $userID));
-        
+
         //found a match
         if(!$rm2->dry())
         {
@@ -164,6 +165,55 @@ class UserController extends Controller{
             $rm->erroneous_flag = false;
 
             $rm->save();
+
+            //recompute average score and satire/opinion for article
+
+            $article = $am->load(array("id=?", $reviewArtID));
+
+            $scores = array();
+            $satireFlags =  array();
+            $opinionFlags = array();
+
+            //reuse rm2 to collect all reviews for same article
+            $rm2->load(array("article_fk=?",$reviewArtID));
+
+           /* while(!$rm2->dry())
+            {
+                array_push($scores,$rm2->score);
+                array_push($satireFlags,$rm2->satire_flag);
+                array_push($opinionFlags,$rm2->opinion_flag);
+            }
+
+            //get average score
+            $avgScore = array_sum($scores)/count($scores);
+            //get majority satire flags
+            $satYes = 0;
+            $satNo = 0;
+            foreach($satireFlags as $sat)
+            {
+                if($sat) $satYes++;//if satire, add 1 to $satYes
+                else $satNo++;
+            }
+            if($satYes>=$satNo) $satMaj = true;
+            else $satMaj = false;
+
+            //same thing with opinions
+
+            $opYes = 0;
+            $opNo = 0;
+            foreach($opinionFlags as $op)
+            {
+                if($op) $opYes++;//if satire, add 1 to $satYes
+                else $opNo++;
+            }
+            if($opYes>=$opNo) $opMaj = true;
+            else $opMaj = false;
+
+            $article->avg_score = $avgScore;
+            $article->satire = $satMaj;
+            $article->opinion = $opMaj;
+            $article->save();*/
+
         }
     }
 }
