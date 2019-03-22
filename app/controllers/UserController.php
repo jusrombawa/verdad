@@ -142,17 +142,16 @@ class UserController extends Controller{
 
         //check if user already submitted a review for article
         $rm2 = new ReviewMapper($this->db);
-        $checkreview = $rm2->load(array("article_fk=?",$reviewArtID));
-        //found a match
+        $checkreview = $rm2->load(array("article_fk=? AND reviewer_fk=?",$reviewArtID, $userID));
         
-        if(!$rm2->dry() & $checkreview->reviewer_fk == $reviewUsername)
+        //found a match
+        if(!$rm2->dry())
         {
             $info = "You already submitted a review for this article.";
             $this->f3->set("SESSION.info",$info);
-            echo json_encode($info);
         }
         //no match, valid review submission
-        /*else
+        else
         {
             //id is auto-increment
             $rm->article_fk = $reviewArtID;
@@ -165,9 +164,6 @@ class UserController extends Controller{
             $rm->erroneous_flag = false;
 
             $rm->save();
-        }*/
-
-        else
-            echo json_encode("Everything's fine");
+        }
     }
 }

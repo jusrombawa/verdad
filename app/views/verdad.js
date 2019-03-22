@@ -18,6 +18,9 @@ $(document).ready(function(){
 
     if(info != '')
         M.toast({html:"<span>" + info + "</span>"});
+    //clear info after prompt
+    info = "";
+    $("#info").text("");
 
     //start reading articles
     $("#read_button").click(function(){
@@ -402,8 +405,8 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
-                   //window.location.reload();
-                   alert($.parseJSON(data));
+                   window.location.reload();
+                   /*alert($.parseJSON(data));*/
                 },
 
                 error: function(jqXHR, exception)
