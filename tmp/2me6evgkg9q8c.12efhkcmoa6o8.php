@@ -11,28 +11,93 @@
   <link href="<?= ($UI . 'css/style.css') ?>" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  
-  <nav class="blue darken-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
-      
-      <ul id="nav-desktop" class="right hide-on-med-and-down">
-          <li><a href="#loginModal">Login</a></li>
-          <li><a href="#registerModal">Register</a></li>
-          <li><a href="#">FAQs</a></li>
-          <li><a href="#">About Verdad</a></li>
-        </ul>
 
-      <ul id="nav-mobile" class="sidenav">
-        <li><a href="#loginModal">Login</a></li>
-        <li><a href="#registerModal">Register</a></li>
-		    <li><a href="#">Frequently Asked Questions</a></li>
-		    <li><a href="#">About Verdad</a></li>
-      </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+  <!-- <?php if ($SESSION['reviewerStatus'] == true): ?>
+    <p>Reviewer account</p>
+  <?php endif; ?>
+ -->
+
+  <span id="info" hidden> <?= ($SESSION['info']) ?> </span>
+  <span id="loggedInUser" hidden> <?= ($SESSION['user']) ?> </span>
+
+  
+  <?php if ($SESSION['user'] != null): ?>
+    
+    
+      <nav class="blue darken-3" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
+          
+          <ul id="nav-desktop" class="right hide-on-med-and-down">
+              <li><a>Hello, <?= ($SESSION['user']) ?></a></li>
+              <li><a>FAQs</a></li>
+              <li><a id="logoutDesktop">Logout</a></li>
+            </ul>
+
+          <ul id="nav-mobile" class="sidenav">
+            <li>Hello, <?= ($SESSION['user']) ?></li>
+            <li><a href="">Frequently Asked Questions</a></li>
+            <li><a id="logoutMobile">Logout</a></li>
+
+          </ul>
+
+
+          <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+    
+
+    <?php else: ?>
+      <nav class="blue darken-3" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
+          
+          <ul id="nav-desktop" class="right hide-on-med-and-down">
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#registerModal">Register</a></li>
+              <li><a id="login-popup">Login</a></li>
+            </ul>
+
+          <ul id="nav-mobile" class="sidenav">
+          <div class="container black-text">
+            <form id="loginMobile" action>
+              <li><h6>Username<h6></li>
+              <li><input id="loginUsernameMobile"></li>
+              <li><h6>Password<h6></li>
+              <li><input id="loginPasswordMobile" type="password">
+              </li>
+              <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button></li>
+            </form>
+              <li><a href="registerModal">Register</a></li>
+              <li><a href="">Frequently Asked Questions</a></li>
+          </div>
+          </ul>
+
+
+          <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+    
+  <?php endif; ?>
+
+  <div id="login-area" class="container">
+      <div class="row">
+        <div class="col s3 offset-s9 z-depth-2">
+          <form id="loginDesktop" class="right-align">
+            <div class="input-field">
+              <input id="loginUsernameDesktop">
+              <label for="loginUsernameDesktop">E-mail</label>
+            </div>
+            <div class="input-field">
+              <input id="loginPasswordDesktop" type="password">
+              <label for="loginPasswordDesktop">Password</label>
+            </div>
+
+            <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
+          </form>
+          <br/>
+        </div>  
+      </div>
     </div>
-  </nav>
-  
-  
+
   <div id="title_header" class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
@@ -97,21 +162,122 @@
 
   	</div>
 
-  
+  <?php if ($SESSION['user'] != null): ?>
+    <div id="art-submit-modal-button" class="fixed-action-btn right-align">
+      <a class="btn-floating btn-large waves-effect waves-light blue modal-trigger" href="#article-submit-modal"><i class="material-icons">add</i></a>
+    </div>
+  <?php endif; ?>
+
+  <!-- <input id="test" type="text" class="timepicker"> -->
 
   <!-- Modals -->
-  
-  <div id="loginModal" class="modal">
+
+  <div id="article-submit-modal" class="modal modal-fixed-footer">
     <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
+      <h4>Submit article</h4>
+      <form id="article-submit-form">
+          <div class="row">
+            <div class="input-field">
+              <h6>Link to the Article</h6>
+                <input id="articleURL">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+            <h6>Title</h6>
+              <div class="col s9">
+                <input type="text" id="articleTitle">
+              </div>
+              <div class="col s3 right-align">
+                <a id="suggest-title" class="waves-effect waves-teal btn-flat">Suggest Title</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s6">
+              <div class="input-field">
+                <h6>Author</h6>
+                <input id="articleAuthor">
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="input-field">
+                <h6>Publisher</h6>
+                <input id="articlePublisher">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s6">
+              <div class="input-field">
+                <h6>Publish Date</h6>
+                <input id="articlePubDate" type="date">
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="input-field">
+                <h6>Publish Time</h6>
+                <input id="articlePubTime" type="time">
+              </div>
+            </div>
+          </div>
+
+      </form>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
+      <a id="art-submit-button" class="modal-close waves-effect waves-blue btn-flat">Submit</a>
     </div>
   </div>
-  
-  
+
+  <div id="review-submit-modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h5>Submit review</h5>
+      <span hidden id="article-review-id"></span>
+      <form id="review-submit">
+        <div class="input-field">
+          <div class="row">
+            <select id="review-rating">
+              <option value="no" disabled selected>Choose the rating</option>
+              <option value="5">5 star</option>
+              <option value="4">4 star</option>
+              <option value="3">3 star</option>
+              <option value="2">2 star</option>
+              <option value="1">1 star</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <textarea id="review-comments" class="materialize-textarea"></textarea>
+            <label for="review-comments">Comments</label>
+          </div>
+
+          <div class="row">
+            <label>
+              <input type="checkbox" id="review-satire" class="filled-in"/>
+              <span>Satire article</span>
+            </label>
+          </div>
+
+          <div class="row">
+            <label>
+              <input type="checkbox" id="review-opinion" class="filled-in"/>
+              <span>Opinion article</span>
+            </label>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="modal-footer">
+      <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
+      <a id="review-submit-button" class="modal-close waves-effect waves-blue btn-flat">Submit</a>
+    </div>
+  </div>
+
   <!--  Scripts-->
   <!--  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
   <script src="<?= ($UI. 'js/jquery.min.js') ?>"></script>

@@ -50,6 +50,10 @@ $(document).ready(function(){
         getArticles();
     });
 
+    var articleListLength;
+    var pageSize = 5;
+    var pages;
+
     function getArticles(){
         //request to get articles
         $.ajax({
@@ -63,8 +67,8 @@ $(document).ready(function(){
                     {
                        
                         //row opening tag
-                        text += "<li>";
-                        text += "<div class='collapsible-header article-listing'>"
+                        text += "<li class='article-item'>";
+                        text += "<div class='collapsible-header'>"
 
 
                         //title
@@ -149,12 +153,35 @@ $(document).ready(function(){
                         text += "</li>";
                     }
 
+                    //add pagination
+                    articleListLength = articleList.length
+
+                    pages = Math.ceil(articleListLength/pageSize);
+
+                    text += '<br/><div class="container">';
+
+                    text += '<ul id="art-pagination" class="pagination">'
+                    /*text += '<li class="page-num waves-effect"><a href="#!"><i class="material-icons">chevron_left</i></a></li>'*/
+
+                    for(var i=1; i<= pages; i++){
+                        if(i==1)
+                            text += '<li class="page-num waves-effect active blue"><a href="#!">'+ i +'</a></li>';
+                        else
+                            text += '<li class="page-num waves-effect"><a href="#!">'+ i +'</a></li>'
+                    }
+                    /*text += '<li class="page-num waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>'*/
+                    text += '</ul>'
+                    text += '</div>'
+                            
+
                     //write to table
                     $("#article_list").html(text);
 
+
                     //resize article_frame
                     var frameheight = $("#articles_sect").height();
-                    $("#article_frame").height(frameheight);       
+                    $("#article_frame").height(frameheight);
+                    showPage(1);   
                 },
 
                 error: function(jqXHR, exception)
@@ -164,6 +191,37 @@ $(document).ready(function(){
 
             });
     }
+
+
+    //determine page number
+    var pageNumber = 1; //default
+
+    $(document).on("click",".page-num", function(){
+        var selPage = $(this).text();
+
+        //remove currently active
+        $("#art-pagination li").removeClass("active blue");
+        //add to active class to this instance
+        $(this).addClass("active blue");
+
+        /*if(selPage == 'chevron_left' && pageNumber > 1) pageNumber--;
+        if(selPage == 'chevron_right' && pageNumber < pages) pageNumber++;
+        else*/
+            pageNumber = parseInt(selPage);
+
+        if(selPage != NaN)
+            showPage(pageNumber);
+
+    });
+
+    showPage = function(page) {
+        $(".article-item").hide();
+        $(".article-item").each(function(n) {
+            if (n >= pageSize * (page - 1) && n < pageSize * page)
+                $(this).show();
+        });        
+    }
+
 
     //pop up login for desktop
     $("#login-popup").click(function(){
