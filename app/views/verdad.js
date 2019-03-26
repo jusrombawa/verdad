@@ -161,15 +161,15 @@ $(document).ready(function(){
                     text += '<br/><div class="container">';
 
                     text += '<ul id="art-pagination" class="pagination">'
-                    /*text += '<li class="page-num waves-effect"><a href="#!"><i class="material-icons">chevron_left</i></a></li>'*/
+                    text += '<li id="prev-page" class="page-num waves-effect"><a href="#!"><i class="material-icons">chevron_left</i></a></li>'
 
                     for(var i=1; i<= pages; i++){
                         if(i==1)
-                            text += '<li class="page-num waves-effect active blue"><a href="#!">'+ i +'</a></li>';
+                            text += '<li id="page-'+ i +'" class="page-num waves-effect active blue"><a href="#!">'+ i +'</a></li>';
                         else
-                            text += '<li class="page-num waves-effect"><a href="#!">'+ i +'</a></li>'
+                            text += '<li id="page-'+ i +'"class="page-num waves-effect"><a href="#!">'+ i +'</a></li>'
                     }
-                    /*text += '<li class="page-num waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>'*/
+                    text += '<li id="next-page" class="page-num waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>'
                     text += '</ul>'
                     text += '</div>'
                             
@@ -179,8 +179,8 @@ $(document).ready(function(){
 
 
                     //resize article_frame
-                    var frameheight = $("#articles_sect").height();
-                    $("#article_frame").height(frameheight);
+                    /*var frameheight = $("#articles_sect").height();
+                    $("#article_frame").height(frameheight);*/
                     showPage(1);   
                 },
 
@@ -202,16 +202,22 @@ $(document).ready(function(){
         //remove currently active
         $("#art-pagination li").removeClass("active blue");
         //add to active class to this instance
-        $(this).addClass("active blue");
+        
 
-        /*if(selPage == 'chevron_left' && pageNumber > 1) pageNumber--;
-        if(selPage == 'chevron_right' && pageNumber < pages) pageNumber++;
-        else*/
+        if(selPage == 'chevron_left' && pageNumber > 1) {
+            --pageNumber;
+            $("#page-" + pageNumber).addClass("active blue");
+        }
+        else if (selPage == 'chevron_right' && pageNumber < pages){
+            pageNumber++;
+            $("#page-" + pageNumber).addClass("active blue");
+        }
+        else if (Number.isInteger(parseInt(selPage))){
+            $(this).addClass("active blue");
             pageNumber = parseInt(selPage);
+        }
 
-        if(selPage != NaN)
-            showPage(pageNumber);
-
+        showPage(pageNumber);
     });
 
     showPage = function(page) {

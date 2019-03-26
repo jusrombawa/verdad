@@ -34,7 +34,7 @@
             </ul>
 
           <ul id="nav-mobile" class="sidenav">
-            <li>Hello, <?= ($SESSION['user']) ?></li>
+            <li><a href="">Hello, <?= ($SESSION['user']) ?></a></li>
             <li><a href="">Frequently Asked Questions</a></li>
             <li><a id="logoutMobile">Logout</a></li>
 
