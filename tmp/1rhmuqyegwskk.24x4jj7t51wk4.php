@@ -12,11 +12,6 @@
 </head>
 <body>
 
-  <!-- <?php if ($SESSION['reviewerStatus'] == true): ?>
-    <p>Reviewer account</p>
-  <?php endif; ?>
- -->
-
   <span id="info" hidden> <?= ($SESSION['info']) ?> </span>
   
   <nav class="blue darken-3" role="navigation">
@@ -65,6 +60,72 @@
           </form>
           <br/>
         </div>  
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <h5 class="blue-text">Create your personal account</h5>
+      </div>
+      <div class="row">
+        <form id="register-form" class="col s12">
+          <div class="row">
+            <div class="col s12">
+              <input id="regUsername" type="text">
+              <label for="regUsername">Username</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div clas="col s12">
+              <input id="regPassword" type="password">
+              <label for="password">Password</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div clas="col s12">
+              <input id="regEmail" type="text">
+              <label for="regEmail">E-mail</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s6">
+              <input id="regFirstName" type="text">
+              <label for="regFirstName">First Name</label>
+            </div>
+            <div class="col s6">
+              <input id="regMiddleName" type="text">
+              <label for="regMiddleName">Middle Name</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s9">
+              <input id="regLastName" type="text">
+              <label for="regLastNamae">Last Name</label>
+            </div>
+
+            <div class="col s3">
+              <input id="regNameQualifier" type="text">
+              <label for="regNameQualifier">Name Suffix</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+              <label>
+                <input type="checkbox" class="filled-in" />
+                <span>I have read the Verdad's <a href="">Terms and Conditions</a></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="row">
+            <a class="waves-effect waves-light btn blue">register</a>
+          </div>
+        </form>
       </div>
     </div>
 
