@@ -256,7 +256,7 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
-                    window.location.reload();
+                    window.location.assign("/");
                 },
 
                 error: function(jqXHR, exception)

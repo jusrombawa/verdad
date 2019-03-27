@@ -8,7 +8,11 @@ class MainController extends Controller{
 
 	function framePlaceholder(){
 		$this->renderView('article-placeholder.htm');
-	}	
+	}
+
+	function registerPage(){
+		$this->renderView("register.htm");
+	}
 
 	function getArticles()
 	{
