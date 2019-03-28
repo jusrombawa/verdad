@@ -217,4 +217,25 @@ class UserController extends Controller{
 
         }
     }
+
+    function registerUser(){
+        /* "regUsername": regUsername,
+                    "regPassword": regPassword,
+                    "regEmail": regEmail,
+                    "regFirstName": regFirstName,
+                    "regMiddleName": regMiddleName,
+                    "regLastName": regLastName,
+                    "regLastName": regLastName,
+                    "regNameSuffix": regNameSuffix*/
+
+        $regUsername = $this->f3->get("POST.regUsername");
+        $regPassword = $this->f3->get("POST.regPassword");
+        $regEmail = $this->f3->get("POST.regEmail");
+        $regFirstName = $this->f3->get("POST.regFirstName");
+        $regMiddleName = $this->f3->get("POST.regMiddleName");
+        $regLastName = $this->f3->get("POST.regLastName");
+        $regNameSuffix = $this->f3->get("POST.regNameSuffix");
+
+        echo "success";
+    }
 }

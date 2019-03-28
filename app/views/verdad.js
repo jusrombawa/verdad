@@ -501,4 +501,105 @@ $(document).ready(function(){
 
     });
 
+    $("#register-submit").click(function(){
+        var regUsername = $("#regUsername").val().trim();
+        var regPassword = $("#regPassword").val().trim();
+        var regPassword = $("#regVerifyPassword").val().trim();
+        var regEmail = $("#regEmail").val().trim();
+        var regFirstName = $("#regFirstName").val().trim();
+        var regMiddleName = $("#regMiddleName").val().trim();
+        var regLastName = $("#regLastName").val().trim();
+        var regNameSuffix = $("#regNameSuffix").val().trim();
+
+        if($("#regTerms").is(":checked"))
+            var regTerms = true;
+        else
+            var regTerms = false;
+
+        var testreg = regUsername + "\n" + regPassword + "\n" + regEmail + "\n" + regFirstName + "\n" + regMiddleName + "\n" + regLastName + "\n" + regNameSuffix + "\n" + regTerms + "\n";
+
+        var emailPattern = new RegExp('^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'); //thanks to http://emailregex.com/ I don't have to figure this crap out
+        var suffixPattern = new RegExp("(Sr.|Jr.|^M{0,3}(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$)"); //thanks to this https://stackoverflow.com/questions/267399/how-do-you-match-only-valid-roman-numerals-with-a-regular-expression I just added Jr. and Sr. to the mix
+        var emailMatch = emailPattern.test(regEmail);
+        var suffixMatch = suffixPattern.test(regNameSuffix);
+
+        if(regUsername == '')
+            alert("Please input your username.");
+        else if(regPassword == '')
+            alert("Please input your password.");
+        else if(regPassword != regVerifyPassword)
+            alert("Please verify that your password matches.");
+        else if(regEmail == '')
+            alert("Please input your email address.");
+        else if(!emailMatch)
+            alert("Please input a valid email address.");
+        else if(regFirstName == '')
+            alert("Please input your first name.");
+        else if(regMiddleName == '')
+            alert("Please input your middle name.");
+        else if(regLastName == '')
+            alert("Please input your last name.");
+        else if(!suffixMatch && regNameSuffix != '')
+            alert("Please input a valid name suffix.");
+        else if(regTerms == false)
+            alert("Please make sure that you've read Verdad's terms and conditions.");
+        else
+        {
+            $.ajax({
+                type:"POST",
+                url:"/registerUser",
+                data: {
+                    "regUsername": regUsername,
+                    "regPassword": regPassword,
+                    "regEmail": regEmail,
+                    "regFirstName": regFirstName,
+                    "regMiddleName": regMiddleName,
+                    "regLastName": regLastName,
+                    "regNameSuffix": regNameSuffix
+                },
+
+                success: function(data)
+                {
+                    alert(data);
+                },
+
+                error: function(jqXHR, exception)
+                {
+                    alert(jqXHR.responseText);
+                }
+            });
+        }
+    });
+
+    //toggle password visibility
+    $("#passToggle").click(function(){
+        if($("#regPassword").attr('type') === 'password')
+        {
+            $("#regPassword").attr("type","text");
+            $("#passToggle").removeClass("grey-text");
+            $("#passToggle").addClass("blue-text blue lighten-5");
+        }
+        else
+        {
+            $("#regPassword").attr("type","password");
+            $("#passToggle").removeClass("blue-text blue lighten-5");
+            $("#passToggle").addClass("grey-text");
+        }
+    });
+
+    $("#verifyToggle").click(function(){
+        if($("#regVerifyPassword").attr('type') === 'password')
+        {
+            $("#regVerifyPassword").attr("type","text");
+            $("#verifyToggle").removeClass("grey-text");
+            $("#verifyToggle").addClass("blue-text blue lighten-5");
+        }
+        else
+        {
+            $("#regVerifyPassword").attr("type","password");
+            $("#verifyToggle").removeClass("blue-text blue lighten-5");
+            $("#verifyToggle").addClass("grey-text");
+        }
+    });
+
 });
