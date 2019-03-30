@@ -220,7 +220,6 @@ class UserController extends Controller{
 
     function registerUser(){
 
-
         $regUsername = $this->f3->get("POST.regUsername");
         $regPassword = $this->f3->get("POST.regPassword");
         $regEmail = $this->f3->get("POST.regEmail");
@@ -229,18 +228,57 @@ class UserController extends Controller{
         $regLastName = $this->f3->get("POST.regLastName");
         $regNameSuffix = $this->f3->get("POST.regNameSuffix");
 
-        $rando = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),0,5); //modified this a bit https://stackoverflow.com/questions/19017694/one-line-php-random-string-generator to generate 6-character random string
+        $pm = new PendingUserMapper($this->db);
 
-        //send verification email
-        //set up SMTP
-        $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "bluecoll@rman820" );
+        do{
+            $rando = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),0,5); //modified this a bit https://stackoverflow.com/questions/19017694/one-line-php-random-string-generator to generate 6-character random string
 
-        $txt = "Hello " . $regFirstName . "! Thank you for registering to Verdad News Review. To verify your email, please copy the code below to the prompt given after your user registration. Thank you.\n\n\n " . $rando . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
+            //check for repeated verification code
+            $pm->load(array("verification_code", $rando));
+        }while(!$pm->dry());
 
-        $smtp->set("From", 'verdadnewsreview@gmail.com');
-        $smtp->set("To",  $regEmail);
-        $smtp->set("Subject", "Verdad User Registration Verification");
-        $sent = $smtp->send($txt, true);
+        //check if username and email are unique
+        $um = new UserMapper($this->db);
+        $um2 = new UserMapper($this->db);
+
+        $um->load(array("username=?",$regUsername));
+        $um2->load(array("email=?",$regEmail));
+        if(!$um->dry())
+            echo "This username is already taken.";
+        else if(!$um2->dry())
+            echo "Only one account is allowed per email address.";
+        else
+        {
+            //write to pending_users to be approved later
+            //reuse pm
+            $pm = new PendingUserMapper($this->db);
+
+            //id is auto-increment
+            $pm->username = $regUsername;
+            $pm->password = $regPassword;
+            $pm->email = $regEmail;
+            $pm->first_name = $regFirstName;
+            $pm->middle_name = $regMiddleName;
+            $pm->last_name = $regLastName;
+            $pm->name_suffix = $regNameSuffix;
+            $pm->verification_code = $rando;
+            $pm->approved_user = false;
+
+            $pm->save();
+            
+            //send verification email
+            //set up SMTP
+            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "bluecoll@rman820" );
+
+            $txt = "Hello " . $regFirstName . "! Thank you for registering to Verdad News Review. To verify your email, please copy the code below to the prompt given after your user registration. Thank you.\n\n\n " . $rando . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
+
+            $smtp->set("From", 'verdadnewsreview@gmail.com');
+            $smtp->set("To",  $regEmail);
+            $smtp->set("Subject", "Verdad User Registration Verification");
+            $sent = $smtp->send($txt, true);
+
+            echo true;
+        }
 
     }
 

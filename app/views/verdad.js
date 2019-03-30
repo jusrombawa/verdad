@@ -562,7 +562,10 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
-                    alert(data);
+                    if(data == true)
+                        alert("Your registration is pending approval")
+                    else
+                        alert(data)
                 },
 
                 error: function(jqXHR, exception)
