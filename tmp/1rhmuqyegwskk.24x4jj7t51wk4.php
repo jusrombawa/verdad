@@ -96,7 +96,7 @@
         </div>
 
         <div class="row">
-          <div clas="col s12">
+          <div class="col s12">
             <input id="regEmail" type="text">
             <label for="regEmail">E-mail</label>
           </div>

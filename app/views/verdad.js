@@ -504,7 +504,7 @@ $(document).ready(function(){
     $("#register-submit").click(function(){
         var regUsername = $("#regUsername").val().trim();
         var regPassword = $("#regPassword").val().trim();
-        var regPassword = $("#regVerifyPassword").val().trim();
+        var regVerifyPassword = $("#regVerifyPassword").val().trim();
         var regEmail = $("#regEmail").val().trim();
         var regFirstName = $("#regFirstName").val().trim();
         var regMiddleName = $("#regMiddleName").val().trim();
@@ -518,7 +518,7 @@ $(document).ready(function(){
 
         var testreg = regUsername + "\n" + regPassword + "\n" + regEmail + "\n" + regFirstName + "\n" + regMiddleName + "\n" + regLastName + "\n" + regNameSuffix + "\n" + regTerms + "\n";
 
-        var emailPattern = new RegExp('^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'); //thanks to http://emailregex.com/ I don't have to figure this crap out
+        var emailPattern = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"); //thanks to https://www.regextester.com/19 I don't have to figure this crap out
         var suffixPattern = new RegExp("(Sr.|Jr.|^M{0,3}(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$)"); //thanks to this https://stackoverflow.com/questions/267399/how-do-you-match-only-valid-roman-numerals-with-a-regular-expression I just added Jr. and Sr. to the mix
         var emailMatch = emailPattern.test(regEmail);
         var suffixMatch = suffixPattern.test(regNameSuffix);
@@ -527,6 +527,8 @@ $(document).ready(function(){
             alert("Please input your username.");
         else if(regPassword == '')
             alert("Please input your password.");
+        else if(regVerifyPassword == '')
+            alert("Please verify your password.");
         else if(regPassword != regVerifyPassword)
             alert("Please verify that your password matches.");
         else if(regEmail == '')

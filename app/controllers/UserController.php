@@ -219,14 +219,7 @@ class UserController extends Controller{
     }
 
     function registerUser(){
-        /* "regUsername": regUsername,
-                    "regPassword": regPassword,
-                    "regEmail": regEmail,
-                    "regFirstName": regFirstName,
-                    "regMiddleName": regMiddleName,
-                    "regLastName": regLastName,
-                    "regLastName": regLastName,
-                    "regNameSuffix": regNameSuffix*/
+
 
         $regUsername = $this->f3->get("POST.regUsername");
         $regPassword = $this->f3->get("POST.regPassword");
@@ -236,6 +229,19 @@ class UserController extends Controller{
         $regLastName = $this->f3->get("POST.regLastName");
         $regNameSuffix = $this->f3->get("POST.regNameSuffix");
 
-        echo "success";
+        $rando = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),0,5); //modified this a bit https://stackoverflow.com/questions/19017694/one-line-php-random-string-generator to generate 6-character random string
+
+        //send verification email
+        //set up SMTP
+        $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "bluecoll@rman820" );
+
+        $txt = "Hello " . $regFirstName . "! Thank you for registering to Verdad News Review. To verify your email, please copy the code below to the prompt given after your user registration. Thank you.\n\n\n " . $rando . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
+
+        $smtp->set("From", 'verdadnewsreview@gmail.com');
+        $smtp->set("To",  $regEmail);
+        $smtp->set("Subject", "Verdad User Registration Verification");
+        $sent = $smtp->send($txt, true);
+
     }
+
 }
