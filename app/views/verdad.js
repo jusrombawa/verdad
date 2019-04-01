@@ -562,7 +562,7 @@ $(document).ready(function(){
                 {
                     if(data == 1 || data == true)
                     {
-                        window.location.assign("/");
+                        window.location.assign("/verifyPage");
                     }
                     else
                         alert(data);

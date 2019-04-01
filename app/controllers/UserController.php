@@ -280,7 +280,7 @@ class UserController extends Controller{
             
             //send verification email
             //set up SMTP
-            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "bluecoll@rman820" );
+            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "$anteria420" );
 
             $txt = "Hello " . $regFirstName . "! Thank you for registering to Verdad News Review. To verify your email, please copy the code below to the prompt given after your user registration. Thank you.\n\n\n " . $rando . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
 

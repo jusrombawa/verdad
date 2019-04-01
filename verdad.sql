@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2019 at 03:21 PM
+-- Generation Time: Apr 01, 2019 at 06:48 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -60,11 +60,11 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `title`, `author`, `url`, `publisher_fk`, `publish_date`, `publish_time`, `submit_date`, `avg_score`, `satire`, `opinion`) VALUES
-(1, 'House to hold question hour for Diokno over 2019 budget', 'Mara Cepeda', 'https://www.rappler.com/nation/218551-house-question-hour-benjamin-diokno-december-11-2018', 1, '2018-12-09', '13:06:00', '2018-12-09 16:42:32', NULL, 0, 0),
-(2, 'Malacañang to Trillanes: Stop \'smearing\' Duterte, face libel charges', 'Rappler.com', 'https://www.rappler.com/nation/218558-malacanang-statement-antonio-trillanes-libel-charges', 1, '2018-12-09', '16:55:00', '2018-12-09 18:50:48', NULL, 0, 0),
-(3, 'Malaysian Prime Minister Mahathir arrives in Manila for official visit', 'Pia Ranada', 'https://www.rappler.com/nation/225056-mahathir-mohamad-arrives-manila-march-6-2019', 1, '2019-03-06', '19:47:00', '2019-03-06 23:04:33', NULL, NULL, NULL),
-(4, 'EU says talks with UK ’difficult’ as Brexit impasse drags on', 'Associated Press', 'https://newsinfo.inquirer.net/1092900/eu-says-talks-with-uk-difficult-as-brexit-impasse-drags-on?utm_expid=.XqNwTug2W6nwDVUSgFJXed.1', 2, '2019-03-06', '21:29:00', '2019-03-06 23:34:15', NULL, NULL, NULL),
-(5, 'Mon Tulfo refuses to apologize for calling Filipino workers \'lazy\'', 'Aika Rey', 'https://www.rappler.com/nation/225350-mon-tulfo-refuse-apologize-statement-against-filipino-workers', 1, '2019-03-09', '20:57:00', '2019-03-09 23:10:05', NULL, NULL, NULL),
+(1, 'House to hold question hour for Diokno over 2019 budget', 'Mara Cepeda', 'https://www.rappler.com/nation/218551-house-question-hour-benjamin-diokno-december-11-2018', 1, '2018-12-09', '13:06:00', '2018-12-09 16:42:32', 5, 0, 0),
+(2, 'Malacañang to Trillanes: Stop \'smearing\' Duterte, face libel charges', 'Rappler.com', 'https://www.rappler.com/nation/218558-malacanang-statement-antonio-trillanes-libel-charges', 1, '2018-12-09', '16:55:00', '2018-12-09 18:50:48', 5, 0, 0),
+(3, 'Malaysian Prime Minister Mahathir arrives in Manila for official visit', 'Pia Ranada', 'https://www.rappler.com/nation/225056-mahathir-mohamad-arrives-manila-march-6-2019', 1, '2019-03-06', '19:47:00', '2019-03-06 23:04:33', 5, 0, 0),
+(4, 'EU says talks with UK ’difficult’ as Brexit impasse drags on', 'Associated Press', 'https://newsinfo.inquirer.net/1092900/eu-says-talks-with-uk-difficult-as-brexit-impasse-drags-on?utm_expid=.XqNwTug2W6nwDVUSgFJXed.1', 2, '2019-03-06', '21:29:00', '2019-03-06 23:34:15', 5, NULL, NULL),
+(5, 'Mon Tulfo refuses to apologize for calling Filipino workers \'lazy\'', 'Aika Rey', 'https://www.rappler.com/nation/225350-mon-tulfo-refuse-apologize-statement-against-filipino-workers', 1, '2019-03-09', '20:57:00', '2019-03-09 23:10:05', 5, NULL, NULL),
 (6, 'Ex-PCSO chief Balutan rejects corruption allegations', 'Frances G. Mangosing', 'https://newsinfo.inquirer.net/1093867/ex-pcso-chief-balutan-rejects-corruption-allegations?utm_expid=.XqNwTug2W6nwDVUSgFJXed.1', 2, '2019-03-09', '14:34:00', '2019-03-09 23:11:12', NULL, NULL, NULL),
 (7, 'Comelec hopes VRVM pilot test to go smoothly', 'Philippine News Agency', 'https://news.mb.com.ph/2019/03/09/comelec-hopes-vrvm-pilot-test-to-go-smoothly/', 3, '2019-03-09', '21:47:00', '2019-03-09 23:21:19', NULL, NULL, NULL),
 (8, '‘Find alternative to sugar import liberalization’: Zubiri', 'Philippine News Agency', 'https://news.mb.com.ph/2019/03/09/find-alternative-to-sugar-import-liberalization-zubiri/', 3, '2019-03-09', '22:47:00', '2019-03-09 23:26:53', NULL, NULL, NULL),
@@ -107,6 +107,33 @@ INSERT INTO `messages` (`id`, `msgkey`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pending_users`
+--
+
+CREATE TABLE `pending_users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `middle_name` varchar(30) NOT NULL,
+  `name_suffix` varchar(5) DEFAULT NULL,
+  `verification_code` varchar(6) NOT NULL,
+  `approved_user` tinyint(1) NOT NULL,
+  `approved_user_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pending_users`
+--
+
+INSERT INTO `pending_users` (`id`, `username`, `password`, `email`, `last_name`, `first_name`, `middle_name`, `name_suffix`, `verification_code`, `approved_user`, `approved_user_fk`) VALUES
+(1, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', '', 'wea0ab', 1, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `publish_sites`
 --
 
@@ -135,10 +162,6 @@ INSERT INTO `publish_sites` (`id`, `name`, `url`, `avg_score`, `published_by`) V
 
 CREATE TABLE `reviewers` (
   `id` int(11) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `middle_name` varchar(30) NOT NULL,
-  `name_qualifier` varchar(5) DEFAULT NULL,
   `profile_img_path` varchar(1024) DEFAULT NULL,
   `phone_number` varchar(15) NOT NULL,
   `phone_area` varchar(3) DEFAULT NULL,
@@ -150,8 +173,8 @@ CREATE TABLE `reviewers` (
 -- Dumping data for table `reviewers`
 --
 
-INSERT INTO `reviewers` (`id`, `last_name`, `first_name`, `middle_name`, `name_qualifier`, `profile_img_path`, `phone_number`, `phone_area`, `affiliation_fk`, `user_fk`) VALUES
-(1, 'Rombawa', 'Justin Aaron', 'Santiago', NULL, NULL, '09677062985', NULL, 1, 1);
+INSERT INTO `reviewers` (`id`, `profile_img_path`, `phone_number`, `phone_area`, `affiliation_fk`, `user_fk`) VALUES
+(1, NULL, '09677062985', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -178,7 +201,9 @@ CREATE TABLE `reviews` (
 INSERT INTO `reviews` (`id`, `article_fk`, `reviewer_fk`, `score`, `comments`, `satire_flag`, `opinion_flag`, `erroneous_flag`, `report_fk`) VALUES
 (1, 1, 1, 5, 'Similarly reported by GMA News[1] on the same day and almost the same time.\r\n\r\nhttps://www.gmanetwork.com/news/news/nation/677571/house-summons-diokno-to-a-question-hour-on-2019-budget/story/', 0, 0, 0, 0),
 (2, 5, 1, 5, 'Mr. Tulfo\'s tweet is still shown in his Twitter account. https://twitter.com/RamonTulfoII/status/1104232510886535168?ref_src=twsrc%5Etfw', 0, 0, 0, NULL),
-(3, 4, 0, 5, 'Original report by the Associated Press can be seen here: https://apnews.com/01725bac555d49758e563f2b317816d9', 0, 0, 0, NULL);
+(3, 4, 1, 5, 'Original report by the Associated Press can be seen here: https://apnews.com/01725bac555d49758e563f2b317816d9', 0, 0, 0, NULL),
+(8, 2, 1, 5, 'Similary reported by The Manila Bulletin. https://news.mb.com.ph/2018/12/09/palace-to-trillanes-face-libel-charges/', 0, 0, 0, NULL),
+(9, 3, 1, 5, 'Prime Minister Mahathir did arrive on March 6, 2019. https://news.abs-cbn.com/news/03/06/19/malaysian-pm-mahathir-arrives-in-ph', 0, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -210,6 +235,10 @@ CREATE TABLE `users` (
   `username` varchar(30) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `middle_name` varchar(30) NOT NULL,
+  `name_suffix` varchar(5) DEFAULT NULL,
   `reviewer_status` tinyint(1) NOT NULL,
   `reviewer_fk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -218,8 +247,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `reviewer_status`, `reviewer_fk`) VALUES
-(1, 'username1', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jusrombawa@gmail.com', 1, NULL);
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_name`, `first_name`, `middle_name`, `name_suffix`, `reviewer_status`, `reviewer_fk`) VALUES
+(1, 'username1', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jusrombawa@gmail.com', 'Rombawa', 'Justin Aaron', 'Santiago', '', 1, NULL),
+(4, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', '', 0, NULL);
 
 --
 -- Indexes for dumped tables
@@ -243,6 +273,12 @@ ALTER TABLE `articles`
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `pending_users`
+--
+ALTER TABLE `pending_users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `publish_sites`
@@ -297,6 +333,12 @@ ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `pending_users`
+--
+ALTER TABLE `pending_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `publish_sites`
 --
 ALTER TABLE `publish_sites`
@@ -312,7 +354,7 @@ ALTER TABLE `reviewers`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `test`
@@ -324,7 +366,7 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
