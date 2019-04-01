@@ -32,7 +32,7 @@ class UserController extends Controller{
 
             //check if user is reviewer
             $rm = new ReviewerMapper($this->db);
-            $reviewer = $rm->load(array("user_fk", $user->id));
+            $rm->load(array("user_fk = ?", $user->id));
 
             if($rm->dry()) //not a reviewer
                 $reviewerStatus = false;
