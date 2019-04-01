@@ -14,6 +14,10 @@ class MainController extends Controller{
 		$this->renderView("register.htm");
 	}
 
+	function verifyPage(){
+		$this->renderView("verify.htm");
+	}
+
 	function getArticles()
 	{
 		$artList = array();

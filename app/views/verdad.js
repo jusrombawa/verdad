@@ -562,10 +562,12 @@ $(document).ready(function(){
 
                 success: function(data)
                 {
-                    if(data == true)
-                        alert("Your registration is pending approval")
+                    if(data == 1 || data == true)
+                    {
+                        window.location.assign("/");
+                    }
                     else
-                        alert(data)
+                        alert(data);
                 },
 
                 error: function(jqXHR, exception)
@@ -605,6 +607,40 @@ $(document).ready(function(){
             $("#verifyToggle").removeClass("blue-text blue lighten-5");
             $("#verifyToggle").addClass("grey-text");
         }
+    });
+
+    $("#verify-submit").click(function(){
+
+        var verificationCode = $("#verificationCode").val().trim();
+
+        //check length of string
+        if(verificationCode.length != 6)
+            alert("Please check your verification code and try submitting again.")
+        else{
+
+            $.ajax({
+                type: "POST",
+                data: {
+                    "verificationCode":verificationCode
+                },
+                url: "/verifyUser",
+                success: function(data)
+                {
+                    if(data == true)
+                    {
+                        window.location.assign("/");
+                    }
+                    else
+                        alert(data);
+                },
+                error: function(jqXHR, exception)
+                {
+                    alert(jqXHR.responseText);
+                }
+
+            });
+        }
+
     });
 
 });

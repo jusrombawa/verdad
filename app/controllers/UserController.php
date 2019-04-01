@@ -65,11 +65,6 @@ class UserController extends Controller{
             $this->f3->clear('SESSION.reviewerStatus');
             $this->f3->reroute('/');
         }
-
-        else
-        {
-        }
-        
     }
 
     function submitArticle()
@@ -221,7 +216,7 @@ class UserController extends Controller{
     function registerUser(){
 
         $regUsername = $this->f3->get("POST.regUsername");
-        $regPassword = $this->f3->get("POST.regPassword");
+        $regPassword = password_hash($this->f3->get("POST.regPassword"), PASSWORD_DEFAULT); //OH MY DOG DON'T FORGET TO HASH YOUR PASSWORDS
         $regEmail = $this->f3->get("POST.regEmail");
         $regFirstName = $this->f3->get("POST.regFirstName");
         $regMiddleName = $this->f3->get("POST.regMiddleName");
@@ -240,13 +235,30 @@ class UserController extends Controller{
         //check if username and email are unique
         $um = new UserMapper($this->db);
         $um2 = new UserMapper($this->db);
+        $pm = new PendingUserMapper($this->db);
 
         $um->load(array("username=?",$regUsername));
         $um2->load(array("email=?",$regEmail));
+        $pm->load(array("username=? AND email=?",$regUsername,$regEmail));
         if(!$um->dry())
             echo "This username is already taken.";
         else if(!$um2->dry())
             echo "Only one account is allowed per email address.";
+        else if(!$pm->dry())
+        {
+            //send verification email
+            //set up SMTP
+            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "bluecoll@rman820" );
+
+            $txt = "Hello " . $regFirstName . "! It seems that you are trying to register to Verdad again. To start using Verdad, please click on the verify account link bellow the register button then enter your verification code below. Thank you.\n\n\n " . $rando . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
+
+            $smtp->set("From", 'verdadnewsreview@gmail.com');
+            $smtp->set("To",  $regEmail);
+            $smtp->set("Subject", "Verdad User Registration Verification");
+            $sent = $smtp->send($txt, true);
+            
+            echo "You already have a pending user registration. We sent another verification email in your account. Please click verify previous registration to enter the registration verification code.";
+        }
         else
         {
             //write to pending_users to be approved later
@@ -280,6 +292,53 @@ class UserController extends Controller{
             echo true;
         }
 
+    }
+
+    function verifyUser()
+    {
+        //get verification code and make sure it matches
+        $verificationCode = $this->f3->get("POST.verificationCode");
+
+        $pm = new PendingUserMapper($this->db);
+        $pm->load(array("verification_code = ?", $verificationCode));
+    
+        if(!$pm->dry())
+        {
+            //write to users
+            $um = new UserMapper($this->db);
+            //id is auto-increment
+            $um->username = $pm->username;
+            $um->password = $pm->password;
+            $um->email = $pm->email;
+            $um->last_name = $pm->last_name;
+            $um->first_name = $pm->first_name;
+            $um->middle_name = $pm->middle_name;
+            $um->name_suffix = $pm->name_suffix;
+            $um->reviewer_status = false; //default value
+            //reviewer_fk is null
+            $um->save();
+
+            //update pending_users entry
+            $um->load(array("username = ?", $pm->username)); //reuse $um because we won't be saving anything anymore
+            $pm->approved_user = true;
+            $pm->approved_user_fk = $um->id;
+            $pm->save();
+
+            //log in user
+            $newUsername = $pm->username;
+            $newUserStatus = false;
+            $newUserInfo = "Thank you for registering for Verdad. You may start contributing by reading and submitting articles below.";
+
+            $this->f3->set("SESSION.user", $newUsername);
+            $this->f3->set("SESSION.reviewerStatus", $newUserStatus);
+            $this->f3->set("SESSION.info", $newUserInfo);
+
+            echo true;
+        }
+        else
+        {
+            echo "Invalid verification code. Please re-check your verification email and try again.";
+        }
     }
 
 }
