@@ -641,4 +641,20 @@ $(document).ready(function(){
 
     });
 
+    $("#faq").click(function(){
+
+        $.ajax({
+            type: "GET",
+            url: "/testFTP",
+            success: function(data)
+            {
+                alert(data);
+            },
+            error: function(jqXHR, exception)
+            {
+                alert(jqXHR.responseText);
+            }
+        });
+    });
+
 });

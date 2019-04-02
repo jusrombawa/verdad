@@ -2,6 +2,10 @@
 
 class MainController extends Controller{
 
+	function beforeroute(){
+		//$f3->set('AUTOLOAD','autoload/');
+	}
+
 	function home(){
 		$this->renderView('home.htm');
 	}
@@ -76,6 +80,24 @@ class MainController extends Controller{
 
 	}
 
+	/*This is a test, remove after you're done and don't forget to replace the FAQ link destination*/
+	//I should also probably put this on beforeroute? Idk this is all new to me.
+	function testFTP(){
+
+		$host = "localhost";
+		$login = "verdadadmin";
+		$password = "verdadnews";
+
+		$ftp = new \FtpClient\FtpClient();
+		$ftp->connect($host);
+		$items = $ftp->login($login, $password);
+
+		$f3->set('FTP', $ftp);
+
+		//$items = $ftp->scanDir();
+		echo $items;
+
+	}
 	
 
 	function sayhello(){
