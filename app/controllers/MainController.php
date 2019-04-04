@@ -21,6 +21,10 @@ class MainController extends Controller{
 	function verifyPage(){
 		$this->renderView("verify.htm");
 	}
+	
+	function profilePage(){
+        $this->renderView("profile.htm");
+    }
 
 	function getArticles()
 	{
@@ -82,8 +86,8 @@ class MainController extends Controller{
 
 	/*This is a test, remove after you're done and don't forget to replace the FAQ link destination*/
 	//I should also probably put this on beforeroute? Idk this is all new to me.
-	function testFTP(){
-
+	function testFile(){
+/*
 		$host = "localhost";
 		$login = "verdadadmin";
 		$password = "verdadnews";
@@ -96,12 +100,18 @@ class MainController extends Controller{
 
 		//$items = $ftp->scanDir();
 		echo $items;
+*/
 
+		//$testfile = readfile("../files/test.asdf");
+		$testfile = file_exists("../files/test.asdf");
+		echo $testfile;
 	}
 	
 
 	function sayhello(){
 		echo 'Hola!';
 	}
+
+
 }
 ?>

@@ -22,7 +22,7 @@
         <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Verdad</a>
           
           <ul id="nav-desktop" class="right hide-on-med-and-down">
-              <li><a>Hello, <?= ($SESSION['user']) ?></a></li>
+              <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
               <?php if ($SESSION['reviewerStatus'] == false): ?>
                 
                   <li><a>Sign up as a reviewer!</a></li>
@@ -33,13 +33,13 @@
             </ul>
 
           <ul id="nav-mobile" class="sidenav">
-            <li><a href="">Hello, <?= ($SESSION['user']) ?></a></li>
+            <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
             <?php if ($SESSION['reviewerStatus'] == false): ?>
               
                 <li><a>Sign up as a reviewer!</a></li>
               
             <?php endif; ?>
-            <li><a id="faq">Frequently Asked Questions</a></li>
+            <li><a id="">Frequently Asked Questions</a></li>
             <li><a id="logoutMobile">Logout</a></li>
 
           </ul>

@@ -645,10 +645,35 @@ $(document).ready(function(){
 
         $.ajax({
             type: "GET",
-            url: "/testFTP",
+            url: "/testFile",
             success: function(data)
             {
-                alert(data);
+                if(data)
+                    alert("exists");
+                else
+                    alert("no");
+                //M.toast({html:"<span>" + data + "</span>"});
+            },
+            error: function(jqXHR, exception)
+            {
+                alert(jqXHR.responseText);
+            }
+        });
+    });
+
+    $(".user-profile").click(function(){
+
+        var username = $(this).attr("id");
+        alert(username);
+
+        $.ajax({
+            type: "GET",
+            data: {
+                "profileUsername": username
+            },
+            url: "/userProfile",
+            success: function(){
+                window.location.assign("/profilePage");
             },
             error: function(jqXHR, exception)
             {

@@ -341,4 +341,19 @@ class UserController extends Controller{
         }
     }
 
+    function userProfile()
+    {
+        $username = $this->f3->get("GET.profileUsername");
+
+        $um = new UserMapper($this->db);
+        $um->load(array("username = ?",$username));
+
+        if(!$um->dry())
+        {
+            $this->f3->set("SESSION.profileUsername",$username);
+        }
+    }
+
+
+
 }
