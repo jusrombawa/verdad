@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2019 at 06:48 PM
+-- Generation Time: Apr 04, 2019 at 05:54 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -25,15 +25,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `affiliation`
+-- Table structure for table `affiliations`
 --
 
-CREATE TABLE `affiliation` (
+CREATE TABLE `affiliations` (
   `id` int(11) NOT NULL,
   `occupation` varchar(50) NOT NULL,
   `organization_fk` int(11) NOT NULL,
   `reviewer_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `affiliations`
+--
+
+INSERT INTO `affiliations` (`id`, `occupation`, `organization_fk`, `reviewer_fk`) VALUES
+(1, 'Student', 1, 1),
+(3, 'Member', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -107,6 +115,29 @@ INSERT INTO `messages` (`id`, `msgkey`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `organizations`
+--
+
+CREATE TABLE `organizations` (
+  `id` int(11) NOT NULL,
+  `org_name` varchar(50) NOT NULL,
+  `org_address` text NOT NULL,
+  `org_phone` text,
+  `org_logo` text,
+  `org_type` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `organizations`
+--
+
+INSERT INTO `organizations` (`id`, `org_name`, `org_address`, `org_phone`, `org_logo`, `org_type`) VALUES
+(1, 'University of the Philippines Los Baños', 'College, Los Baños, Laguna', NULL, NULL, 'Academic'),
+(2, 'UP Jammers\' Club', 'Los Baños, Laguna', NULL, NULL, 'Socio-cultural');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pending_users`
 --
 
@@ -129,7 +160,7 @@ CREATE TABLE `pending_users` (
 --
 
 INSERT INTO `pending_users` (`id`, `username`, `password`, `email`, `last_name`, `first_name`, `middle_name`, `name_suffix`, `verification_code`, `approved_user`, `approved_user_fk`) VALUES
-(1, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', '', 'wea0ab', 1, 4);
+(2, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', '', 'X9446e', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -174,7 +205,7 @@ CREATE TABLE `reviewers` (
 --
 
 INSERT INTO `reviewers` (`id`, `profile_img_path`, `phone_number`, `phone_area`, `affiliation_fk`, `user_fk`) VALUES
-(1, NULL, '09677062985', NULL, 1, 1);
+(1, 'C:\\xampp\\htdocs\\verdad\\files\\default_profile.png', '09677062985', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -249,16 +280,16 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_name`, `first_name`, `middle_name`, `name_suffix`, `reviewer_status`, `reviewer_fk`) VALUES
 (1, 'username1', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jusrombawa@gmail.com', 'Rombawa', 'Justin Aaron', 'Santiago', '', 1, NULL),
-(4, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', '', 0, NULL);
+(5, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', 'Jr.', 0, NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `affiliation`
+-- Indexes for table `affiliations`
 --
-ALTER TABLE `affiliation`
+ALTER TABLE `affiliations`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -273,6 +304,12 @@ ALTER TABLE `articles`
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `organizations`
+--
+ALTER TABLE `organizations`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `pending_users`
@@ -315,10 +352,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `affiliation`
+-- AUTO_INCREMENT for table `affiliations`
 --
-ALTER TABLE `affiliation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `affiliations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `articles`
@@ -333,10 +370,16 @@ ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `organizations`
+--
+ALTER TABLE `organizations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `pending_users`
 --
 ALTER TABLE `pending_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `publish_sites`
@@ -366,7 +409,7 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Verdad - Home</title>
+  <title>Verdad - Profile</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -84,14 +84,34 @@
 
     <div id="user-profile-page" class="container">
       <div class="row">
-        <h5 class="blue-text">Name <?= ($SESSION['profileFirstName']) ?> <?= ($SESSION['profileLastName']) ?><?php if ($SESSION['profileNameSuffix'] != ''): ?>, @SESSION.profileNameSuffix <?php endif; ?></h5>
-        <?php if ($SESSION['profileReviewerStatus']): ?>
-          <i class="material-icons">verified_user</i>
-        <?php endif; ?>
+        <h5 class="blue-text"><?= ($SESSION['profileFirstName']) ?> <?= ($SESSION['profileLastName']) ?><?php if ($SESSION['profileNameSuffix'] != ''): ?> <?= ($SESSION['profileNameSuffix']) ?> <?php endif; ?></h5>
       </div>
-      <div class="row"><img alt="Profile Picture"/></div>
-      <div class="row"><h6><?= ($SESSION['profileUsername']) ?></h6></div>
-      
+      <?php if ($SESSION['profileReviewerStatus'] == true): ?>
+        <div class="row">
+          <h6 class="blue-text text-darken-2">Verified Reviewer <i class="material-icons">verified_user</i></h6>
+        </div>
+      <?php endif; ?>
+      <div class="row">Username: <?= ($SESSION['profileUsername']) ?></div>
+      <?php if ($SESSION['profileReviewerStatus']): ?>
+        <div class="row"><img width="300" height="300" src=" <?= ($SESSION['profileImagePath']) ?> " alt="Profile Picture"/></div>
+        <div class="row">Contact number: <?php if ($SESSION['profilePhoneArea'] != ''): ?>(<?= ($SESSION['profilePhoneArea']) ?>) <?php endif; ?><?= ($SESSION['profilePhoneNumber']) ?></div>
+        <!-- then show occupation and organization -->
+        <?php if ($SESSION['profileAffiliations'] != null): ?>
+          <div class="row"><h6 class="blue-text text-darken-2">Affiliations</h6></div>
+          <div class="row">
+            <ul>
+              <?php foreach (($SESSION['profileAffiliations']?:[]) as $affiliation): ?>
+                <div class="row">
+                  <li style="list-style-type:disc;">
+                    <i><?= ($affiliation[0]) ?></i> <br />
+                    <a class="organization blue-text text-darken-3"><?= ($affiliation[1]) ?></a>
+                  </li>
+                </div>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        <?php endif; ?>
+      <?php endif; ?>      
     </div>
 
   <!-- Modals -->

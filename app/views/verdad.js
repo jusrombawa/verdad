@@ -336,7 +336,7 @@ $(document).ready(function(){
             type: 'POST',
             url: '/logout',
             success: function(data) {
-                window.location.reload();
+                window.location.assign("/");
             },
 
             error: function(jqXHR, exception)
@@ -664,7 +664,6 @@ $(document).ready(function(){
     $(".user-profile").click(function(){
 
         var username = $(this).attr("id");
-        alert(username);
 
         $.ajax({
             type: "GET",

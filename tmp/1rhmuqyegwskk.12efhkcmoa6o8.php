@@ -286,7 +286,7 @@
       <?php else: ?>
         <div class="modal-content">
           <h5>Sign up as a verified reviewer!</h5>
-          <p>We at Verdad are dedicated to the pursuit of the truth. That is why we make sure that users that our reviewers are verified professionals in their fields of expertise. If you would like to be a reviewer, please click on the sign up button below.</p>
+          <p>We at Verdad are dedicated to the pursuit of the truth. That is why we make sure that reviewers are verified professionals in their fields of expertise. If you would like to be a reviewer, please click on the sign up button below.</p>
         </div>
 
         <div class="modal-footer">

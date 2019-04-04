@@ -343,6 +343,17 @@ class UserController extends Controller{
 
     function userProfile()
     {
+        //clear previous session profile stuff to ensure no spillover
+        $this->f3->clear("SESSION.profileFirstName");
+        $this->f3->clear("SESSION.profileLastName");
+        $this->f3->clear("SESSION.profileNameSuffix");
+        $this->f3->clear("SESSION.profileUsername");
+        $this->f3->clear("SESSION.profileReviewerStatus");
+        $this->f3->clear("SESSION.profileImagePath");
+        $this->f3->clear("SESSION.profilePhoneNumber");
+        $this->f3->clear("SESSION.profilePhoneArea");
+        $this->f3->clear("SESSION.profileAffiliations");
+
         $username = $this->f3->get("GET.profileUsername");
 
         $um = new UserMapper($this->db);
@@ -350,7 +361,54 @@ class UserController extends Controller{
 
         if(!$um->dry())
         {
-            $this->f3->set("SESSION.profileUsername",$username);
+            $firstname = $um->first_name;
+            $lastname = $um->last_name;
+            $namesuffix = $um->name_suffix;
+            if($namesuffix == 'Jr.' || $namesuffix == 'Sr.')
+                $namesuffix == ', ' + $namesuffix;
+            $reviewerstatus = $um->reviewer_status;
+
+            $this->f3->set("SESSION.profileFirstName", $firstname);
+            $this->f3->set("SESSION.profileLastName", $lastname);
+            $this->f3->set("SESSION.profileNameSuffix", $namesuffix);
+            $this->f3->set("SESSION.profileUsername", $username);
+            $this->f3->set("SESSION.profileReviewerStatus", $reviewerstatus);
+
+            if($reviewerstatus)
+            {
+                $rm = new ReviewerMapper($this->db);
+                $rm->load(array("user_fk = ?",$um->id));
+
+                $profileimagepath = $rm->profile_img_path;
+                $phonenumber = $rm->phone_number;
+                $phonearea = $rm->phone_area;
+
+                $am = new AffiliationMapper($this->db);
+                $om =new OrganizationMapper($this->db);
+                
+                $am->load(array("reviewer_fk = ?", $rm->id));
+                $affiliations = array();
+
+                while(!$am->dry())
+                {   
+                    $entry = array();
+                    //occupation
+                    array_push($entry,$am->occupation);
+                    //organization
+                    $om->load(array("id = ?",$am->organization_fk));
+                    array_push($entry,$om->org_name);
+                    //push to $affiliations
+                    array_push($affiliations,$entry);
+                    $am->next();
+                }
+
+
+
+                $this->f3->set("SESSION.profileImagePath", $profileiamgepath);
+                $this->f3->set("SESSION.profilePhoneNumber", $phonenumber);
+                $this->f3->set("SESSION.profilePhoneArea", $phonearea);
+                $this->f3->set("SESSION.profileAffiliations", $affiliations);
+            }
         }
     }
 
