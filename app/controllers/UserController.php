@@ -380,6 +380,8 @@ class UserController extends Controller{
                 $rm->load(array("user_fk = ?",$um->id));
 
                 $profileimagepath = $rm->profile_img_path;
+                if($profileimagepath == '')
+                    $profileimagepath = "../files/default_profile.png";
                 $phonenumber = $rm->phone_number;
                 $phonearea = $rm->phone_area;
 

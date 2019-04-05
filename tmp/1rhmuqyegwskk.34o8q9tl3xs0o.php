@@ -93,7 +93,8 @@
       <?php endif; ?>
       <div class="row">Username: <?= ($SESSION['profileUsername']) ?></div>
       <?php if ($SESSION['profileReviewerStatus']): ?>
-        <div class="row"><img width="300" height="300" src=" <?= ($SESSION['profileImagePath']) ?> " alt="Profile Picture"/></div>
+        <!-- <div class="row"><img width="300" height="300" src=" <?= ($SESSION['profileImagePath']) ?> " alt="Profile Picture"/> <?= ($SESSION['profileImagePath']) ?></div> -->
+        <div class="row"><img width="200" height="200" src="uploads/default_profile.png" /></div>
         <div class="row">Contact number: <?php if ($SESSION['profilePhoneArea'] != ''): ?>(<?= ($SESSION['profilePhoneArea']) ?>) <?php endif; ?><?= ($SESSION['profilePhoneNumber']) ?></div>
         <!-- then show occupation and organization -->
         <?php if ($SESSION['profileAffiliations'] != null): ?>
