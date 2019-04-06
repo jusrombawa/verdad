@@ -114,15 +114,15 @@ class MainController extends Controller{
 
 	//test only
 	function uploadPhoto(){
-		$this->f3->set('UPLOADS','../files/'); // don't forget to set an Upload directory, and make it writable!
+		$this->f3->set('UPLOADS','uploads/'); // don't forget to set an Upload directory, and make it writable!
 
-		$overwrite = false; // set to true, to overwrite an existing file; Default: false
+		$overwrite = true; // set to true, to overwrite an existing file; Default: false
 		$slug = true; // rename file to filesystem-friendly version
 
         $web = \Web::instance();
 
 		$files = $web->receive(function($file,$formFieldName){
-		        var_dump($file);
+		        $vardump = var_dump($file);
 		        /* looks like:
 		          array(5) {
 		              ["name"] =>     string(19) "csshat_quittung.png"
@@ -144,6 +144,8 @@ class MainController extends Controller{
 		    $overwrite,
 		    $slug
 		);
+
+		echo var_dump($files);
 
 	}
 

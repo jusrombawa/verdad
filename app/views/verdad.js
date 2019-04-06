@@ -681,4 +681,32 @@ $(document).ready(function(){
         });
     });
 
+    $("#change-pic-submit").click(function(){
+        //e.preventDefault();
+
+        var form = $("#change-pic-form")[0];
+        var data = new FormData(form);
+
+        $.ajax({
+            type: "POST",
+            enctype: "multipart/form-data",
+            url: "/uploadPhoto",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function(data){
+                alert(data);
+                //window.location.reload();
+            },
+            error: function(jqXHR, exception)
+            {
+                alert(jqXHR.responseText);
+            }
+
+
+        });
+    });
+
 });

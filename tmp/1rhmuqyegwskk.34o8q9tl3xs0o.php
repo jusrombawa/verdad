@@ -95,6 +95,11 @@
       <?php if ($SESSION['profileReviewerStatus']): ?>
         <!-- <div class="row"><img width="300" height="300" src=" <?= ($SESSION['profileImagePath']) ?> " alt="Profile Picture"/> <?= ($SESSION['profileImagePath']) ?></div> -->
         <div class="row"><img width="200" height="200" src="uploads/default_profile.png" /></div>
+
+        <?php if ($SESSION['profileUsername'] == $SESSION['user']): ?>
+          <div class="row"><a href="#change-pic-modal" class="btn waves-effect waves-light blue modal-trigger">Change Profile Picture</a></div>
+        <?php endif; ?>
+
         <div class="row">Contact number: <?php if ($SESSION['profilePhoneArea'] != ''): ?>(<?= ($SESSION['profilePhoneArea']) ?>) <?php endif; ?><?= ($SESSION['profilePhoneNumber']) ?></div>
         <!-- then show occupation and organization -->
         <?php if ($SESSION['profileAffiliations'] != null): ?>
@@ -117,6 +122,24 @@
 
   <!-- Modals -->
 
+    <div id="change-pic-modal" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <h4>Change Profile Picture</h4>
+      </div>
+
+      <form id="change-pic-form" method="POST" enctype="multipart/form-data">
+        <div class="row">
+          Select image to upload:
+          <input type="file" name="fileToUpload" id="fileToUpload">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
+        <a id="change-pic-submit" class="modal-close waves-effect waves-blue btn-flat">Submit</a>
+      </div>
+    </form>
+  </div>
   
 
   <!--  Scripts-->
