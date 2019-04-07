@@ -697,8 +697,8 @@ $(document).ready(function(){
             cache: false,
             timeout: 600000,
             success: function(data){
-                alert(data);
-                //window.location.reload();
+                //alert(data);
+                window.location.reload();
             },
             error: function(jqXHR, exception)
             {

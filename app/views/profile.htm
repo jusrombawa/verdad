@@ -94,7 +94,14 @@
       <div class="row">Username: {{ @SESSION.profileUsername }}</div>
       <check if="{{ @SESSION.profileReviewerStatus }}">
         <!-- <div class="row"><img width="300" height="300" src=" {{ @SESSION.profileImagePath }} " alt="Profile Picture"/> {{ @SESSION.profileImagePath}}</div> -->
-        <div class="row"><img width="200" height="200" src="uploads/default_profile.png" /></div>
+        <check if="{{ @SESSION.profileImagePath == ''}}">
+          <true>
+            <div class="row"><img width="200" height="200" src="uploads/default_profile.png" /></div>
+          </true>
+          <false>
+            <div class="row"><img width="200" height="200" src="{{ @SESSION.profileImagePath }}" /></div>
+          </false>
+        </check>
 
         <check if="{{ @SESSION.profileUsername == @SESSION.user }}">
           <div class="row"><a href="#change-pic-modal" class="btn waves-effect waves-light blue modal-trigger">Change Profile Picture</a></div>

@@ -94,7 +94,14 @@
       <div class="row">Username: <?= ($SESSION['profileUsername']) ?></div>
       <?php if ($SESSION['profileReviewerStatus']): ?>
         <!-- <div class="row"><img width="300" height="300" src=" <?= ($SESSION['profileImagePath']) ?> " alt="Profile Picture"/> <?= ($SESSION['profileImagePath']) ?></div> -->
-        <div class="row"><img width="200" height="200" src="uploads/default_profile.png" /></div>
+        <?php if ($SESSION['profileImagePath'] == ''): ?>
+          
+            <div class="row"><img width="200" height="200" src="uploads/default_profile.png" /></div>
+          
+          <?php else: ?>
+            <div class="row"><img width="200" height="200" src="<?= ($SESSION['profileImagePath']) ?>" /></div>
+          
+        <?php endif; ?>
 
         <?php if ($SESSION['profileUsername'] == $SESSION['user']): ?>
           <div class="row"><a href="#change-pic-modal" class="btn waves-effect waves-light blue modal-trigger">Change Profile Picture</a></div>

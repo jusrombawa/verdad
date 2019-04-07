@@ -110,7 +110,7 @@
         <h5 class="header col s12 light">An online peer-review system for news articles</h5>
       </div>
       <div class="row center">
-        <button id="read_button" class="btn-large waves-effect waves-light blue modal-trigger">Start reading articles</a>
+        <button id="read_button" class="btn-large waves-effect waves-light blue">Start reading articles</a>
       </div>
       <br><br>
 
