@@ -167,7 +167,7 @@ class MainController extends Controller{
 		$rm->profile_img_path = $newfile;
 		$rm->save();
 
-		$this->f3-set("SESSION.profileImagePath", $newfile);
+		$this->f3->set("SESSION.profileImagePath", $newfile);
 
 	}
 

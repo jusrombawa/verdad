@@ -380,9 +380,9 @@ class UserController extends Controller{
                 $rm->load(array("user_fk = ?",$um->id));
 
                 $profileimagepath = $rm->profile_img_path;
-                if($profileimagepath == '')
-                    $profileimagepath = "../files/default_profile.png";
-                $phonenumber = $rm->phone_number;
+/*                if($profileimagepath == '')
+                    $profileimagepath = "uploads/default_profile.png";
+*/                $phonenumber = $rm->phone_number;
                 $phonearea = $rm->phone_area;
 
                 $am = new AffiliationMapper($this->db);
@@ -406,7 +406,7 @@ class UserController extends Controller{
 
 
 
-                $this->f3->set("SESSION.profileImagePath", $profileiamgepath);
+                $this->f3->set("SESSION.profileImagePath", $profileimagepath);
                 $this->f3->set("SESSION.profilePhoneNumber", $phonenumber);
                 $this->f3->set("SESSION.profilePhoneArea", $phonearea);
                 $this->f3->set("SESSION.profileAffiliations", $affiliations);
