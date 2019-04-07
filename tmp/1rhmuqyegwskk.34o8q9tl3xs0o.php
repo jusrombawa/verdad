@@ -93,16 +93,13 @@
       <?php endif; ?>
       <div class="row">Username: <?= ($SESSION['profileUsername']) ?></div>
       <?php if ($SESSION['profileReviewerStatus']): ?>
-        <!-- <div class="row"><img width="300" height="300" src=" <?= ($SESSION['profileImagePath']) ?> " alt="Profile Picture"/> <?= ($SESSION['profileImagePath']) ?></div> -->
+
         <?php if ($SESSION['profileImagePath'] == null): ?>
           
-            <div class="row"><img width="200" height="200" src="uploads/default_profile.png" /></div>
-            <p>Path: <?= ($SESSION['profileImagePath'])."
-" ?>
+            <div class="row"><img class="materialboxed" height="300" src="uploads/default_profile.png" /></div>
           
           <?php else: ?>
-            <div class="row"><img width="200" height="200" src="<?= ($SESSION['profileImagePath']) ?>" /></div>
-            <p>Path: <?= ($SESSION['profileImagePath']) ?></p>
+            <div class="row"><img class="materialboxed" height="300" src="<?= ($SESSION['profileImagePath']) ?>" /></div>
           
         <?php endif; ?>
 

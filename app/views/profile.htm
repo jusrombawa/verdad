@@ -93,13 +93,13 @@
       </check>
       <div class="row">Username: {{ @SESSION.profileUsername }}</div>
       <check if="{{ @SESSION.profileReviewerStatus }}">
-        <!-- <div class="row"><img width="300" height="300" src=" {{ @SESSION.profileImagePath }} " alt="Profile Picture"/> {{ @SESSION.profileImagePath}}</div> -->
+
         <check if="{{ @SESSION.profileImagePath == null}}">
           <true>
-            <div class="row"><img width="200" height="200" src="uploads/default_profile.png" /></div>
+            <div class="row"><img class="materialboxed" height="300" src="uploads/default_profile.png" /></div>
           </true>
           <false>
-            <div class="row"><img width="200" height="200" src="{{ @SESSION.profileImagePath }}" /></div>
+            <div class="row"><img class="materialboxed" height="300" src="{{ @SESSION.profileImagePath }}" /></div>
           </false>
         </check>
 

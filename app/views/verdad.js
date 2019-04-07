@@ -3,10 +3,9 @@ $(document).ready(function(){
     $('.modal').modal();
     $('select').formSelect();
     $('.collapsible').collapsible();
-    $('.datepicker').datepicker();
     $('.sidenav').sidenav();
     $('.fixed-action-btn').floatingActionButton();
-    $('.timepicker').timepicker();
+    $('.materialboxed').materialbox();
 
     //hide initially hidden components
     $("#articles_sect").hide();
@@ -75,7 +74,9 @@ $(document).ready(function(){
                         text += articleList[i][0];
                         text += "<br/>";
                         //date published
-                        text += articleList[i][2];
+                        artdate = new Date(articleList[i][2]);
+                        //artdate = artdate.toLocaleFormat();
+                        text += artdate.toDateString();
                         text += "<br/>";
 
                         //rating
@@ -134,10 +135,12 @@ $(document).ready(function(){
                                 else
                                     text += "Satire <br/>";
                                 //check if opinion or not
-                                if(articleList[i][8][k][2] == false)
+                                if(articleList[i][8][k][3] == false)
                                     text += "Not opinion <br/>"
                                 else
                                     text += "Opinion <br/>";
+                                //link to reviewer's profile
+                                text += "Review written by: <a id="+articleList[i][8][k][4]+" class='user-profile'>" + articleList[i][8][k][4] + "</a>";
 
                                 //end of row
                                 text +="</div>";
@@ -368,17 +371,10 @@ $(document).ready(function(){
     });
 
     $(document).on("click", "#art-submit-button", function(){
-
-        //alert("submitting article");
-
-        //get website host
-
         var templink = document.createElement("a");
         templink.href = $("#articleURL").val().trim();
 
         var hostURL = templink.protocol + templink.hostname;
-
-        //alert(hostURL);
 
         $.ajax({
             type: 'POST',
@@ -394,7 +390,6 @@ $(document).ready(function(){
             },
             success: function(data)
             {
-                //alert("Hello there.")
                 //I should probably find a way to reload just the article list
                 window.location.reload();
             },
@@ -410,12 +405,9 @@ $(document).ready(function(){
 
     //suggest titles for article submission
     $(document).on("click","#suggest-title", function(){
-        
         //found out about textance on https://stackoverflow.com/questions/7901760/how-can-i-get-the-title-of-a-webpage-given-the-url-an-external-url-using-jquer
         //more info at http://textance.herokuapp.com/index.html
         //and by more info I mean some description text and some other misc utils
-
-       /* alert("suggesting title");*/
 
         var articleURL = $("#articleURL").val().trim();
         var apiURL = "http://textance.herokuapp.com/title/" + articleURL; //append article url to textance url
@@ -423,7 +415,6 @@ $(document).ready(function(){
         $.ajax({
           url: apiURL,
           complete: function(data) {
-            //alert(data.responseText);
             var suggestedTitle = data.responseText;
             $("#articleTitle").val(suggestedTitle);
           }
@@ -470,7 +461,6 @@ $(document).ready(function(){
             alert("Please provide a rating and comments.")
         else
         {
-            //alert(reviewComments);
             $.ajax({
                 type:"POST",
                 url: "/submitReview",
@@ -486,7 +476,6 @@ $(document).ready(function(){
                 success: function(data)
                 {
                    window.location.reload();
-                   //alert($.parseJSON(data));
                 },
 
                 error: function(jqXHR, exception)
@@ -494,7 +483,7 @@ $(document).ready(function(){
                     alert("Error submiting review.");
                     alert(jqXHR.responseText);
                 }
-                });
+            });
         }
 
     });
@@ -643,25 +632,10 @@ $(document).ready(function(){
 
     $("#faq").click(function(){
 
-        $.ajax({
-            type: "GET",
-            url: "/testFile",
-            success: function(data)
-            {
-                if(data)
-                    alert("exists");
-                else
-                    alert("no");
-                //M.toast({html:"<span>" + data + "</span>"});
-            },
-            error: function(jqXHR, exception)
-            {
-                alert(jqXHR.responseText);
-            }
-        });
     });
 
-    $(".user-profile").click(function(){
+    $(document).on("click", ".user-profile", function(){
+//    $(".user-profile").click(function(){
 
         var username = $(this).attr("id");
 
@@ -682,7 +656,6 @@ $(document).ready(function(){
     });
 
     $("#change-pic-submit").click(function(){
-        //e.preventDefault();
 
         var form = $("#change-pic-form")[0];
         var data = new FormData(form);
@@ -697,7 +670,6 @@ $(document).ready(function(){
             cache: false,
             timeout: 600000,
             success: function(data){
-                //alert(data);
                 window.location.reload();
             },
             error: function(jqXHR, exception)

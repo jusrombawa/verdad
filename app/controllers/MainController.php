@@ -56,14 +56,22 @@ class MainController extends Controller{
 			$reviews = $rm->load(array("article_fk=?",$article_id));
 			$review_list = array();
 
+			$reviewer = new ReviewerMapper($this->db);
+			$um = new UserMapper($this->db);
+
 			while(!$rm->dry())
 			{
 				$review_entry = array();
-				//reviewer to be pushed later
 				array_push($review_entry, $rm->score);
 				array_push($review_entry, $rm->comments);
 				array_push($review_entry, $rm->satire_flag);
 				array_push($review_entry, $rm->opinion_flag);
+
+				//push reviewer username
+				$reviewer->load(array("id = ?", $rm->reviewer_fk));
+				$um->load(array("id = ?", $reviewer->user_fk));
+				array_push($review_entry, $um->username);
+
 				array_push($review_list,$review_entry);
 				$rm->next();
 		
@@ -83,30 +91,6 @@ class MainController extends Controller{
 		echo json_encode($artList);
 
 	}
-
-	/*This is a test, remove after you're done and don't forget to replace the FAQ link destination*/
-	//I should also probably put this on beforeroute? Idk this is all new to me.
-	function testFile(){
-/*
-		$host = "localhost";
-		$login = "verdadadmin";
-		$password = "verdadnews";
-
-		$ftp = new \FtpClient\FtpClient();
-		$ftp->connect($host);
-		$items = $ftp->login($login, $password);
-
-		$f3->set('FTP', $ftp);
-
-		//$items = $ftp->scanDir();
-		echo $items;
-*/
-
-		//$testfile = readfile("../files/test.asdf");
-		$testfile = file_exists("../files/test.asdf");
-		echo $testfile;
-	}
-	
 
 	function sayhello(){
 		echo 'Hola!';
