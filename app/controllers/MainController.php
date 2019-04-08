@@ -26,6 +26,10 @@ class MainController extends Controller{
         $this->renderView("profile.htm");
     }
 
+    function reviewerSignupPage(){
+    	$this->renderView("reviewersignup.htm");
+    }
+
 	function getArticles()
 	{
 		$artList = array();
@@ -106,7 +110,7 @@ class MainController extends Controller{
         $web = \Web::instance();
 
 		$files = $web->receive(function($file,$formFieldName){
-		        //$vardump = var_dump($file);
+		        $vardump = var_dump($file);
 		        /* looks like:
 		          array(5) {
 		              ["name"] =>     string(19) "csshat_quittung.png"

@@ -681,4 +681,67 @@ $(document).ready(function(){
         });
     });
 
+    affiliationcounter = 1;
+
+    $("#add-affiliation").click(function(){
+
+        text = '<div class="row">';
+
+            text += '<div class="col s6">';
+                text += '<input id="position'+affiliationcounter+'" class="regRevPosition" type="text"> ';
+                text += '<label for="position'+affiliationcounter+'">Position</label>'
+            text += '</div>';
+
+            text += '<div class="col s6">';
+                text += '<input id="organization'+affiliationcounter+'" class="regRevOrganization" type="text"> ';
+                text += '<label for="organization'+affiliationcounter+'">Organization</label>'
+            text += '</div>';
+        text += '</div>';
+
+        text += '<div class="row">';
+            text += '<div class="col s12"><h6 class="blue-text text-darken-2">Scanned copy/photograph of organization ID</h6>;';
+            text += '<input type="file" name="orgIDupload" id="orgIDupload"></div>'
+        text += '</div>';
+
+
+        $("#affiliationInputs").append(text);
+        affiliationcounter++;
+    });
+
+    $("#revRegSubmit").click(function(){
+        /*var positions = $(".regRevPosition").map(function(){ return $(this).val().trim()}).get(); //get values from regRevPosition class then put into array
+        var organizations = $(".regRevOrganization").map(function(){ return $(this).val().trim()}).get();*/
+
+
+        var form = $("#revRegForm")[0];
+        if(form.length > 0)
+        {
+            var data = new FormData();
+            $.each(form.files, function(k,file){
+                data.append('images[]', file);
+            });
+            $.ajax({
+                type: "POST",
+                enctype: "multipart/form-data",
+                url: "/registerReviewer",
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function(data){
+                    //window.location.reload();
+                    alert(data);
+                },
+                error: function(jqXHR, exception)
+                {
+                    alert(jqXHR.responseText);
+                }
+
+
+            });
+        }
+
+    });
+
 });

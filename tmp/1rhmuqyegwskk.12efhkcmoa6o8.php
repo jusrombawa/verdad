@@ -25,7 +25,7 @@
               <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
               <?php if ($SESSION['reviewerStatus'] == false): ?>
                 
-                  <li><a>Sign up as a reviewer!</a></li>
+                  <li><a href="/reviewerSignup">Sign up as a reviewer!</a></li>
                 
               <?php endif; ?>
               <li><a id="faq">FAQs</a></li>
@@ -36,7 +36,7 @@
             <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
             <?php if ($SESSION['reviewerStatus'] == false): ?>
               
-                <li><a>Sign up as a reviewer!</a></li>
+                <li><a href="/reviewerSignup">Sign up as a reviewer!</a></li>
               
             <?php endif; ?>
             <li><a id="">Frequently Asked Questions</a></li>
@@ -291,7 +291,7 @@
 
         <div class="modal-footer">
           <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
-          <a id="review-submit-button" class="modal-close waves-effect waves-blue btn-flat">Sign Up</a>
+          <a href="/reviewerSignup" class="modal-close waves-effect waves-blue btn-flat">Sign Up</a>
         </div>
       
     <?php endif; ?>
