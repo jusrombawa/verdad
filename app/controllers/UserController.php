@@ -441,9 +441,9 @@ class UserController extends Controller{
 
         $dir = scandir($path,SCANDIR_SORT_DESCENDING);
 
-        echo var_dump($dir) . sizeOf($dir)-3;
+        //echo var_dump($dir) . sizeOf($dir)-3;
 
-        /*$prm = new PendingReviewerMapper($this->db);
+        $prm = new PendingReviewerMapper($this->db);
         $pam = new PendingAffiliationMapper($this->db);
         $um = new UserMapper($this->db);
         $om = new OrganizationMapper($this->db);
@@ -465,7 +465,7 @@ class UserController extends Controller{
 
         $pendingReviewerID = $prm->id;
 
-        for($i = 1; $i < sizeOf($dir) - 3; $i++) //last two entries are . and .., then sizeOf() returns size instead of last array index
+        for($i = 1; $i < sizeOf($dir) - 2; $i++) //last two entries are . and ..
         {
             //$post = $this->f3->get("POST.position1");
 
@@ -498,7 +498,7 @@ class UserController extends Controller{
             //don't forget to reset
             $om->reset();
             $pam->reset();
-        }*/
+        }
     }
 
 
