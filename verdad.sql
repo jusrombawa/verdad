@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2019 at 07:02 PM
+-- Generation Time: Apr 09, 2019 at 08:54 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -134,7 +134,9 @@ CREATE TABLE `organizations` (
 INSERT INTO `organizations` (`id`, `org_name`, `org_address`, `org_phone`, `org_logo`, `org_type`) VALUES
 (1, 'University of the Philippines Los Baños', 'College, Los Baños, Laguna', NULL, NULL, 'Academic'),
 (2, 'UP Jammers\' Club', 'Los Baños, Laguna', NULL, NULL, 'Socio-cultural'),
-(3, 'qwer', NULL, NULL, NULL, '');
+(13, 'Galactic Federation', NULL, NULL, NULL, ''),
+(14, 'Dr. Light', NULL, NULL, NULL, ''),
+(15, 'Maverick Hunters', NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -155,7 +157,9 @@ CREATE TABLE `pending_affiliations` (
 --
 
 INSERT INTO `pending_affiliations` (`id`, `occupation`, `id_img_path`, `organization_fk`, `pending_reviewer_fk`) VALUES
-(1, 'asdf', 'uploads/username2/orgIDupload2.jpg', 3, 1);
+(12, 'Bounty Hunter', 'uploads/username2/orgIDupload1.jpg', 13, 8),
+(13, 'Super Fighting Robot', 'uploads/username2/orgIDupload2.jpg', 14, 8),
+(14, 'Commander', 'uploads/username2/orgIDupload3.jpg', 15, 8);
 
 -- --------------------------------------------------------
 
@@ -178,7 +182,7 @@ CREATE TABLE `pending_reviewers` (
 --
 
 INSERT INTO `pending_reviewers` (`id`, `profile_img_path`, `phone`, `phone_area`, `user_fk`, `approved_reviewer`, `approved_reviewer_fk`) VALUES
-(1, 'uploads/username2/profileUpload.jpeg', '88888888', '02', 5, NULL, NULL);
+(8, 'uploads/username2/profileUpload.jpeg', '88884444', '02', 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -429,19 +433,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `organizations`
 --
 ALTER TABLE `organizations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pending_affiliations`
 --
 ALTER TABLE `pending_affiliations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `pending_reviewers`
 --
 ALTER TABLE `pending_reviewers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pending_users`

@@ -730,8 +730,8 @@ $(document).ready(function(){
                 cache: false,
                 timeout: 600000,
                 success: function(data){
-                    //window.location.reload();
-                    alert(data);
+                    window.location.assign("/revSignupPending");
+                    
                 },
                 error: function(jqXHR, exception)
                 {

@@ -30,6 +30,10 @@ class MainController extends Controller{
     	$this->renderView("reviewersignup.htm");
     }
 
+    function reviewerSignupPendingPage(){
+    	$this->renderView("revsignuppending.htm");
+    }
+
 	function getArticles()
 	{
 		$artList = array();

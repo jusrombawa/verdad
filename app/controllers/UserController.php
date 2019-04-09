@@ -465,7 +465,9 @@ class UserController extends Controller{
 
         $pendingReviewerID = $prm->id;
 
-        for($i = 1; $i < sizeOf($dir) - 2; $i++) //last two entries are . and ..
+        $loop = sizeOf($dir) - 2;
+
+        for($i = 1; $i < $loop; $i++) //last two entries are . and ..
         {
             //$post = $this->f3->get("POST.position1");
 
@@ -490,7 +492,7 @@ class UserController extends Controller{
 
             //id is default
             $pam->occupation = $occupation;
-            $pam->id_img_path = $path . $dir[$i]; // next file from $["FILES"]
+            $pam->id_img_path = $path . $dir[$loop - $i];
             $pam->organization_fk = $orgID;
             $pam->pending_reviewer_fk = $pendingReviewerID;
             $pam->save();
