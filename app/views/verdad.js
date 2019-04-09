@@ -688,19 +688,19 @@ $(document).ready(function(){
         text = '<div class="row">';
 
             text += '<div class="col s6">';
-                text += '<input id="position'+affiliationcounter+'" class="regRevPosition" type="text"> ';
+                text += '<input id="position'+affiliationcounter+'" name="position'+affiliationcounter+'" class="regRevPosition" type="text"> ';
                 text += '<label for="position'+affiliationcounter+'">Position</label>'
             text += '</div>';
 
             text += '<div class="col s6">';
-                text += '<input id="organization'+affiliationcounter+'" class="regRevOrganization" type="text"> ';
+                text += '<input id="organization'+affiliationcounter+'" name="organization'+affiliationcounter+'" class="regRevOrganization" type="text"> ';
                 text += '<label for="organization'+affiliationcounter+'">Organization</label>'
             text += '</div>';
         text += '</div>';
 
         text += '<div class="row">';
-            text += '<div class="col s12"><h6 class="blue-text text-darken-2">Scanned copy/photograph of organization ID</h6>;';
-            text += '<input type="file" name="orgIDupload" id="orgIDupload"></div>'
+            text += '<div class="col s12"><h6 class="blue-text text-darken-2">Scanned copy/photograph of organization ID</h6>';
+            text += '<input type="file" name="orgIDupload'+affiliationcounter+'" id="orgIDupload"></div>'
         text += '</div>';
 
 
@@ -716,9 +716,9 @@ $(document).ready(function(){
         var form = $("#revRegForm")[0];
         if(form.length > 0)
         {
-            var data = new FormData();
+            var data = new FormData(form);
             $.each(form.files, function(k,file){
-                data.append('images[]', file);
+                data.append('form[]', file);
             });
             $.ajax({
                 type: "POST",

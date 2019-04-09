@@ -107,11 +107,11 @@
     <form id="revRegForm" method="POST" enctype="multipart/form-data">
       <div class="row">
         <div class="col s3">
-          <input id="revRegPhoneArea" type="text">
+          <input id="revRegPhoneArea" name="revRegPhoneArea" type="text">
           <label for="revRegPhoneArea">Phone Area (optional)</label>
         </div>
         <div class="col s9">
-          <input id="revRegPhone" type="text">
+          <input id="revRegPhone" name="revRegPhone" type="text">
           <label for="revRegPhone">Phone Number</label>
         </div>
       </div>
