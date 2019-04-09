@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2019 at 05:54 PM
+-- Generation Time: Apr 09, 2019 at 07:02 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -121,7 +121,7 @@ INSERT INTO `messages` (`id`, `msgkey`, `message`) VALUES
 CREATE TABLE `organizations` (
   `id` int(11) NOT NULL,
   `org_name` varchar(50) NOT NULL,
-  `org_address` text NOT NULL,
+  `org_address` text,
   `org_phone` text,
   `org_logo` text,
   `org_type` varchar(30) NOT NULL
@@ -133,7 +133,52 @@ CREATE TABLE `organizations` (
 
 INSERT INTO `organizations` (`id`, `org_name`, `org_address`, `org_phone`, `org_logo`, `org_type`) VALUES
 (1, 'University of the Philippines Los Baños', 'College, Los Baños, Laguna', NULL, NULL, 'Academic'),
-(2, 'UP Jammers\' Club', 'Los Baños, Laguna', NULL, NULL, 'Socio-cultural');
+(2, 'UP Jammers\' Club', 'Los Baños, Laguna', NULL, NULL, 'Socio-cultural'),
+(3, 'qwer', NULL, NULL, NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pending_affiliations`
+--
+
+CREATE TABLE `pending_affiliations` (
+  `id` int(11) NOT NULL,
+  `occupation` varchar(50) NOT NULL,
+  `id_img_path` varchar(1024) NOT NULL,
+  `organization_fk` int(11) NOT NULL,
+  `pending_reviewer_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pending_affiliations`
+--
+
+INSERT INTO `pending_affiliations` (`id`, `occupation`, `id_img_path`, `organization_fk`, `pending_reviewer_fk`) VALUES
+(1, 'asdf', 'uploads/username2/orgIDupload2.jpg', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pending_reviewers`
+--
+
+CREATE TABLE `pending_reviewers` (
+  `id` int(11) NOT NULL,
+  `profile_img_path` varchar(1024) DEFAULT NULL,
+  `phone` varchar(15) NOT NULL,
+  `phone_area` varchar(3) NOT NULL,
+  `user_fk` int(11) NOT NULL,
+  `approved_reviewer` tinyint(1) DEFAULT NULL,
+  `approved_reviewer_fk` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pending_reviewers`
+--
+
+INSERT INTO `pending_reviewers` (`id`, `profile_img_path`, `phone`, `phone_area`, `user_fk`, `approved_reviewer`, `approved_reviewer_fk`) VALUES
+(1, 'uploads/username2/profileUpload.jpeg', '88888888', '02', 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -196,7 +241,6 @@ CREATE TABLE `reviewers` (
   `profile_img_path` varchar(1024) DEFAULT NULL,
   `phone_number` varchar(15) NOT NULL,
   `phone_area` varchar(3) DEFAULT NULL,
-  `affiliation_fk` int(11) NOT NULL,
   `user_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -204,8 +248,8 @@ CREATE TABLE `reviewers` (
 -- Dumping data for table `reviewers`
 --
 
-INSERT INTO `reviewers` (`id`, `profile_img_path`, `phone_number`, `phone_area`, `affiliation_fk`, `user_fk`) VALUES
-(1, 'C:\\xampp\\htdocs\\verdad\\files\\default_profile.png', '09677062985', NULL, 1, 1);
+INSERT INTO `reviewers` (`id`, `profile_img_path`, `phone_number`, `phone_area`, `user_fk`) VALUES
+(1, 'uploads/username1/profile.jpg', '09677062985', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -312,6 +356,18 @@ ALTER TABLE `organizations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pending_affiliations`
+--
+ALTER TABLE `pending_affiliations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pending_reviewers`
+--
+ALTER TABLE `pending_reviewers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pending_users`
 --
 ALTER TABLE `pending_users`
@@ -373,7 +429,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `organizations`
 --
 ALTER TABLE `organizations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `pending_affiliations`
+--
+ALTER TABLE `pending_affiliations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `pending_reviewers`
+--
+ALTER TABLE `pending_reviewers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pending_users`

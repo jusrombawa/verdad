@@ -380,9 +380,7 @@ class UserController extends Controller{
                 $rm->load(array("user_fk = ?",$um->id));
 
                 $profileimagepath = $rm->profile_img_path;
-/*                if($profileimagepath == '')
-                    $profileimagepath = "uploads/default_profile.png";
-*/                $phonenumber = $rm->phone_number;
+                $phonenumber = $rm->phone_number;
                 $phonearea = $rm->phone_area;
 
                 $am = new AffiliationMapper($this->db);
@@ -414,11 +412,15 @@ class UserController extends Controller{
         }
     }
 
-    function registerReviewer(){
-        $this->f3->set('UPLOADS','uploads/'); // don't forget to set an Upload directory, and make it writable!
+    function registerReviewer()
+    {
+        $user = $this->f3->get("SESSION.user");
+        $path = 'uploads/' . $user . "/";
 
-        $overwrite = true; // set to true, to overwrite an existing file; Default: false
-        $slug = true; // rename file to filesystem-friendly version
+        $this->f3->set('UPLOADS', $path);
+
+        $overwrite = true;
+        $slug = true;
 
         $web = \Web::instance();
 
@@ -436,12 +438,67 @@ class UserController extends Controller{
                 return $formFieldName . ".". pathinfo($fileBaseName, PATHINFO_EXTENSION);
             }
         );
+
+        $dir = scandir($path,SCANDIR_SORT_DESCENDING);
+
+        echo var_dump($dir) . sizeOf($dir)-3;
+
+        /*$prm = new PendingReviewerMapper($this->db);
+        $pam = new PendingAffiliationMapper($this->db);
+        $um = new UserMapper($this->db);
+        $om = new OrganizationMapper($this->db);
         
+        //write other stuff first
+        $um->load(array("username = ?",$user));
+        $userid = $um->id;
 
-        $post = $this->f3->get("POST.revRegPhone");
+        //id is default
+        $prm->profile_img_path = $path . $dir[0];
+        $prm->phone = $this->f3->get("POST.revRegPhone");
+        $prm->phone_area = $this->f3->get("POST.revRegPhoneArea");
+        $prm->user_fk = $userid;
+        $prm->approved_user = false;
+        $prm->approved_user_fk = null;
+        $prm->save();
 
-        echo $post;
+        $prm->load(array("user_fk = ?", $userid));
 
+        $pendingReviewerID = $prm->id;
+
+        for($i = 1; $i < sizeOf($dir) - 3; $i++) //last two entries are . and .., then sizeOf() returns size instead of last array index
+        {
+            //$post = $this->f3->get("POST.position1");
+
+            $occupation = $this->f3->get("POST.position" . $i);
+            $orgName = $this->f3->get("POST.organization" . $i);
+
+            $om->load(array("org_name = ?", $orgName));
+            //if non-existent, write new
+            if($om->dry())
+            {
+                //id is default
+                $om->org_name = $orgName;
+                $om->save();
+                //then get new id
+                $om->load(array("org_name = ?", $orgName));
+                $orgID = $om->id;
+            }
+            else
+                $orgID = $om->id;
+
+            //write values to pending affiliations
+
+            //id is default
+            $pam->occupation = $occupation;
+            $pam->id_img_path = $path . $dir[$i]; // next file from $["FILES"]
+            $pam->organization_fk = $orgID;
+            $pam->pending_reviewer_fk = $pendingReviewerID;
+            $pam->save();
+
+            //don't forget to reset
+            $om->reset();
+            $pam->reset();
+        }*/
     }
 
 
