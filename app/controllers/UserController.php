@@ -423,25 +423,26 @@ class UserController extends Controller{
         $web = \Web::instance();
 
         $files = $web->receive(function($file,$formFieldName){
-                var_dump($file);
+                //var_dump($file);
                 
-                if($file['size'] > (2 * 1024 * 1024)) // if bigger than 2 MB
-                   return false; // this file is not valid, return false will skip moving it
+                if($file['size'] > (2 * 1024 * 1024))
+                   return false;
 
-                // everything went fine, hurray!
-                return true; // allows the file to be moved from php tmp dir to your defined upload dir
+                return true;
             },
             $overwrite,
-            $slug
+            function($fileBaseName, $formFieldName){
+                // input field name + file extension
+                return $formFieldName . ".". pathinfo($fileBaseName, PATHINFO_EXTENSION);
+            }
         );
-        echo var_dump($files);
+        
+
+        $post = $this->f3->get("POST.revRegPhone");
+
+        echo $post;
 
     }
-
-    $post = $this->f3->get("POST.revRegPhoneNumber");
-
-    echo var_dump($post);
-
 
 
 }
