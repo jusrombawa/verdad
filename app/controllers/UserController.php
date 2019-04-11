@@ -452,13 +452,14 @@ class UserController extends Controller{
         $um->load(array("username = ?",$user));
         $userid = $um->id;
 
-        //id is default
+        //id default auto-increment
         $prm->profile_img_path = $path . $dir[0];
         $prm->phone = $this->f3->get("POST.revRegPhone");
         $prm->phone_area = $this->f3->get("POST.revRegPhoneArea");
         $prm->user_fk = $userid;
-        $prm->approved_user = false;
-        $prm->approved_user_fk = null;
+        //request_time default is current timestamp
+        $prm->approved_reviewer = false;
+        $prm->approved_reviewer_fk = null;
         $prm->save();
 
         $prm->load(array("user_fk = ?", $userid));

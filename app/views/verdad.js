@@ -268,7 +268,7 @@ $(document).ready(function(){
         }
 
         else if (username == '')
-            alert("E-mail field cannot be empty.");
+            alert("Username field cannot be empty.");
 
         else if (password == '')
             alert("Password field cannot be empty.");
@@ -308,7 +308,7 @@ $(document).ready(function(){
         }
 
         else if (username == '')
-            alert("E-mail field cannot be empty.");
+            alert("Username field cannot be empty.");
 
         else if (password == '')
             alert("Password field cannot be empty.");

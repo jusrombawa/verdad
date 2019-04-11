@@ -88,7 +88,7 @@
           <form id="loginDesktop" class="right-align">
             <div class="input-field">
               <input id="loginUsernameDesktop">
-              <label for="loginUsernameDesktop">E-mail</label>
+              <label for="loginUsernameDesktop">Username</label>
             </div>
             <div class="input-field">
               <input id="loginPasswordDesktop" type="password">
