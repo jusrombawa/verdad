@@ -3,6 +3,7 @@ $(document).ready(function(){
     $('.modal').modal();
     $('select').formSelect();
     $('.collapsible').collapsible();
+
     $('.sidenav').sidenav();
 //  $('.fixed-action-btn').floatingActionButton();
     $('.materialboxed').materialbox();
@@ -153,7 +154,61 @@ $(document).ready(function(){
             type:"GET",
             url:"/getPendingReviewers",
             success: function(data){
-                alert(data);
+                //alert(data);
+
+                list = $.parseJSON(data);
+
+                text = "";
+                //text += list;
+
+                text += '<div class="row"><div class="col s12"><h4 class="blue-text text-darken-3">Pending reviewer requests</h4></div></div>'
+
+                text += '<div class="row"><div class="col s12">'
+                text += '<ul class="collapsible">'
+                    for(var i=0; i<list.length; i++)
+                    {
+                        text += '<li>'
+                            text += '<div class="collapsible-header">'
+                                text += '<h6 class="blue-text text-darken-3">' + list[i][2] + ', ' +  list[i][3] + ' ' + list[i][5] + ' ' +  list[i][4] + '</h6>'
+                            text += '</div>'
+
+                            text += "<div class='collapsible-body'>"
+                                text += "Username: " + list[i][1] + '<br/>'
+                                reqdate = new Date(list[i][6]);
+                                text += "Request date: " + reqdate.toDateString() + '<br/>';
+                                text += "<h6>Profile picture: </h6>"
+                                text += '<img class="materialboxed" src="' + list[i][7] + '" height="300"/>'
+                                text += '<br/>Email address: <a href="mailto:'+ list[i][8] +'">' + list[i][8] + '</a><br/>'
+                                text += 'Phone number: '
+                                if(list[i][9] != '')
+                                    text += '(' + list[i][9] + ') '
+                                text += list[i][10] + '<br/><br/>'
+                                text += "<div class='row divider'></div>"
+                                text += '<h6 class="blue-text text-darken-3">Affiliations:</h6>'
+                                text += '<ul class="collapsible">'
+                                for(var j=0; j<list[i][11].length; j++)
+                                {
+                                    text += '<li>'
+                                        text += '<div class="collapsible-header"> Occupation: ' + list[i][11][j][0] + '</div>';
+                                        text += '<div class="collapsible-body">Organization: ' + list[i][11][j][2] + '<br/>'
+                                        text += 'Organization ID: <br/><img class="materialboxed" src="' + list[i][11][j][3] + '" height="240" />'
+                                        text += "<div class='row divider'></div>"
+                                    text += '</li>'
+                                }
+                                text += '</ul>'
+                            
+                                text += '<a class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">check</i>Approve</a><br/> <br/>'
+                                text += '<a class="waves-effect waves-light btn orange darken-3"><i class="material-icons left">clear</i>deny</a>'
+
+                            text += '</div>'
+                        text += '</li>'
+
+                    }
+                text += '</ul></div></div>'
+
+                $("#admin_sect").html(text);
+                $('.collapsible').collapsible();
+                $('.materialboxed').materialbox();
             },
             error: function(jqXHR, exception)
             {

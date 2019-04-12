@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Verdad - Home</title>
+  <title>Verdad - Admin</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -100,13 +100,21 @@
           <p>
             This is the admin login page. If you are a user or a reviewer and you somehow ended up here, <a href="/">click here</a> to go back to Verdad's home page.
           </p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col s5">
-          <ul class="collapsible popout" id="article_list">
-          </ul>
+          <!-- <ul class="collapsible">
+            <li>
+              <div class="collapsible-header">asdf</div>
+              <div class="collapsible-body">qwerqwerqwer</div>
+            </li>
+            <li>
+              <div class="collapsible-header">asdf</div>
+              <div class="collapsible-body">qwerqwerqwer</div>
+            </li>
+            <li>
+              <div class="collapsible-header">asdf</div>
+              <div class="collapsible-body">qwerqwerqwer</div>
+            </li>
+          </ul> -->
+          </div>
         </div>
       </div>
 

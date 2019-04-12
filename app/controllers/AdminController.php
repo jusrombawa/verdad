@@ -85,7 +85,7 @@
 	    		//profile image
 	    		array_push($entry, $prm->profile_img_path);
 	    		//email
-	    		array_push($entry, $am->email);
+	    		array_push($entry, $um->email);
 	    		//phone area
 	    		array_push($entry, $prm->phone_area);
 	    		//phone number
