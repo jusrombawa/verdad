@@ -108,7 +108,7 @@
 
   <!-- Modals -->
 
-  <div id="inquiry-modal" class="modal modal-fixed-footer">
+  <div id="inquiry-modal" class="modal">
     <div class="modal-content">
       <h4>Send inquiry</h4>
       <form>
@@ -119,6 +119,21 @@
     </div>
     <div class="modal-footer">
       <a id="inquiry-send" class="modal-close waves-effect waves-green btn-flat">Send</a>
+      <a class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
+
+  <div id="deny-modal" class="modal">
+    <div class="modal-content">
+      <h4>Deny reviewer registration</h4>
+      <form>
+        <input type="hidden" id="deny-pr-id">
+        <textarea id="deny-text" class="materialize-textarea"></textarea>
+        <label for="textarea1">Reasons for denying</label>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a id="deny-rev-submit" class="modal-close waves-effect waves-green btn-flat">Deny</a>
       <a class="modal-close waves-effect waves-green btn-flat">Cancel</a>
     </div>
   </div>

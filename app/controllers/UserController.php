@@ -290,7 +290,7 @@ class UserController extends Controller{
             $sent = $smtp->send($txt, true);
 
             if($sent)
-                echo $sent
+                echo $sent;
             else
                 echo $smtp->log();
         }
@@ -428,9 +428,13 @@ class UserController extends Controller{
         $web = \Web::instance();
 
         $files = $web->receive(function($file,$formFieldName){
-                //var_dump($file);
-                
-                if($file['size'] > (2 * 1024 * 1024))
+                var_dump($file);
+
+                //check if image
+                /*if($file["type"] != "image/png" || $file["type"] != "image/gif" || $file["type"] != "image/jpeg" || $file["type"] != "image/pjpeg")
+                    return false;*/
+                //check if < 8 MB
+                if($file['size'] > (8 * 1024 * 1024))
                    return false;
 
                 return true;
@@ -470,6 +474,8 @@ class UserController extends Controller{
         $pendingReviewerID = $prm->id;
 
         $loop = sizeOf($dir) - 2;
+
+        echo json_encode($dir);
 
         for($i = 1; $i < $loop; $i++) //last two entries are . and ..
         {

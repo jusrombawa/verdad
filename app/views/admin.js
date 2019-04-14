@@ -157,55 +157,59 @@ $(document).ready(function(){
                 //alert(data);
 
                 list = $.parseJSON(data);
-
                 text = "";
-                //text += list;
 
                 text += '<div class="row"><div class="col s12"><h4 class="blue-text text-darken-3">Pending reviewer requests</h4></div></div>'
 
-                text += '<div class="row"><div class="col s12">'
-                text += '<ul class="collapsible">'
-                    for(var i=0; i<list.length; i++)
-                    {
-                        text += '<li>'
-                            text += '<div class="collapsible-header">'
-                                text += '<h6 class="blue-text text-darken-3">' + list[i][2] + ', ' +  list[i][3] + ' ' + list[i][5] + ' ' +  list[i][4] + '</h6>'
-                            text += '</div>'
+                if(list.length == 0)
+                    text += '<div class="row"><div class="col s12"><p>There are no pending reviewers right now.</p></div></div>'
+                else
+                {
 
-                            text += "<div class='collapsible-body'>"
-                                text += "Username: " + list[i][1] + '<br/>'
-                                reqdate = new Date(list[i][6]);
-                                text += "Request date: " + reqdate.toDateString() + '<br/>';
-                                text += "<h6>Profile picture: </h6>"
-                                text += '<img class="materialboxed" src="' + list[i][7] + '" height="300"/>'
-                                text += '<br/>Email address: <a href="mailto:'+ list[i][8] +'">' + list[i][8] + '</a><br/>'
-                                text += 'Phone number: '
-                                if(list[i][9] != '')
-                                    text += '(' + list[i][9] + ') '
-                                text += list[i][10] + '<br/><br/>'
-                                text += "<div class='row divider'></div>"
-                                text += '<h6 class="blue-text text-darken-3">Affiliations:</h6>'
-                                text += '<ul class="collapsible">'
-                                for(var j=0; j<list[i][11].length; j++)
-                                {
-                                    text += '<li>'
-                                        text += '<div class="collapsible-header"> Occupation: ' + list[i][11][j][0] + '</div>';
-                                        text += '<div class="collapsible-body">Organization: ' + list[i][11][j][2] + '<br/>'
-                                        text += 'Organization ID: <br/><img class="materialboxed" src="' + list[i][11][j][3] + '" height="240" />'
-                                        text += "<div class='row divider'></div>"
-                                    text += '</li>'
-                                }
-                                text += '</ul>'
-                            
-                                text += '<a id="approve' + list[i][0] + '" class="waves-effect waves-light btn blue darken-3 approve-reviewer"><i class="material-icons left">check</i>Approve</a><br/> <br/>'
-                                text += '<a id="inquire' + list[i][0] + '" class="waves-effect waves-light btn lime darken-2 inquire-reviewer"><i class="material-icons left">email</i>Send inquiry</a><br/> <br/>'
-                                text += '<a id="deny' + list[i][0] + '" class="waves-effect waves-light btn orange darken-3 deny-reviewer"><i class="material-icons left">clear</i>deny</a>'
+                    text += '<div class="row"><div class="col s12">'
+                    text += '<ul class="collapsible">'
+                        for(var i=0; i<list.length; i++)
+                        {
+                            text += '<li>'
+                                text += '<div class="collapsible-header">'
+                                    text += '<h6 class="blue-text text-darken-3">' + list[i][2] + ', ' +  list[i][3] + ' ' + list[i][5] + ' ' +  list[i][4] + '</h6>'
+                                text += '</div>'
 
-                            text += '</div>'
-                        text += '</li>'
+                                text += "<div class='collapsible-body'>"
+                                    text += "Username: " + list[i][1] + '<br/>'
+                                    reqdate = new Date(list[i][6]);
+                                    text += "Request date: " + reqdate.toDateString() + '<br/>';
+                                    text += "<h6>Profile picture: </h6>"
+                                    text += '<img class="materialboxed" src="' + list[i][7] + '" height="300"/>'
+                                    text += '<br/>Email address: <a href="mailto:'+ list[i][8] +'">' + list[i][8] + '</a><br/>'
+                                    text += 'Phone number: '
+                                    if(list[i][9] != '')
+                                        text += '(' + list[i][9] + ') '
+                                    text += list[i][10] + '<br/><br/>'
+                                    text += "<div class='row divider'></div>"
+                                    text += '<h6 class="blue-text text-darken-3">Affiliations:</h6>'
+                                    text += '<ul class="collapsible">'
+                                    for(var j=0; j<list[i][11].length; j++)
+                                    {
+                                        text += '<li>'
+                                            text += '<div class="collapsible-header"> Occupation: ' + list[i][11][j][0] + '</div>';
+                                            text += '<div class="collapsible-body">Organization: ' + list[i][11][j][2] + '<br/>'
+                                            text += 'Organization ID: <br/><img class="materialboxed" src="' + list[i][11][j][3] + '" height="240" />'
+                                            text += "<div class='row divider'></div>"
+                                        text += '</li>'
+                                    }
+                                    text += '</ul>'
+                                
+                                    text += '<a id="approve' + list[i][0] + '" class="waves-effect waves-light btn blue darken-3 approve-reviewer"><i class="material-icons left">check</i>Approve</a><br/> <br/>'
+                                    text += '<a id="inquire' + list[i][0] + '" class="waves-effect waves-light btn lime darken-2 inquire-reviewer"><i class="material-icons left">email</i>Send inquiry</a><br/> <br/>'
+                                    text += '<a id="deny' + list[i][0] + '" class="waves-effect waves-light btn orange darken-3 deny-reviewer"><i class="material-icons left">clear</i>deny</a>'
 
-                    }
-                text += '</ul></div></div>'
+                                text += '</div>'
+                            text += '</li>'
+
+                        }
+                    text += '</ul></div></div>'
+                }
 
                 $("#admin_sect").html(text);
                 $('.collapsible').collapsible();
@@ -268,6 +272,42 @@ $(document).ready(function(){
         else
             alert("Can't send empty inquiry");
 
+    });
+
+    $(document).on("click", ".deny-reviewer", function(){
+        var denyID = $(this).attr("id");
+        denyID = denyID.substr(4);
+
+        $("#deny-pr-id").val(denyID);
+        var inquireInstance = M.Modal.getInstance($("#deny-modal"));
+        inquireInstance.open();
+    });
+
+    $(document).on("click", "#deny-rev-submit", function(){
+        var denyID = $("#deny-pr-id").val();
+        var denyText = $("#deny-text").val();
+
+        if(denyText != '')
+        {
+            $.ajax({
+                type:"POST",
+                data: {
+                    "denyID": denyID,
+                    "denyText": denyText
+                },
+                url: "/denyRegistration",
+                success: function(data){
+                    window.location.reload()
+                },
+                error: function(jqXHR, exception)
+                {
+                    alert(jqXHR.responseText);
+                }
+
+            });
+        }
+        else
+            alert("Reason cannot be empty");
     });
 
 

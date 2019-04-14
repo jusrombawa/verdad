@@ -124,14 +124,15 @@ class MainController extends Controller{
 		              ["size"] =>     int(172245)
 		            }
 		        */
-		        // $file['name'] already contains the slugged name now
+		        //check if image
+/*		        if($file["type"] != "image/png" || $file["type"] != "image/gif" || $file["type"] != "image/jpeg" || $file["type"] != "image/pjpeg")
+		        	return false;*/
 
-		        // maybe you want to check the file size
-		        if($file['size'] > (2 * 1024 * 1024)) // if bigger than 2 MB
-		            return false; // this file is not valid, return false will skip moving it
+		        //check if < 8 MB
+		        if($file['size'] > (8 * 1024 * 1024))
+		            return false;
 
-		        // everything went fine, hurray!
-		        return true; // allows the file to be moved from php tmp dir to your defined upload dir
+		        return true;
 		    },
 		    $overwrite,
 		    $slug

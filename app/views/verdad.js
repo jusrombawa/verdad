@@ -731,6 +731,7 @@ $(document).ready(function(){
                 timeout: 600000,
                 success: function(data){
                     window.location.assign("/revSignupPending");
+                    //alert(data);
                     
                 },
                 error: function(jqXHR, exception)
