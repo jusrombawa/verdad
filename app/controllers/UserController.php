@@ -122,6 +122,7 @@ class UserController extends Controller{
 
         $rm = new ReviewMapper($this->db);
         $um = new UserMapper($this->db);
+        $revm = new ReviewerMapper($this->db);
         $am = new ArticleMapper($this->db);
         
         $reviewArtID = $this->f3->get("POST.articleID");
@@ -134,11 +135,12 @@ class UserController extends Controller{
         $reviewUsername = trim($reviewUsername);
 
         $user = $um->load(array("username=?",$reviewUsername));
-        $userID = $user->id;
+        $revm->load(array("user_fk = ?",$user->id));
+        $reviewerID = $revm->id;
 
         //check if user already submitted a review for article
         $rm2 = new ReviewMapper($this->db);
-        $checkreview = $rm2->load(array("article_fk=? AND reviewer_fk=?",$reviewArtID, $userID));
+        $checkreview = $rm2->load(array("article_fk=? AND reviewer_fk=?",$reviewArtID, $reviewerID));
 
         //found a match
         if(!$rm2->dry())
@@ -151,7 +153,7 @@ class UserController extends Controller{
         {
             //id is auto-increment
             $rm->article_fk = $reviewArtID;
-            $rm->reviewer_fk = $userID;
+            $rm->reviewer_fk = $reviewerID;
             $rm->score = $reviewScore;
             $rm->comments = $reviewComments;
             $rm->satire_flag = $reviewSatire;
@@ -211,6 +213,7 @@ class UserController extends Controller{
             $article->save();
 
         }
+
     }
 
     function registerUser(){

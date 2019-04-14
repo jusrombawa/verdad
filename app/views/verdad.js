@@ -442,15 +442,15 @@ $(document).ready(function(){
         
         //check if satire
         if($("#review-satire").is(":checked"))
-            var reviewSatire = true;
+            var reviewSatire = 1;
         else
-            var reviewSatire = false;
+            var reviewSatire = 0;
 
         //check if opinion
         if($("#review-opinion").is(":checked"))
-            var reviewOpinion = true;
+            var reviewOpinion = 1;
         else
-            var reviewOpinion = false;
+            var reviewOpinion = 0;
 
         //simple input sanitation
         if(reviewRating == null)

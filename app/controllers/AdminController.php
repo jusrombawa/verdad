@@ -226,6 +226,8 @@
 	    	$rm->phone_number = $prm->phone;
 	    	$rm->phone_area = $prm->phone_area;
 	    	$rm->user_fk = $prm->user_fk;
+	    	$um->reviewer_status = 1;
+	    	$um->save();
 	    	$rm->save();
 
 	    	//load from $rm to get new reviewer's ID
