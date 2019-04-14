@@ -100,20 +100,6 @@
           <p>
             This is the admin login page. If you are a user or a reviewer and you somehow ended up here, <a href="/">click here</a> to go back to Verdad's home page.
           </p>
-          <!-- <ul class="collapsible">
-            <li>
-              <div class="collapsible-header">asdf</div>
-              <div class="collapsible-body">qwerqwerqwer</div>
-            </li>
-            <li>
-              <div class="collapsible-header">asdf</div>
-              <div class="collapsible-body">qwerqwerqwer</div>
-            </li>
-            <li>
-              <div class="collapsible-header">asdf</div>
-              <div class="collapsible-body">qwerqwerqwer</div>
-            </li>
-          </ul> -->
           </div>
         </div>
       </div>
@@ -121,6 +107,21 @@
   	</div>
 
   <!-- Modals -->
+
+  <div id="inquiry-modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Send inquiry</h4>
+      <form>
+        <input type="hidden" id="inquire-pr-id">
+        <textarea id="inquire-text" class="materialize-textarea"></textarea>
+        <label for="textarea1">Inquiry</label>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a id="inquiry-send" class="modal-close waves-effect waves-green btn-flat">Send</a>
+      <a class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
 
   <!--  Scripts-->
   <!--  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->

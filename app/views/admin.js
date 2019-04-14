@@ -197,8 +197,9 @@ $(document).ready(function(){
                                 }
                                 text += '</ul>'
                             
-                                text += '<a class="waves-effect waves-light btn blue darken-3"><i class="material-icons left">check</i>Approve</a><br/> <br/>'
-                                text += '<a class="waves-effect waves-light btn orange darken-3"><i class="material-icons left">clear</i>deny</a>'
+                                text += '<a id="approve' + list[i][0] + '" class="waves-effect waves-light btn blue darken-3 approve-reviewer"><i class="material-icons left">check</i>Approve</a><br/> <br/>'
+                                text += '<a id="inquire' + list[i][0] + '" class="waves-effect waves-light btn lime darken-2 inquire-reviewer"><i class="material-icons left">email</i>Send inquiry</a><br/> <br/>'
+                                text += '<a id="deny' + list[i][0] + '" class="waves-effect waves-light btn orange darken-3 deny-reviewer"><i class="material-icons left">clear</i>deny</a>'
 
                             text += '</div>'
                         text += '</li>'
@@ -217,6 +218,57 @@ $(document).ready(function(){
 
         });
     }
+
+    $(document).on("click", ".approve-reviewer", function(){
+        var approveID = $(this).attr('id');
+        approveID = approveID.substr(7);
+
+        alert(approveID);
+    });
+
+    $(document).on("click", ".inquire-reviewer", function(){
+        var inquireID = $(this).attr('id');
+        inquireID = inquireID.substr(7);
+        $("#inquire-pr-id").val(inquireID);
+
+        var inquireInstance = M.Modal.getInstance($("#inquiry-modal"));
+        inquireInstance.open();
+        //alert(inquireID);
+    });
+
+    $(document).on("click", "#inquiry-send", function(){
+        var inquireID = $("#inquire-pr-id").val();
+        var inquireText = $("#inquire-text").val();
+
+        //alert(inquireID + " " + inquireText)
+
+        if(inquireText != '')
+        {
+            $.ajax({
+                type:"POST",
+                data: {
+                    "inquireID": inquireID,
+                    "inquireText": inquireText
+                },
+                url: "/sendInquiry",
+                success: function(data){
+                    if(data == true)
+                        alert("Inquiry sent successfully");
+                    else{
+                        alert("Inquiry not sent: \n\n" + data);
+                    }
+                },
+                error: function(jqXHR, exception)
+                {
+                    alert(jqXHR.responseText);
+                }
+
+            });
+        }
+        else
+            alert("Can't send empty inquiry");
+
+    });
 
 
 });

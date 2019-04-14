@@ -128,5 +128,33 @@
 	    	echo json_encode($prList);
 
 	    }
+
+	    function sendInquiry()
+	    {
+	    	$id = $this->f3->get("POST.inquireID");
+	    	$inquiry = $this->f3->get("POST.inquireText");
+
+	    	$prm = new PendingReviewerMapper($this->db);
+	    	$um = new UserMapper($this->db);
+
+	    	$prm->load(array("id=?",$id));
+	    	$um->load(array("id=?", $prm->user_fk));
+
+	    	$username = $um->username;
+	    	$firstname = $um->first_name;
+	    	$email = $um->email;
+
+	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "philtyphilphilantropist" );
+
+			$txt = "Hello " . $firstname . "! We would like to inquire further about your registration as reviewer for Verdad. Specifically, we would like to ask the following: \n\n" . $inquiry . "\n\nYou may send your reply to the inquiry to this email. Thank you.";
+
+			$smtp->set("From", 'verdadnewsreview@gmail.com');
+			$smtp->set("To",  $email);
+			$smtp->set("Subject", "Verdad Reviewer Registration Inquiry");
+			$sent = $smtp->send($txt, true);
+
+			echo $smtp->log();
+
+	    }
 	}
 ?>

@@ -248,7 +248,7 @@ class UserController extends Controller{
         {
             //send verification email
             //set up SMTP
-            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "bluecoll@rman820" );
+            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "philtyphilphilantropist" );
 
             $txt = "Hello " . $regFirstName . "! It seems that you are trying to register to Verdad again. To start using Verdad, please click on the verify account link bellow the register button then enter your verification code below. Thank you.\n\n\n " . $rando . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
 
@@ -280,7 +280,7 @@ class UserController extends Controller{
             
             //send verification email
             //set up SMTP
-            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "$anteria420" );
+            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "philtyphilphilantropist" );
 
             $txt = "Hello " . $regFirstName . "! Thank you for registering to Verdad News Review. To verify your email, please copy the code below to the prompt given after your user registration. Thank you.\n\n\n " . $rando . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
 
@@ -289,7 +289,10 @@ class UserController extends Controller{
             $smtp->set("Subject", "Verdad User Registration Verification");
             $sent = $smtp->send($txt, true);
 
-            echo true;
+            if($sent)
+                echo $sent
+            else
+                echo $smtp->log();
         }
 
     }
