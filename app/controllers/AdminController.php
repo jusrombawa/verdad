@@ -182,7 +182,7 @@
 			$smtp->set("From", 'verdadnewsreview@gmail.com');
 			$smtp->set("To",  $email);
 			$smtp->set("Subject", "Verdad Reviewer Registration Inquiry");
-			$sent = $smtp->send($txt, true);	    	
+			$sent = $smtp->send($txt, true);   	
 
 	    	//send email
 
@@ -200,6 +200,66 @@
 	    	chown($prm->profile_img_path, 666);
 	    	unlink($prm->profile_img_path);
 	    	$prm->erase();
+	    }
+
+	    function approveRegistration()
+	    {
+	    	$id = $this->f3->get("POST.approveID");
+
+	    	$prm = new PendingReviewerMapper($this->db);
+	    	$pam = new PendingAffiliationMapper($this->db);
+	    	$rm = new ReviewerMapper($this->db);
+	    	$am = new Affiliationmapper($this->db);
+	    	$um = new UserMapper($this->db);
+
+	    	$prm->load(array("id=?", $id));
+
+	    	//get email address
+
+	    	$um->load(array("id = ?", $prm->user_fk));
+	    	$email = $um->email;
+	    	$username = $um->username;
+
+	    	//transfer pending reviewer to reviewer table
+
+	    	$rm->profile_img_path = $prm->profile_img_path;
+	    	$rm->phone_number = $prm->phone;
+	    	$rm->phone_area = $prm->phone_area;
+	    	$rm->user_fk = $prm->user_fk;
+	    	$rm->save();
+
+	    	//load from $rm to get new reviewer's ID
+	    	$rm->load(array("user_fk = ?", $rm->user_fk));
+
+	    	//update affiliations
+	    	$pam->load(array("pending_reviewer_fk = ?", $prm->id));
+	    	while(!$pam->dry())
+	    	{
+	    		$am->occupation = $pam->occupation;
+	    		$am->organization_fk = $pam->organization_fk;
+	    		$am->reviewer_fk = $rm->id;
+	    		$am->save();
+
+	    		$am->reset();
+	    		$pam->next();
+	    	}
+
+	    	//update pending reviewer as approved
+	    	$prm->approved_reviewer = true;
+	    	$prm->approved_reviewer_fk = $rm->id;
+	    	$prm->save();
+
+	    	//send email
+
+	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "philtyphilphilantropist" );
+
+			$txt = "Hello " . $username . "! We would like to inform you that your registration as reviewer has been approved. You may now review articles for Verdad. You may also contribute to the community by submitting articles for review. If you have any concerns, please reply to this email. Thank you.";
+
+			$smtp->set("From", 'verdadnewsreview@gmail.com');
+			$smtp->set("To",  $email);
+			$smtp->set("Subject", "Verdad Reviewer Registration Inquiry");
+			$sent = $smtp->send($txt, true);
+
 	    }
 	}
 ?>

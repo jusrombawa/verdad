@@ -23,22 +23,12 @@
           
           <ul id="nav-desktop" class="right hide-on-med-and-down">
               <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
-              <?php if ($SESSION['reviewerStatus'] == false): ?>
-                
-                  <li><a>Sign up as a reviewer!</a></li>
-                
-              <?php endif; ?>
               <li><a id="faq">FAQs</a></li>
               <li><a id="logoutDesktop">Logout</a></li>
             </ul>
 
           <ul id="nav-mobile" class="sidenav">
             <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
-            <?php if ($SESSION['reviewerStatus'] == false): ?>
-              
-                <li><a>Sign up as a reviewer!</a></li>
-              
-            <?php endif; ?>
             <li><a id="">Frequently Asked Questions</a></li>
             <li><a id="logoutMobile">Logout</a></li>
 

@@ -227,7 +227,22 @@ $(document).ready(function(){
         var approveID = $(this).attr('id');
         approveID = approveID.substr(7);
 
-        alert(approveID);
+        //alert(approveID);
+        
+        $.ajax({
+            type: "POST",
+            data: {
+                "approveID": approveID
+            },
+            url: "/approveRegistration",
+            success: function(data){
+                window.location.reload();
+            },
+            error: function(jqXHR, exception)
+            {
+                alert(jqXHR.responseText);
+            }
+        });
     });
 
     $(document).on("click", ".inquire-reviewer", function(){

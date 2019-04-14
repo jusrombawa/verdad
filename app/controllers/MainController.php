@@ -125,7 +125,7 @@ class MainController extends Controller{
 		            }
 		        */
 		        //check if image
-/*		        if($file["type"] != "image/png" || $file["type"] != "image/gif" || $file["type"] != "image/jpeg" || $file["type"] != "image/pjpeg")
+		        /*if($file["type"] != "image/png" || $file["type"] != "image/gif" || $file["type"] != "image/jpeg" || $file["type"] != "image/pjpeg")
 		        	return false;*/
 
 		        //check if < 8 MB
