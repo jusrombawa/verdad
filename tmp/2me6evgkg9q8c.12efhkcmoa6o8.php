@@ -12,30 +12,34 @@
 </head>
 <body>
 
-  <!-- <?php if ($SESSION['reviewerStatus'] == true): ?>
-    <p>Reviewer account</p>
-  <?php endif; ?>
- -->
-
   <span id="info" hidden> <?= ($SESSION['info']) ?> </span>
   <span id="loggedInUser" hidden> <?= ($SESSION['user']) ?> </span>
-
   
   <?php if ($SESSION['user'] != null): ?>
     
     
       <nav class="blue darken-3" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
+        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Verdad</a>
           
           <ul id="nav-desktop" class="right hide-on-med-and-down">
-              <li><a>Hello, <?= ($SESSION['user']) ?></a></li>
-              <li><a>FAQs</a></li>
+              <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
+              <?php if ($SESSION['reviewerStatus'] == false): ?>
+                
+                  <li><a href="/reviewerSignup">Sign up as a reviewer!</a></li>
+                
+              <?php endif; ?>
+              <li><a id="faq">FAQs</a></li>
               <li><a id="logoutDesktop">Logout</a></li>
             </ul>
 
           <ul id="nav-mobile" class="sidenav">
-            <li>Hello, <?= ($SESSION['user']) ?></li>
-            <li><a href="">Frequently Asked Questions</a></li>
+            <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
+            <?php if ($SESSION['reviewerStatus'] == false): ?>
+              
+                <li><a href="/reviewerSignup">Sign up as a reviewer!</a></li>
+              
+            <?php endif; ?>
+            <li><a id="">Frequently Asked Questions</a></li>
             <li><a id="logoutMobile">Logout</a></li>
 
           </ul>
@@ -48,11 +52,11 @@
 
     <?php else: ?>
       <nav class="blue darken-3" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="" class="brand-logo">Verdad</a>
+        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Verdad</a>
           
           <ul id="nav-desktop" class="right hide-on-med-and-down">
-              <li><a href="#">FAQs</a></li>
-              <li><a href="#registerModal">Register</a></li>
+              <li><a id="faq" href="">FAQs</a></li>
+              <li><a href="/register">Register</a></li>
               <li><a id="login-popup">Login</a></li>
             </ul>
 
@@ -66,8 +70,8 @@
               </li>
               <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button></li>
             </form>
-              <li><a href="registerModal">Register</a></li>
-              <li><a href="">Frequently Asked Questions</a></li>
+              <li><a href="/register">Register</a></li>
+              <li><a id="faq">Frequently Asked Questions</a></li>
           </div>
           </ul>
 
@@ -84,7 +88,7 @@
           <form id="loginDesktop" class="right-align">
             <div class="input-field">
               <input id="loginUsernameDesktop">
-              <label for="loginUsernameDesktop">E-mail</label>
+              <label for="loginUsernameDesktop">Username</label>
             </div>
             <div class="input-field">
               <input id="loginPasswordDesktop" type="password">
@@ -106,7 +110,7 @@
         <h5 class="header col s12 light">An online peer-review system for news articles</h5>
       </div>
       <div class="row center">
-        <button id="read_button" class="btn-large waves-effect waves-light blue modal-trigger">Start reading articles</a>
+        <button id="read_button" class="btn-large waves-effect waves-light blue">Start reading articles</a>
       </div>
       <br><br>
 
@@ -234,48 +238,63 @@
   </div>
 
   <div id="review-submit-modal" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h5>Submit review</h5>
-      <span hidden id="article-review-id"></span>
-      <form id="review-submit">
-        <div class="input-field">
-          <div class="row">
-            <select id="review-rating">
-              <option value="no" disabled selected>Choose the rating</option>
-              <option value="5">5 star</option>
-              <option value="4">4 star</option>
-              <option value="3">3 star</option>
-              <option value="2">2 star</option>
-              <option value="1">1 star</option>
-            </select>
-          </div>
+    <?php if ($SESSION['reviewerStatus'] == true): ?>
+      
+        <div class="modal-content">
+          <h5>Submit review</h5>
+          <span hidden id="article-review-id"></span>
+          <form id="review-submit">
+            <div class="input-field">
+              <div class="row">
+                <select id="review-rating">
+                  <option value="no" disabled selected>Choose the rating</option>
+                  <option value="5">5 star</option>
+                  <option value="4">4 star</option>
+                  <option value="3">3 star</option>
+                  <option value="2">2 star</option>
+                  <option value="1">1 star</option>
+                </select>
+              </div>
 
-          <div class="row">
-            <textarea id="review-comments" class="materialize-textarea"></textarea>
-            <label for="review-comments">Comments</label>
-          </div>
+              <div class="row">
+                <textarea id="review-comments" class="materialize-textarea"></textarea>
+                <label for="review-comments">Comments</label>
+              </div>
 
-          <div class="row">
-            <label>
-              <input type="checkbox" id="review-satire" class="filled-in"/>
-              <span>Satire article</span>
-            </label>
-          </div>
+              <div class="row">
+                <label>
+                  <input type="checkbox" id="review-satire" class="filled-in"/>
+                  <span>Satire article</span>
+                </label>
+              </div>
 
-          <div class="row">
-            <label>
-              <input type="checkbox" id="review-opinion" class="filled-in"/>
-              <span>Opinion article</span>
-            </label>
-          </div>
+              <div class="row">
+                <label>
+                  <input type="checkbox" id="review-opinion" class="filled-in"/>
+                  <span>Opinion article</span>
+                </label>
+              </div>
+            </div>
+          </form>
+
         </div>
-      </form>
+        <div class="modal-footer">
+          <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
+          <a id="review-submit-button" class="modal-close waves-effect waves-blue btn-flat">Submit</a>
+        </div>
+      
+      <?php else: ?>
+        <div class="modal-content">
+          <h5>Sign up as a verified reviewer!</h5>
+          <p>We at Verdad are dedicated to the pursuit of the truth. That is why we make sure that reviewers are verified professionals in their fields of expertise. If you would like to be a reviewer, please click on the sign up button below.</p>
+        </div>
 
-    </div>
-    <div class="modal-footer">
-      <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
-      <a id="review-submit-button" class="modal-close waves-effect waves-blue btn-flat">Submit</a>
-    </div>
+        <div class="modal-footer">
+          <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
+          <a href="/reviewerSignup" class="modal-close waves-effect waves-blue btn-flat">Sign Up</a>
+        </div>
+      
+    <?php endif; ?>
   </div>
 
   <!--  Scripts-->
