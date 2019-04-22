@@ -47,7 +47,6 @@
 	        {
 	            $this->f3->clear('SESSION.admin');
 	            $this->f3->clear('SESSION.info');
-	            $this->f3->reroute('/admin');
 	        }
 	    }
 

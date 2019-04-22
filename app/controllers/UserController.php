@@ -3,6 +3,8 @@
 class UserController extends Controller{
 
     function beforeroute(){
+        /*$this->f3->set("CORS.origin", "*");
+        $this->f3->copy('HEADERS.Origin','CORS.origin');*/
     }
 
     function authenticate() {
@@ -40,9 +42,6 @@ class UserController extends Controller{
             else
                 $reviewerStatus = true;
             $this->f3->set("SESSION.reviewerStatus", $reviewerStatus);
-
-            $this->f3->reroute('/');
-
         }
 
         //wrong password
@@ -63,7 +62,6 @@ class UserController extends Controller{
             $this->f3->clear('SESSION.user');
             $this->f3->clear('SESSION.info');
             $this->f3->clear('SESSION.reviewerStatus');
-            $this->f3->reroute('/');
         }
     }
 
