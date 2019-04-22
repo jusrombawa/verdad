@@ -21,32 +21,76 @@ $(document).ready(function(){
     info = "";
     $("#info").text("");
 
+    //check if mobile user
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+        var isMobile = true;
+    else
+        var isMobile = false
+
     //check if logged in, automatically show article list
     if($("#loggedInUser").text().trim() != '')
     {
-        $("#intro_sect").hide( function() {
-            $("#read_button").hide();
-            $("#title_header").hide();
-            $("#subtitle_header").hide();
-            $("#articles_sect").show();
-            $("#art-submit-modal-button").show();
-        });
+        if(isMobile == false)
+        {
+            $("#intro_sect").hide( function() {
+                $("#read_button").hide();
+                $("#title_header").hide();
+                $("#subtitle_header").hide();
+                $("#articles_sect").show();
+                $("#art-submit-modal-button").show();
+            });
 
-        getArticles();
+            getArticles();
+        }
+        else
+        {
+            $("#intro_sect").hide( function() {
+                $("#read_button").hide();
+                $("#title_header").hide();
+                $("#subtitle_header").hide();
+                $("#articles_sect").show();
+                $("#art-submit-modal-button").show();
+               
+                $("#article_frame").hide();
+                //change column size for article collapsible section
+                $("#art-collapsible-sect").removeClass("s5");
+                $("#art-collapsible-sect").addClass("s12");
+            });
+            getArticles();
+        }
     }
 
     //start reading articles
     $("#read_button").click(function(){
         //hide extra stuff
-        $("#intro_sect").hide(1000, function() {
-            $("#read_button").hide(1000);
-            $("#title_header").hide(1000);
-            $("#subtitle_header").hide(1000);
-            $("#articles_sect").show(2000);
-            $("#art-submit-modal-button").show(2000);
-        });
-
-        getArticles();
+        if(isMobile == false)
+        {
+            $("#intro_sect").hide(1000, function() {
+                $("#read_button").hide(1000);
+                $("#title_header").hide(1000);
+                $("#subtitle_header").hide(1000);
+                $("#articles_sect").show(2000);
+                $("#art-submit-modal-button").show(2000);
+            });
+    
+            getArticles();
+        }
+        else
+        {
+            $("#intro_sect").hide(1000, function() {
+                $("#read_button").hide(1000);
+                $("#title_header").hide(1000);
+                $("#subtitle_header").hide(1000);
+                $("#articles_sect").show(2000);
+                $("#art-submit-modal-button").show(2000);
+                $("#article_frame").hide();
+                //change column size for article collapsible section
+                $("#art-collapsible-sect").removeClass("s5");
+                $("#art-collapsible-sect").addClass("s12");
+            });
+    
+            getArticles();
+        }
     });
 
     var articleListLength;
@@ -87,8 +131,11 @@ $(document).ready(function(){
                             text += "Average score: " + articleList[i][4] + "";
                         text += "<br/><br/>";
 
-
-                        text += "<a class='waves-effect waves-light btn blue article-button' href='"+ articleList[i][7] +"' target='article_frame'>Read article</a>";
+                        if(isMobile){
+                            text += "<a class='article-button' href='"+ articleList[i][7] +"' target='_blank' rel='noopener noreferrer'>Read article</a>";
+                        }
+                        else
+                            text += "<a class='waves-effect waves-light btn blue article-button' href='"+ articleList[i][7] +"' target='article_frame'>Read article</a>";
                         text += "</div>"
 
                         //src=" + articleList[i][7] + "
@@ -276,6 +323,46 @@ $(document).ready(function(){
 
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
+    });
+
+    $("#loginPasswordDesktop").keypress(function(e){
+        if (e.which == 13)
+        {
+            //login if enter is pressed
+            var username = $("#loginUsernameDesktop").val().trim();
+            var password = $("#loginPasswordDesktop").val().trim();
+            
+            if(username != '' && password != '')
+            {
+                $.ajax({
+                    type:"POST",
+                    url:"/login",
+                    data: {
+                        "username": username,
+                        "password": password
+                    },
+
+                    success: function(data)
+                    {
+                        window.location.assign("/");
+                    },
+
+                    error: function(jqXHR, exception)
+                    {
+                        alert(jqXHR.responseText);
+                    }
+                });
+            }
+
+            else if (username == '')
+                alert("Username field cannot be empty.");
+
+            else if (password == '')
+                alert("Password field cannot be empty.");
+
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        }
     });
 
     $("#loginButtonMobile").click(function(e){

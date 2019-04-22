@@ -180,7 +180,14 @@ $(document).ready(function(){
                                     reqdate = new Date(list[i][6]);
                                     text += "Request date: " + reqdate.toDateString() + '<br/>';
                                     text += "<h6>Profile picture: </h6>"
-                                    text += '<img class="materialboxed" src="' + list[i][7] + '" height="300"/>'
+
+                                    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+                                    {
+                                        text += '<img class="materialboxed" src="' + list[i][7] + '" width="240"/>'
+                                    }
+                                    else
+                                        text += '<img class="materialboxed" src="' + list[i][7] + '" height="300"/>'
+
                                     text += '<br/>Email address: <a href="mailto:'+ list[i][8] +'">' + list[i][8] + '</a><br/>'
                                     text += 'Phone number: '
                                     if(list[i][9] != '')
@@ -194,7 +201,11 @@ $(document).ready(function(){
                                         text += '<li>'
                                             text += '<div class="collapsible-header"> Occupation: ' + list[i][11][j][0] + '</div>';
                                             text += '<div class="collapsible-body">Organization: ' + list[i][11][j][2] + '<br/>'
-                                            text += 'Organization ID: <br/><img class="materialboxed" src="' + list[i][11][j][3] + '" height="240" />'
+                                            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ){
+                                                text += 'Organization ID: <br/><img class="materialboxed" src="' + list[i][11][j][3] + '" width="200" />'
+                                            }
+                                            else
+                                                text += 'Organization ID: <br/><img class="materialboxed" src="' + list[i][11][j][3] + '" height="240" />'
                                             text += "<div class='row divider'></div>"
                                         text += '</li>'
                                     }

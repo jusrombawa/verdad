@@ -84,18 +84,19 @@
 
   <div id="login-area" class="container">
       <div class="row">
-        <div class="col s3 offset-s9 z-depth-2">
-          <form id="loginDesktop" class="right-align">
+        <div class="col s4 offset-s8 z-depth-2">
+          <form id="loginDesktop">
             <div class="input-field">
+              <span>Username</span>
               <input id="loginUsernameDesktop">
-              <label for="loginUsernameDesktop">Username</label>
             </div>
             <div class="input-field">
+              <span>Password</span>
               <input id="loginPasswordDesktop" type="password">
-              <label for="loginPasswordDesktop">Password</label>
             </div>
-
-            <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
+            <div class="right-align">
+              <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
+            </div>
           </form>
           <br/>
         </div>  
@@ -155,7 +156,7 @@
   	<div class="container" id="articles_sect">
   		
       <div class="row">
-        <div class="col s5">
+        <div id="art-collapsible-sect" class="col s5">
           <ul class="collapsible popout" id="article_list">
           </ul>
         </div>
