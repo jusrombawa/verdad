@@ -514,5 +514,125 @@ class UserController extends Controller{
         }
     }
 
+    function reportReview()
+    {
+        $reportedReviewID = $this->f3->get("POST.reportedReviewID");
+        $reportSubmitterUsername = $this->f3->get("POST.reportSubmitterUsername");
+        $reasons = $this->f3->get("POST.reasons");
+        $reportComments = $this->f3->get("POST.reportComments");
+
+        $repm = new ReportMapper($this->db); //report
+        $usm = new UserMapper($this->db); //submitter
+        $rsm = new ReviewerMapper($this->db);
+        $ucm = new UserMapper($this->db); //checker
+        $rcm = new ReviewerMapper($this->db);
+        $acm = new AffiliationMapper($this->db);
+        $rwm = new ReviewerMapper($this->db); //writer
+        $awm = new AffiliationMapper($this->db);
+        $revm = new ReviewMapper($this->db); //reported review
+
+        //load submitter
+        $usm->load(array("username = ?", $reportSubmitterUsername));
+        $rsm->load(array("user_fk = ?", $usm->id)); //get reviewer id of submitter
+        
+        //get someone else to review
+        //a. get review writer's org
+        $revm->load(array("id = ?", $reportedReviewID)); //getting reviewer_fk
+        $rwm->load(array("id = ?", $revm->reviewer_fk)); //getting id to get affiliation
+        $awm->load(array("reviewer_fk = ?", $rwm->id)); //getting affiliation
+
+        $writerOrgs = array();
+        while(!$awm->dry())
+        {
+            array_push($writerOrgs, $awm->organization_fk);
+            $awm->next();
+        }
+
+        //build query to find exempted
+        $querytext = '';
+        $query = array();
+        
+        for($i = 0; $i < sizeOf($writerOrgs); $i++)
+        {
+            if($i == sizeOf($writerOrgs) - 1) // last entry
+                $querytext = $querytext."organization_fk = ? ";
+            else
+                $querytext = $querytext."organization_fk = ? OR ";
+        }
+        //exempt report submitter
+        $querytext = $querytext."OR reviewer_fk = ?";
+        array_push($query, $querytext);
+
+        for($i = 0; $i < sizeOf($writerOrgs); $i++)
+            array_push($query, $writerOrgs[$i]);
+        array_push($query, $rsm->id);
+
+        $acm->load($query);
+        $query2 = $query;
+
+        $exempted = array();
+        while(!$acm->dry())
+        {
+            array_push($exempted,$acm->reviewer_fk);
+            $acm->next();
+        }
+        $exempted = array_values(array_unique($exempted)); //weed out possible duplicates then get rid of those pesky keys
+
+        //build query to find possible candidates
+        $querytext = '';
+        $query = array();
+
+        for($i=0; $i<sizeOf($exempted); $i++)
+        {
+            if($i == sizeOf($exempted)-1)
+                $querytext = $querytext."reviewer_fk != ?";
+            else
+                $querytext = $querytext."reviewer_fk != ? AND ";
+        }
+        array_push($query, $querytext);
+
+        for($i = 0; $i < sizeOf($exempted); $i++)
+            array_push($query, $exempted[$i]);
+
+        $acm->load($query);//should result to list of candidates
+        $candidates = array();
+        while(!$acm->dry())
+        {
+            array_push($candidates, $acm->reviewer_fk);
+            $acm->next();
+        }
+        $candidates = array_values(array_unique($candidates));
+
+        //if single candidate, choose as checker
+        if(sizeOf($candidates) == 1)
+            $checker = $candidates[0];
+        else if (sizeOf($candidates) == 0) //no candidates, admin checks report
+            $checker = null;
+        else //more than one candidate, randomly choose
+            $checker = $candidates[rand(0, sizeOf($candidates)-1)];
+
+        //add the report to the table
+
+        //id is auto-increment
+        $repm->reasons = serialize($reasons);
+        $repm->comments = $reportComments;
+        $repm->erroneous = 0; //0 = pending, 1 = approved, -1 = disapproved. 0 is default
+        $repm->review_id_fk = $reportedReviewID;
+        $repm->reporter_reviewer_fk = $rsm->id;
+        $repm->checker_reviewer_fk = $checker;
+
+        $repm->save();
+
+        //if no checker, state that admin will check
+        if($checker == null)
+            $info = "Report submited and will be checked by an admin.";
+        //else state that another reviewer will check
+        else
+            $info = "Report submitted and will be checked by another reviewer.";
+
+        echo $info;
+        //echo json_encode($exempted);
+    }
+
 
 }

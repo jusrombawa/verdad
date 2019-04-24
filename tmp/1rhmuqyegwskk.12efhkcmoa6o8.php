@@ -14,6 +14,7 @@
 
   <span id="info" hidden> <?= ($SESSION['info']) ?> </span>
   <span id="loggedInUser" hidden> <?= ($SESSION['user']) ?> </span>
+  <span id="reviewerStatus" hidden> <?= ($SESSION['reviewerStatus']) ?> </span>
   
   <?php if ($SESSION['user'] != null): ?>
     
@@ -296,6 +297,80 @@
         </div>
       
     <?php endif; ?>
+  </div>
+
+  <div id="report-submit-modal" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col s12">
+          <h5>Report this review</h5>
+        </div>
+      </div>
+
+      <form id="report-submit">
+        <input type="hidden" id="reportedReviewID">
+        <input type="hidden" id="reportSubmitterUsername">
+
+        <div class="row">
+          <div class="col s12">
+            Reasons for reporting (please check at least one): <br/>
+
+            <label>
+              <input type="checkbox" class="filled-in report-reason"/>
+              <span>Erroneous/inaccurate review</span>
+            </label>
+            <br/>
+            <label>
+              <input type="checkbox" class="filled-in report-reason"/>
+              <span>Review lacks information/sources</span>
+            </label>
+            <br/>
+            <label>
+              <input type="checkbox" class="filled-in report-reason"/>
+              <span>Possible conflict of interest</span>
+            </label>
+            <br/>
+            <label>
+              <input type="checkbox" class="filled-in report-reason"/>
+              <span>Unprofessional language</span>
+            </label>
+            <br/>
+            <label>
+              <input type="checkbox" class="filled-in report-reason"/>
+              <span>Mistaken as satire/opinion</span>
+            </label>
+            <br/>
+            <label>
+              <input type="checkbox" class="filled-in report-reason"/>
+              <span>Article is actually satire/opinion</span>
+            </label>
+            <br/>
+            <label>
+              <input type="checkbox" class="filled-in report-reason"/>
+              <span>Hateful remarks in review (racism, sexism, violent threat)</span>
+            </label>
+            <br/>
+            <label>
+              <input type="checkbox" class="filled-in report-reason"/>
+              <span>Others</span>
+            </label>
+            <br/>
+          </div>
+        </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="report-comments" class="materialize-textarea"></textarea>
+              <label for="report-comments">Textarea</label>
+            </div>
+          </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
+      <a id="submit-report" class="modal-close waves-effect waves-blue btn-flat">Report</a>
+    </div>
   </div>
 
   <!--  Scripts-->

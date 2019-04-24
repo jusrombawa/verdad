@@ -79,6 +79,8 @@ class MainController extends Controller{
 				$reviewer->load(array("id = ?", $rm->reviewer_fk));
 				$um->load(array("id = ?", $reviewer->user_fk));
 				array_push($review_entry, $um->username);
+				//push review id in case of report
+				array_push($review_entry, $rm->id);
 
 				array_push($review_list,$review_entry);
 				$rm->next();

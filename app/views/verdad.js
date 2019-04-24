@@ -94,7 +94,7 @@ $(document).ready(function(){
     });
 
     var articleListLength;
-    var pageSize = 5;
+    var pageSize = 7;
     var pages;
 
     function getArticles(){
@@ -115,87 +115,82 @@ $(document).ready(function(){
 
 
                         //title
-                        text += articleList[i][0];
-                        text += "<br/>";
-                        //date published
-                        artdate = new Date(articleList[i][2]);
-                        //artdate = artdate.toLocaleFormat();
-                        text += artdate.toDateString();
-                        text += "<br/>";
+                        text += articleList[i][0] + "<br/>";
 
                         //rating
                         //check for not enough ratings (null for now)
                         if(articleList[i][4] == null)
-                            text += "No ratings"
+                            text += "No reviews yet <br/>"
                         else
-                            text += "Average score: " + articleList[i][4] + "";
-                        text += "<br/><br/>";
-
-                        if(isMobile){
-                            text += "<a class='article-button' href='"+ articleList[i][7] +"' target='_blank' rel='noopener noreferrer'>Read article</a>";
-                        }
-                        else
-                            text += "<a class='waves-effect waves-light btn blue article-button' href='"+ articleList[i][7] +"' target='article_frame'>Read article</a>";
+                            text += "Average score: " + articleList[i][4] + "<br/>";
                         text += "</div>"
 
                         //src=" + articleList[i][7] + "
                         text += "<div class='collapsible-body'>";
 
                         //check if satire and/or opinion
-                        text += "<div class='row'>";
-    
-                            //author
-                            text += "Written by: " + articleList[i][1];
-                            text += "<br/>";
-                            
-                            //publisher
-                            text += "Published by: " + articleList[i][3];
-                            text += "<br/>";
 
-                            if(articleList[i][5] && articleList[i][6]) text += "Satire & Opinion";
-                            else if(articleList[i][5] && !articleList[i][6]) text += "Satire";
-                            else if(!articleList[i][5] && articleList[i][6]) text += "Opinion";
-                            else text += "Not satire or opinion";
-                        
-                        text += "</div>";
-                        //check if there are reviews
-                        text += "<div class='row divider'></div>"
-                        text += "<div class='row'> <h6>Reviews:</h6> </div>";
-
-                        if(articleList[i][8].length == 0){ //no reviews to be shown
-                            text += "<div class='row'><p>No reviews yet</p>";
+                        if(isMobile){
+                            text += "<a href='"+ articleList[i][7] +"' target='_blank' rel='noopener noreferrer'>Read article</a>";
                         }
+                        else
+                            text += "<a class='article-button waves-effect waves-light btn-small blue darken-2' href='"+ articleList[i][7] +"' target='article_frame'><i class='material-icons'>link</i> Read article</a><br/><br/>";
 
-                        else{
+                        //date published
+                        artdate = new Date(articleList[i][2]);
+                        text += "Date published: " + artdate.toDateString() + "<br/>";
+    
+                        //author
+                        text += "Written by: " + articleList[i][1];
+                        text += "<br/>";
+                        
+                        //publisher
+                        text += "Published by: " + articleList[i][3];
+                        text += "<br/>";
+
+                        if(articleList[i][5] && articleList[i][6]) text += "Satire & Opinion";
+                        else if(articleList[i][5] && !articleList[i][6]) text += "Satire";
+                        else if(!articleList[i][5] && articleList[i][6]) text += "Opinion";
+                        else text += "Not satire or opinion";
+
+                        text += "<br/><br/>"
+                        
+                        //add button to allow review submission
+                        if($("#reviewerStatus").text() == 1)
+                            text += "<a id='review"+articleList[i][9]+"' class='btn waves-effect waves-light blue darken-2 submit-review'><i class='material-icons'>rate_review</i> Write a review</a>"
+                    
+                        //check if there are reviews
+
+                        if(articleList[i][8].length > 0){
                         //display reviews
+                            text += "<br/><br/><div class='row divider'></div>"
+                            text += "<div class='row'> <h6>Reviews:</h6> </div>";
                             for(var k=0; k < articleList[i][8].length; k++) //loop through 4D array!!!
                             {
                                 text += "<div class='row divider'></div>"
                                 text += "<div class='row'>"
                                 //score
                                 text += "Rating: " + articleList[i][8][k][0]+" stars<br/>";
+                                //link to reviewer's profile
+                                text += "Review written by: <a id="+articleList[i][8][k][4]+" class='user-profile'>" + articleList[i][8][k][4] + "</a>";
                                 //comments
                                 text += "<p><i>" + articleList[i][8][k][1] +"</i></p>";
                                 //check if satire or not
-                                if(articleList[i][8][k][2] == false)
-                                    text += "Not satire <br/>";
-                                else
+                                if(articleList[i][8][k][2] == true)
                                     text += "Satire <br/>";
                                 //check if opinion or not
-                                if(articleList[i][8][k][3] == false)
-                                    text += "Not opinion <br/>"
-                                else
+                                if(articleList[i][8][k][3] == true)
                                     text += "Opinion <br/>";
-                                //link to reviewer's profile
-                                text += "Review written by: <a id="+articleList[i][8][k][4]+" class='user-profile'>" + articleList[i][8][k][4] + "</a>";
-
+                                //add in report button
+                                if($("#loggedInUser").text().trim() != articleList[i][8][k][4] && $("#reviewerStatus").text() == 1)
+                                {
+                                    text += '<a id="report' + articleList[i][8][k][5] + '"class="report-button waves-effect waves-blue blue darken-2 btn"><i class="material-icons">report</i> Report</a><br/><br/>'
+                                }
                                 //end of row
+                                text += "<div class='row divider'></div>"
                                 text +="</div>";
                             }
                         }                        
-                        
-                        //add button to allow review submission
-                        text += "<true><a id='review"+articleList[i][9]+"' class='btn waves-effect waves-light blue submit-review'>Write a review <i class='material-icons'>rate_review</i></a></true>"
 
                         text += "</div>";
                         text += "</li>";
@@ -225,10 +220,13 @@ $(document).ready(function(){
                     //write to table
                     $("#article_list").html(text);
 
+                    if($("#reviewerStatus").text() != 1)
+                    {
+                        
+                    }
+                    
 
-                    //resize article_frame
-                    /*var frameheight = $("#articles_sect").height();
-                    $("#article_frame").height(frameheight);*/
+
                     showPage(1);   
                 },
 
@@ -832,4 +830,70 @@ $(document).ready(function(){
 
     });
 
+    $(document).on("click", ".report-button", function(){
+        var reportID = $(this).attr("id")
+        reportID = reportID.substr(6);
+        reportUser = $("#loggedInUser").text().trim()
+
+        //change value of hidden input fields
+        $("#reportedReviewID").val(reportID);
+        $("#reportSubmitterUsername").val(reportUser);
+
+        
+        var instance = M.Modal.getInstance($("#report-submit-modal"));
+        instance.open();
+    });
+
+    $("#submit-report").click(function(){
+
+        //get hidden values
+        var reportedReviewID = $("#reportedReviewID").val()
+        var reportSubmitterUsername = $("#reportSubmitterUsername").val()
+
+        //get value of reasons as an array of booleans
+        var reasons = [];
+
+        $(".report-reason").each(function(i){
+            if ($(this).is(":checked")) reasons[i] = true
+            else reasons[i] = false
+        });
+
+        //get comments
+        var reportComments = $("#report-comments").val().trim();
+
+        //input validation
+        //check every value of reasons if false
+        var noReasons = reasons.every(function(reason){
+            return reason == false;
+        })
+        
+        if(noReasons) //all false, no reasons indicated
+            alert("Please check at least one reason for the report.")
+        else if(reportComments == '')
+            alert("Please include comments regarding your report.")
+        else
+        {
+            //alert(reportedReviewID + " " + reportSubmitterUsername + " " + reasons + " " + reportComments)
+
+            $.ajax({
+                type:"POST",
+                data:{
+                    "reportedReviewID": reportedReviewID,
+                    "reportSubmitterUsername": reportSubmitterUsername,
+                    "reasons": reasons,
+                    "reportComments": reportComments
+                },
+                url: "/reportReview",
+                success: function(data){
+                    alert(data)
+                },
+                error: function(jqXHR, exception)
+                {
+                    alert(jqXHR.responseText);
+                }
+
+
+            });
+        }
+    });
 });

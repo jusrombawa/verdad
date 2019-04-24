@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2019 at 08:54 PM
+-- Generation Time: Apr 24, 2019 at 08:04 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -25,6 +25,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'admin', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `affiliations`
 --
 
@@ -41,7 +60,9 @@ CREATE TABLE `affiliations` (
 
 INSERT INTO `affiliations` (`id`, `occupation`, `organization_fk`, `reviewer_fk`) VALUES
 (1, 'Student', 1, 1),
-(3, 'Member', 2, 1);
+(3, 'Member', 2, 1),
+(4, 'Student', 1, 3),
+(6, 'Secretary', 16, 4);
 
 -- --------------------------------------------------------
 
@@ -73,11 +94,12 @@ INSERT INTO `articles` (`id`, `title`, `author`, `url`, `publisher_fk`, `publish
 (3, 'Malaysian Prime Minister Mahathir arrives in Manila for official visit', 'Pia Ranada', 'https://www.rappler.com/nation/225056-mahathir-mohamad-arrives-manila-march-6-2019', 1, '2019-03-06', '19:47:00', '2019-03-06 23:04:33', 5, 0, 0),
 (4, 'EU says talks with UK ’difficult’ as Brexit impasse drags on', 'Associated Press', 'https://newsinfo.inquirer.net/1092900/eu-says-talks-with-uk-difficult-as-brexit-impasse-drags-on?utm_expid=.XqNwTug2W6nwDVUSgFJXed.1', 2, '2019-03-06', '21:29:00', '2019-03-06 23:34:15', 5, NULL, NULL),
 (5, 'Mon Tulfo refuses to apologize for calling Filipino workers \'lazy\'', 'Aika Rey', 'https://www.rappler.com/nation/225350-mon-tulfo-refuse-apologize-statement-against-filipino-workers', 1, '2019-03-09', '20:57:00', '2019-03-09 23:10:05', 5, NULL, NULL),
-(6, 'Ex-PCSO chief Balutan rejects corruption allegations', 'Frances G. Mangosing', 'https://newsinfo.inquirer.net/1093867/ex-pcso-chief-balutan-rejects-corruption-allegations?utm_expid=.XqNwTug2W6nwDVUSgFJXed.1', 2, '2019-03-09', '14:34:00', '2019-03-09 23:11:12', NULL, NULL, NULL),
+(6, 'Ex-PCSO chief Balutan rejects corruption allegations', 'Frances G. Mangosing', 'https://newsinfo.inquirer.net/1093867/ex-pcso-chief-balutan-rejects-corruption-allegations?utm_expid=.XqNwTug2W6nwDVUSgFJXed.1', 2, '2019-03-09', '14:34:00', '2019-03-09 23:11:12', 5, 0, 0),
 (7, 'Comelec hopes VRVM pilot test to go smoothly', 'Philippine News Agency', 'https://news.mb.com.ph/2019/03/09/comelec-hopes-vrvm-pilot-test-to-go-smoothly/', 3, '2019-03-09', '21:47:00', '2019-03-09 23:21:19', NULL, NULL, NULL),
 (8, '‘Find alternative to sugar import liberalization’: Zubiri', 'Philippine News Agency', 'https://news.mb.com.ph/2019/03/09/find-alternative-to-sugar-import-liberalization-zubiri/', 3, '2019-03-09', '22:47:00', '2019-03-09 23:26:53', NULL, NULL, NULL),
 (9, 'Go not violating poll rules: Comelec chief', 'Philippine News Agency', 'https://news.mb.com.ph/2019/03/09/go-not-violating-poll-rules-comelec-chief/', 3, '2019-03-09', '21:55:00', '2019-03-09 23:31:14', NULL, NULL, NULL),
-(10, 'Senior citizens deserve to live a life of dignity', 'Mario Casayuran', 'https://news.mb.com.ph/2019/03/09/senior-citizens-deserve-to-live-a-life-of-dignity/', 3, '2019-03-09', '18:55:00', '2019-03-09 23:39:36', NULL, NULL, NULL);
+(10, 'Senior citizens deserve to live a life of dignity', 'Mario Casayuran', 'https://news.mb.com.ph/2019/03/09/senior-citizens-deserve-to-live-a-life-of-dignity/', 3, '2019-03-09', '18:55:00', '2019-03-09 23:39:36', NULL, NULL, NULL),
+(11, 'Colmenares hits Duterte’s ‘below the belt’ attacks vs Diokno, Hilbay', 'Consuelo Marquez', 'https://newsinfo.inquirer.net/1108774/colmenares-hits-dutertes-below-the-belt-attacks-vs-diokno-hilbay', 0, '2019-04-20', '13:12:00', '2019-04-20 14:34:37', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -136,7 +158,8 @@ INSERT INTO `organizations` (`id`, `org_name`, `org_address`, `org_phone`, `org_
 (2, 'UP Jammers\' Club', 'Los Baños, Laguna', NULL, NULL, 'Socio-cultural'),
 (13, 'Galactic Federation', NULL, NULL, NULL, ''),
 (14, 'Dr. Light', NULL, NULL, NULL, ''),
-(15, 'Maverick Hunters', NULL, NULL, NULL, '');
+(15, 'Maverick Hunters', NULL, NULL, NULL, ''),
+(16, 'Heureux Transport Services', NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -157,9 +180,9 @@ CREATE TABLE `pending_affiliations` (
 --
 
 INSERT INTO `pending_affiliations` (`id`, `occupation`, `id_img_path`, `organization_fk`, `pending_reviewer_fk`) VALUES
-(12, 'Bounty Hunter', 'uploads/username2/orgIDupload1.jpg', 13, 8),
-(13, 'Super Fighting Robot', 'uploads/username2/orgIDupload2.jpg', 14, 8),
-(14, 'Commander', 'uploads/username2/orgIDupload3.jpg', 15, 8);
+(16, 'Student', 'uploads/username2/orgIDupload1.jpg', 1, 14),
+(17, 'Student', 'uploads/username3/orgIDupload1.jpg', 1, 15),
+(18, 'Secretary', 'uploads/username3/orgIDupload1.jpg', 16, 15);
 
 -- --------------------------------------------------------
 
@@ -173,6 +196,7 @@ CREATE TABLE `pending_reviewers` (
   `phone` varchar(15) NOT NULL,
   `phone_area` varchar(3) NOT NULL,
   `user_fk` int(11) NOT NULL,
+  `request_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `approved_reviewer` tinyint(1) DEFAULT NULL,
   `approved_reviewer_fk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -181,8 +205,9 @@ CREATE TABLE `pending_reviewers` (
 -- Dumping data for table `pending_reviewers`
 --
 
-INSERT INTO `pending_reviewers` (`id`, `profile_img_path`, `phone`, `phone_area`, `user_fk`, `approved_reviewer`, `approved_reviewer_fk`) VALUES
-(8, 'uploads/username2/profileUpload.jpeg', '88884444', '02', 5, NULL, NULL);
+INSERT INTO `pending_reviewers` (`id`, `profile_img_path`, `phone`, `phone_area`, `user_fk`, `request_time`, `approved_reviewer`, `approved_reviewer_fk`) VALUES
+(14, 'uploads/username2/profileUpload.jpg', '8376553', '02', 5, '2019-04-15 02:28:58', 1, 3),
+(15, 'uploads/username3/profileUpload.jpg', '8376553', '02', 6, '2019-04-16 14:05:33', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -209,7 +234,8 @@ CREATE TABLE `pending_users` (
 --
 
 INSERT INTO `pending_users` (`id`, `username`, `password`, `email`, `last_name`, `first_name`, `middle_name`, `name_suffix`, `verification_code`, `approved_user`, `approved_user_fk`) VALUES
-(2, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', '', 'X9446e', 1, 5);
+(2, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', '', 'X9446e', 1, 5),
+(3, 'username3', '$2y$10$EuhiP.Z9HI3.debwmq0ugOHd7pdnVcseHnHomClTa0p3K3hsfKOPW', 'verdadtest1@gmail.com', 'Rombawa', 'Justin Aaron', 'Santiago', 'III', 'bb210f', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -237,6 +263,30 @@ INSERT INTO `publish_sites` (`id`, `name`, `url`, `avg_score`, `published_by`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL,
+  `reasons` varchar(150) NOT NULL,
+  `comments` text NOT NULL,
+  `erroneous` int(1) NOT NULL,
+  `review_id_fk` int(11) NOT NULL,
+  `reporter_reviewer_fk` int(11) NOT NULL,
+  `checker_reviewer_fk` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `reasons`, `comments`, `erroneous`, `review_id_fk`, `reporter_reviewer_fk`, `checker_reviewer_fk`) VALUES
+(4, 'a:8:{i:0;s:5:\"false\";i:1;s:4:\"true\";i:2;s:5:\"false\";i:3;s:5:\"false\";i:4;s:5:\"false\";i:5;s:5:\"false\";i:6;s:5:\"false\";i:7;s:5:\"false\";}', 'Review does not elaborate on corruption allegations.', 0, 15, 1, 4),
+(6, 'a:8:{i:0;s:4:\"true\";i:1;s:5:\"false\";i:2;s:5:\"false\";i:3;s:5:\"false\";i:4;s:5:\"false\";i:5;s:5:\"false\";i:6;s:4:\"true\";i:7;s:5:\"false\";}', 'fake news kalokohang rappler yan mga tanga sinisiraan si tatay digong', 0, 8, 4, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `reviewers`
 --
 
@@ -253,7 +303,9 @@ CREATE TABLE `reviewers` (
 --
 
 INSERT INTO `reviewers` (`id`, `profile_img_path`, `phone_number`, `phone_area`, `user_fk`) VALUES
-(1, 'uploads/username1/profile.jpg', '09677062985', NULL, 1);
+(1, 'uploads/username1/profile.jpg', '09677062985', NULL, 1),
+(3, 'uploads/username2/profileUpload.jpg', '8376553', '02', 5),
+(4, 'uploads/username3/profileUpload.jpg', '8376553', '02', 6);
 
 -- --------------------------------------------------------
 
@@ -282,7 +334,8 @@ INSERT INTO `reviews` (`id`, `article_fk`, `reviewer_fk`, `score`, `comments`, `
 (2, 5, 1, 5, 'Mr. Tulfo\'s tweet is still shown in his Twitter account. https://twitter.com/RamonTulfoII/status/1104232510886535168?ref_src=twsrc%5Etfw', 0, 0, 0, NULL),
 (3, 4, 1, 5, 'Original report by the Associated Press can be seen here: https://apnews.com/01725bac555d49758e563f2b317816d9', 0, 0, 0, NULL),
 (8, 2, 1, 5, 'Similary reported by The Manila Bulletin. https://news.mb.com.ph/2018/12/09/palace-to-trillanes-face-libel-charges/', 0, 0, 0, NULL),
-(9, 3, 1, 5, 'Prime Minister Mahathir did arrive on March 6, 2019. https://news.abs-cbn.com/news/03/06/19/malaysian-pm-mahathir-arrives-in-ph', 0, 0, 0, NULL);
+(9, 3, 1, 5, 'Prime Minister Mahathir did arrive on March 6, 2019. https://news.abs-cbn.com/news/03/06/19/malaysian-pm-mahathir-arrives-in-ph', 0, 0, 0, NULL),
+(15, 6, 3, 5, 'Similarly reported by Rappler on March 9, 2019.\n\nhttps://www.rappler.com/nation/225310-pcso-alexander-balutan-denies-corruption-allegations', 0, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -328,11 +381,18 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `last_name`, `first_name`, `middle_name`, `name_suffix`, `reviewer_status`, `reviewer_fk`) VALUES
 (1, 'username1', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jusrombawa@gmail.com', 'Rombawa', 'Justin Aaron', 'Santiago', '', 1, NULL),
-(5, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', 'Jr.', 0, NULL);
+(5, 'username2', '$2y$10$RvlazU621FgBjUp11AwEI.mLmhvyPr8SDy/d/SCCKt5K5D7XkfegG', 'jsrombawa@up.edu.ph', 'Rombawa', 'Justin Aaron', 'Santiago', 'Jr.', 1, NULL),
+(6, 'username3', '$2y$10$EuhiP.Z9HI3.debwmq0ugOHd7pdnVcseHnHomClTa0p3K3hsfKOPW', 'verdadtest1@gmail.com', 'Rombawa', 'Justin Aaron', 'Santiago', 'III', 1, NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `affiliations`
@@ -384,6 +444,12 @@ ALTER TABLE `publish_sites`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `reviewers`
 --
 ALTER TABLE `reviewers`
@@ -412,16 +478,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `affiliations`
 --
 ALTER TABLE `affiliations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -433,25 +505,25 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `organizations`
 --
 ALTER TABLE `organizations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `pending_affiliations`
 --
 ALTER TABLE `pending_affiliations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `pending_reviewers`
 --
 ALTER TABLE `pending_reviewers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pending_users`
 --
 ALTER TABLE `pending_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `publish_sites`
@@ -460,16 +532,22 @@ ALTER TABLE `publish_sites`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `reviewers`
 --
 ALTER TABLE `reviewers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `test`
@@ -481,7 +559,7 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
