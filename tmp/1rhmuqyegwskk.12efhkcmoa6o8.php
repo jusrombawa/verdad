@@ -28,6 +28,9 @@
                 
                   <li><a href="/reviewerSignup">Sign up as a reviewer!</a></li>
                 
+                <?php else: ?>
+                  <li><a href="/checkReportsPage">Check Reported Reviews</a></li>
+                
               <?php endif; ?>
               <li><a id="faq">FAQs</a></li>
               <li><a id="logoutDesktop">Logout</a></li>
@@ -38,6 +41,9 @@
             <?php if ($SESSION['reviewerStatus'] == false): ?>
               
                 <li><a href="/reviewerSignup">Sign up as a reviewer!</a></li>
+              
+              <?php else: ?>
+                <li><a href="/checkReportsPage">Check Reported Reviews</a></li>
               
             <?php endif; ?>
             <li><a id="">Frequently Asked Questions</a></li>
@@ -361,7 +367,7 @@
           <div class="row">
             <div class="input-field col s12">
               <textarea id="report-comments" class="materialize-textarea"></textarea>
-              <label for="report-comments">Textarea</label>
+              <label for="report-comments">Comments</label>
             </div>
           </div>
       </form>

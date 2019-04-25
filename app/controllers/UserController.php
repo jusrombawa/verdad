@@ -634,5 +634,73 @@ class UserController extends Controller{
         //echo json_encode($exempted);
     }
 
+    function getReports()
+    {
+        $user = $this->f3->get("SESSION.user");
+
+        $um = new UserMapper($this->db);
+        $revm = new ReviewerMapper($this->db);
+        $repm = new ReportMapper($this->db);
+        $am = new ArticleMapper($this->db);
+        $rm = new ReviewMapper($this->db);
+        $revm2 = new ReviewerMapper($this->db);
+        $um2 = new UserMapper($this->db);
+
+        $um->load(array("username = ?", $user));
+        $revm->load(array("user_fk = ?", $um->id));
+        $repm->load(array("checker_reviewer_fk = ? AND erroneous = 0", $revm->id));
+        /*$repm->load(array("checker_reviewer_fk IS NULL")); //query for admin, saving this for later*/
+
+        $reports = array();
+        while(!$repm->dry())
+        {
+            $report = array();
+
+            $rm->load(array("id = ?", $repm->review_id_fk));
+            $am->load(array("id = ?", $rm->article_fk));
+            $revm2->load(array("id = ?", $rm->reviewer_fk));
+            $um2->load(array("id = ?", $revm2->user_fk));
+
+            //article title
+            array_push($report, $am->title);
+            //article link
+            array_push($report, $am->url);
+            //overall rating
+            array_push($report, $am->avg_score);
+            //satire/opinion flags
+            array_push($report, $am->satire);
+            array_push($report, $am->opinion);
+
+            //review rating
+            array_push($report, $rm->score);
+            /*//reviewer id
+            array_push($report, $rm->reviewer_fk);*/
+            //reviewer username
+            array_push($report, $um2->username);
+            //review comments
+            array_push($report, $rm->comments);
+            //review flags
+            array_push($report, $rm->satire_flag);
+            array_push($report, $rm->opinion_flag);
+
+            //reuse revm2 and um2 here to save space I could probably reuse revm and um again but naaaaah
+            $revm2->load(array("id = ?", $repm->reporter_reviewer_fk));
+            $um2->load(array("id = ?", $revm2->user_fk));
+
+            //report writer username
+            array_push($report, $um2->username);
+            //report reasons
+            array_push($report, unserialize($repm->reasons));
+            //report comments
+            array_push($report, $repm->comments);
+
+            array_push($reports, $report);
+            $repm->next();
+        }
+
+        echo json_encode($reports);
+
+    }
+
 
 }

@@ -34,6 +34,10 @@ class MainController extends Controller{
     	$this->renderView("revsignuppending.htm");
     }
 
+    function checkReportsPage(){
+    	$this->renderView("checkreports.htm");
+    }
+
 	function getArticles()
 	{
 		$artList = array();

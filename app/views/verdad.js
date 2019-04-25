@@ -107,8 +107,7 @@ $(document).ready(function(){
                     var articleList = $.parseJSON(data);
                     var text = "";
                     for (var i=0; i<articleList.length; i++)
-                    {
-                       
+                    {         
                         //row opening tag
                         text += "<li class='article-item'>";
                         text += "<div class='collapsible-header'>"
@@ -891,9 +890,9 @@ $(document).ready(function(){
                 {
                     alert(jqXHR.responseText);
                 }
-
-
             });
         }
     });
+
+
 });
