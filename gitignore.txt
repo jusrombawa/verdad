@@ -1,0 +1,15 @@
+#Sensitive info
+/uploads
+/sslforfree
+
+#Cache
+/tmp
+
+#Database
+verdad.sql
+
+# Fat-Free Framework
+/app/lib
+
+# Materialize CSS
+/ui
