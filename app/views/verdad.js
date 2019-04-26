@@ -21,6 +21,17 @@ $(document).ready(function(){
     info = "";
     $("#info").text("");
 
+    //then clear info from session if it's there
+    $.ajax({
+        type:"GET",
+        url: "/clearInfo",
+        error: function(jqXHR, exception)
+        {
+            alert(jqXHR.responseText);
+        }
+
+    });
+
     //check if mobile user
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
         var isMobile = true;
@@ -57,6 +68,25 @@ $(document).ready(function(){
                 $("#art-collapsible-sect").addClass("s12");
             });
             getArticles();
+        }
+
+        //check report count if reviewer
+        if($("#reviewerStatus").text() == 1)
+        {
+            $.ajax({
+                type: "GET",
+                url: "/getReportCount",
+                success: function(data){
+                    if(data == 0)
+                        $(".report-count").hide();
+                    else
+                        $(".report-count").text(data)
+                },
+                error: function(jqXHR, exception)
+                {
+                    alert(jqXHR.responseText);
+                }
+            });
         }
     }
 
@@ -815,7 +845,7 @@ $(document).ready(function(){
                 timeout: 600000,
                 success: function(data){
                     window.location.assign("/revSignupPending");
-                    //alert(data);
+                    alert("Report has been denied.");
                     
                 },
                 error: function(jqXHR, exception)

@@ -14,6 +14,7 @@
 
   <span id="info" hidden> <?= ($SESSION['info']) ?> </span>
   <span id="loggedInUser" hidden> <?= ($SESSION['user']) ?> </span>
+  <span id="reviewerStatus" hidden> <?= ($SESSION['reviewerStatus']) ?> </span>
   
   <?php if ($SESSION['user'] != null): ?>
     
@@ -27,6 +28,9 @@
                 
                   <li><a>Sign up as a reviewer!</a></li>
                 
+                <?php else: ?>
+                  <li><a href="/checkReportsPage">Check Reported Reviews <span data-badge-caption="" class="report-count new badge orange lighten-1"></span></a></li>
+                
               <?php endif; ?>
               <li><a id="faq">FAQs</a></li>
               <li><a id="logoutDesktop">Logout</a></li>
@@ -37,6 +41,9 @@
             <?php if ($SESSION['reviewerStatus'] == false): ?>
               
                 <li><a>Sign up as a reviewer!</a></li>
+              
+              <?php else: ?>
+                <li><a href="/checkReportsPage">Check Reported Reviews <span data-badge-caption="" class="report-count new badge orange lighten-1"></span></a></li>
               
             <?php endif; ?>
             <li><a id="">Frequently Asked Questions</a></li>

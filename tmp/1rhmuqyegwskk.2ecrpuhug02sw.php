@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Verdad - Home</title>
+  <title>Verdad - Check Reports</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -29,7 +29,7 @@
                   <li><a href="/reviewerSignup">Sign up as a reviewer!</a></li>
                 
                 <?php else: ?>
-                  <li><a href="/checkReportsPage">Check Reported Reviews</a></li>
+                  <li><a href="/checkReportsPage">Check Reported Reviews <span data-badge-caption="" class="report-count new badge orange lighten-1"></span></a></li>
                 
               <?php endif; ?>
               <li><a id="faq">FAQs</a></li>
@@ -43,7 +43,7 @@
                 <li><a href="/reviewerSignup">Sign up as a reviewer!</a></li>
               
               <?php else: ?>
-                <li><a href="/checkReportsPage">Check Reported Reviews</a></li>
+                <li><a href="/checkReportsPage">Check Reported Reviews <span data-badge-caption="" class="report-count new badge orange lighten-1"></span></a></li>
               
             <?php endif; ?>
             <li><a id="">Frequently Asked Questions</a></li>

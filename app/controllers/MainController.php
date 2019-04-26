@@ -65,7 +65,7 @@ class MainController extends Controller{
 
 			//build array of reviews then push to entry
 			$article_id = $am->id;
-			$reviews = $rm->load(array("article_fk=?",$article_id));
+			$reviews = $rm->load(array("article_fk=? AND erroneous_flag = false",$article_id));
 			$review_list = array();
 
 			$reviewer = new ReviewerMapper($this->db);
@@ -168,6 +168,35 @@ class MainController extends Controller{
 
 		$this->f3->set("SESSION.profileImagePath", $newfile);
 
+	}
+
+	function clearInfo()
+	{
+		$this->f3->clear('SESSION.info');
+	}
+
+	function getReportCount()
+	{
+		$user = $this->f3->get("SESSION.user");
+
+		$um = new UserMapper($this->db);
+		$revm = new ReviewerMapper($this->db);
+		$repm = new ReportMapper($this->db);
+
+		$um->load(array("username = ?", $user));
+		$revm->load(array("user_fk = ?", $um->id));
+		$repm->load(array("checker_reviewer_fk = ? AND erroneous = 0", $revm->id));
+
+		//i have to count manually because apparently $repm->count() outputs all entries in table disregarding the query
+		$count = 0;
+		while(!$repm->dry())
+		{
+			$count++;
+			$repm->next();
+		}
+
+		//send out count
+		echo $count;
 	}
 
 }
