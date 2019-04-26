@@ -16,7 +16,7 @@ $(document).ready(function(){
 				{
 					text += '<li class="report-item">';
 						text += '<div class="collapsible-header">'
-							text += 'Report #' + (i+1)
+							text += 'Report #' + reportList[i][13]
 						text += '</div>'
 
 						text += '<div class="collapsible-body">'

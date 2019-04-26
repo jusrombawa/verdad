@@ -807,7 +807,7 @@ class UserController extends Controller{
         $am->opinion = $opMaj;
         $am->save();
 
-        $info = "Report #".$denyID." has been confirmed.";
+        $info = "Report #".$confirmID." has been confirmed.";
         $this->f3->set('SESSION.info', $info);
     }
 

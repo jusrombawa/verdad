@@ -262,5 +262,176 @@
 			$sent = $smtp->send($txt, true);
 
 	    }
+
+	    function getReports()
+	    {
+	        //$user = $this->f3->get("SESSION.user");
+
+	        //$um = new UserMapper($this->db);
+	        //$revm = new ReviewerMapper($this->db);
+	        $repm = new ReportMapper($this->db);
+	        $am = new ArticleMapper($this->db);
+	        $rm = new ReviewMapper($this->db);
+	        $revm2 = new ReviewerMapper($this->db);
+	        $um2 = new UserMapper($this->db);
+
+	        //$um->load(array("username = ?", $user));
+	        //$revm->load(array("user_fk = ?", $um->id));
+	        $repm->load(array("checker_reviewer_fk IS NULL AND erroneous = 0"));
+	        /*$repm->load(array("checker_reviewer_fk IS NULL")); //query for admin, saving this for later*/
+
+	        $reports = array();
+	        while(!$repm->dry())
+	        {
+	            $report = array();
+
+	            $rm->load(array("id = ?", $repm->review_id_fk));
+	            $am->load(array("id = ?", $rm->article_fk));
+	            $revm2->load(array("id = ?", $rm->reviewer_fk));
+	            $um2->load(array("id = ?", $revm2->user_fk));
+
+	            //article title
+	            array_push($report, $am->title);
+	            //article link
+	            array_push($report, $am->url);
+	            //overall rating
+	            array_push($report, $am->avg_score);
+	            //satire/opinion flags
+	            array_push($report, $am->satire);
+	            array_push($report, $am->opinion);
+
+	            //review rating
+	            array_push($report, $rm->score);
+	            /*//reviewer id
+	            array_push($report, $rm->reviewer_fk);*/
+	            //reviewer username
+	            array_push($report, $um2->username);
+	            //review comments
+	            array_push($report, $rm->comments);
+	            //review flags
+	            array_push($report, $rm->satire_flag);
+	            array_push($report, $rm->opinion_flag);
+
+	            //reuse revm2 and um2 here to save space I could probably reuse revm and um again but naaaaah
+	            $revm2->load(array("id = ?", $repm->reporter_reviewer_fk));
+	            $um2->load(array("id = ?", $revm2->user_fk));
+
+	            //report writer username
+	            array_push($report, $um2->username);
+	            //report reasons
+	            array_push($report, unserialize($repm->reasons));
+	            //report comments
+	            array_push($report, $repm->comments);
+	            //report ID
+	            array_push($report, $repm->id);
+
+	            array_push($reports, $report);
+	            $repm->next();
+	        }
+
+	        echo json_encode($reports);
+	    }
+
+	    function denyReport()
+	    {
+	        $denyID = $this->f3->get("POST.denyID");
+	        echo $denyID;
+
+	        $repm = new ReportMapper($this->db);
+	        $repm->load(array("id = ?", $denyID));
+	        $repm->erroneous = -1;
+	        $repm->save();
+
+	        $info = "Report #".$denyID." has been denied.";
+	        $this->f3->set('SESSION.info', $info);
+	    }
+
+		function confirmReport()
+	    {
+	        //get confirmed report's id
+	        $confirmID = $this->f3->get("POST.confirmID");
+	        echo $confirmID;
+
+	        $repm = new ReportMapper($this->db);
+	        $revm = new ReviewMapper($this->db);
+	        $am = new ArticleMapper($this->db);
+
+	        $repm->load(array("id = ?", $confirmID));
+	        $revm->load(array("id = ?", $repm->review_id_fk));
+
+	        //get article ID for score recomputation later
+	        $artID =  $revm->article_fk;
+
+	        //mark report as 1 review confirmed erroneous
+	        $repm->erroneous = 1;
+	        $repm->save();
+
+	        //mark review as erroneous true
+	        $revm->erroneous_flag = true;
+	        $revm->save();
+
+	        //recalculate article's average score
+
+	        $am->load(array("id = ? ", $artID));
+	        //reuse revm to load remaining reviews
+	        $revm->load(array("article_fk=? AND erroneous_flag = 0",$artID));
+
+	        $scores = array();
+	        $satireFlags =  array();
+	        $opinionFlags = array();
+
+	        while(!$revm->dry())
+	        {
+	            array_push($scores,$revm->score);
+	            array_push($satireFlags,$revm->satire_flag);
+	            array_push($opinionFlags,$revm->opinion_flag);
+	            $revm->next();
+	        }
+
+	        //get average score
+	        if(count($scores) != 0)
+	            $avgScore = array_sum($scores)/count($scores);
+	        else $avgScore = null;
+
+	        //get majority satire flags
+	        if(count($satireFlags) != 0)
+	        {
+	            $satYes = 0;
+	            $satNo = 0;
+	            foreach($satireFlags as $sat)
+	            {
+	                if($sat) $satYes++;//if satire, add 1 to $satYes
+	                else $satNo++;
+	            }
+	            if($satYes>=$satNo) $satMaj = true;
+	            else $satMaj = false;
+	        }
+	        else //if no valid flags AKA no non-erroneous review, set to null
+	            $satMaj = null;
+
+	        //same thing with opinions
+	        if(count($opinionFlags) != 0)
+	        {
+	            $opYes = 0;
+	            $opNo = 0;
+	            foreach($opinionFlags as $op)
+	            {
+	                if($op) $opYes++;//if satire, add 1 to $opYes
+	                else $opNo++;
+	            }
+	            if($opYes>=$opNo) $opMaj = true;
+	            else $opMaj = false;
+	        }
+	        else
+	            $opMaj = null;
+
+	        $am->avg_score = $avgScore;
+	        $am->satire = $satMaj;
+	        $am->opinion = $opMaj;
+	        $am->save();
+
+	        $info = "Report #".$confirmID." has been confirmed.";
+	        $this->f3->set('SESSION.info', $info);
+	    }
 	}
 ?>
