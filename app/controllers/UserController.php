@@ -96,11 +96,13 @@ class UserController extends Controller{
             $pm2->save();
 
             $am->publisher_fk = $pm2->id;
+            
         }
         //found in publish_sites
         else
         {
-            $am->publiser_fk = $pubisher->id;
+            $am->publiser_fk = $publisher->id;
+            //note from future Jus, CHECK THE SPELLINGS OF YOUR VARIABLES.
         }
 
         $am->publish_date = $articlePubDate;

@@ -490,30 +490,45 @@ $(document).ready(function(){
 
         var hostURL = templink.protocol + templink.hostname;
 
-        $.ajax({
-            type: 'POST',
-            url: 'submit-article',
-            data: {
-                "articleURL": $("#articleURL").val().trim(),
-                "articleTitle": $("#articleTitle").val().trim(),
-                "articleAuthor": $("#articleAuthor").val().trim(),
-                "articlePublisher": $("#articlePublisher").val().trim(),
-                "articlePubDate": $("#articlePubDate").val().trim(),
-                "articlePubTime": $("#articlePubTime").val().trim(),
-                "hostURL": hostURL
-            },
-            success: function(data)
-            {
-                //I should probably find a way to reload just the article list
-                window.location.reload();
-            },
+        if($("#articleURL").val().trim() == '')
+            alert("Please input article URL.")
+        else if($("#articleTitle").val().trim() == '')
+            alert("Please input the article's title or click on Suggest Title.")
+        else if($("#articleAuthor").val().trim() == '')
+            alert("Please input the article's author.")
+        else if($("#articlePublisher").val().trim() == '')
+            alert("Please input the article's publisher.")
+        else if($("#articlePubDate").val().trim() == '')
+            alert("Please input the article's publish date.")
+        else if($("#articlePubTime").val().trim() == '')
+            alert("Please input the article's publish time.")
+        else{
+            $.ajax({
+                type: 'POST',
+                url: 'submit-article',
+                data: {
+                    "articleURL": $("#articleURL").val().trim(),
+                    "articleTitle": $("#articleTitle").val().trim(),
+                    "articleAuthor": $("#articleAuthor").val().trim(),
+                    "articlePublisher": $("#articlePublisher").val().trim(),
+                    "articlePubDate": $("#articlePubDate").val().trim(),
+                    "articlePubTime": $("#articlePubTime").val().trim(),
+                    "hostURL": hostURL
+                },
+                success: function(data)
+                {
+                    //window.location.reload();
+                    alert(data)
+                },
 
-            error: function(jqXHR, exception)
-            {
-                alert("Error submiting article.");
-                alert(jqXHR.responseText);
-            }
-        });
+                error: function(jqXHR, exception)
+                {
+                    alert("Error submiting article.");
+                    alert(jqXHR.responseText);
+                }
+            });
+        }
+
 
     });
 
