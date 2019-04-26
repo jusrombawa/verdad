@@ -488,7 +488,7 @@ $(document).ready(function(){
         var templink = document.createElement("a");
         templink.href = $("#articleURL").val().trim();
 
-        var hostURL = templink.protocol + templink.hostname;
+        var hostURL = templink.protocol + "//" + templink.hostname + "/";
 
         if($("#articleURL").val().trim() == '')
             alert("Please input article URL.")
@@ -517,8 +517,7 @@ $(document).ready(function(){
                 },
                 success: function(data)
                 {
-                    //window.location.reload();
-                    alert(data)
+                    window.location.reload();
                 },
 
                 error: function(jqXHR, exception)
@@ -548,6 +547,37 @@ $(document).ready(function(){
             $("#articleTitle").val(suggestedTitle);
           }
         });
+
+    });
+
+    $("#suggest-publisher").click(function(){
+        var templink = document.createElement("a");
+        templink.href = $("#articleURL").val().trim();
+        
+        var hostURL = templink.protocol + "//" + templink.hostname + "/";
+
+        //alert(hostURL)
+
+        if($("#articleURL").val().trim() != '')
+        {
+            $.ajax({
+                type:"GET",
+                data: {
+                    "hostURL": hostURL
+                },
+                url: "/suggestPublisher",
+                success: function(data){
+                    if(data == false)
+                        alert("Publisher not found. Please manually input the article's publisher")
+                    else
+                        $("#articlePublisher").val(data);
+                },
+                error: function(jqXHR, exception)
+                {
+                    alert(jqXHR.responseText);
+                }
+            });
+        }
 
     });
 

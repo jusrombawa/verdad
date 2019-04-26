@@ -188,16 +188,25 @@
     <div class="modal-content">
       <h4>Submit article</h4>
       <form id="article-submit-form">
+          
+          <div class="row"><div class="col s12">
+            <h6>Link to the Article</h6>
+          </div></div>
+
           <div class="row">
-            <div class="input-field">
-              <h6>Link to the Article</h6>
-                <input id="articleURL">
+            <div class="col s12">
+              <div class="input-field">
+                  <input id="articleURL">
+              </div>
             </div>
           </div>
 
+          <div class="row"><div class="col s12">
+            <h6>Title</h6>
+          </div></div>
+
           <div class="row">
             <div class="input-field">
-            <h6>Title</h6>
               <div class="col s9">
                 <input type="text" id="articleTitle">
               </div>
@@ -209,29 +218,47 @@
 
           <div class="row">
             <div class="col s6">
-              <div class="input-field">
-                <h6>Author</h6>
-                <input id="articleAuthor">
-              </div>
+              <h6>Author</h6>
             </div>
             <div class="col s6">
-              <div class="input-field">
-                <h6>Publisher</h6>
-                <input id="articlePublisher">
-              </div>
+              <h6>Publisher</h6>
             </div>
           </div>
 
           <div class="row">
             <div class="col s6">
               <div class="input-field">
-                <h6>Publish Date</h6>
+                <input id="articleAuthor">
+              </div>
+            </div>
+            <div class="col s3">
+              <div class="input-field">
+                <input id="articlePublisher">
+              </div>
+            </div>
+            <div class="col s3 right-align">
+              <a id="suggest-publisher" class="waves-effect waves-teal btn-flat">Suggest Publisher</a>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col s6">
+              <h6>Publish Date</h6>
+            </div>
+            <div class="col s6">
+              <h6>Publish Time</h6>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s6">
+              <div class="input-field">
                 <input id="articlePubDate" type="date">
               </div>
             </div>
             <div class="col s6">
               <div class="input-field">
-                <h6>Publish Time</h6>
                 <input id="articlePubTime" type="time">
               </div>
             </div>

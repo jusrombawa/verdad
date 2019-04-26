@@ -80,7 +80,7 @@ class UserController extends Controller{
 
         //write publisher to publish_sites
         //check if publisher is already in database
-        $publisher = $pm->load(array("name=?",$articlePublisher));
+        $publisher = $pm->load(array("url=?",$hostURL));
 
         //new publisher, add to publish_sites then write new id as fk to article publisher
         if($pm->dry())
@@ -94,15 +94,15 @@ class UserController extends Controller{
             //but I think imma have to deal with some multiple url bullshit. Example: opinion.inquirer.net vs newsinfo.inquirer.net are all inquirer.
             //avg_score and published_by fk are all null by default
             $pm2->save();
-
             $am->publisher_fk = $pm2->id;
             
         }
         //found in publish_sites
         else
         {
-            $am->publiser_fk = $publisher->id;
+            $am->publisher_fk = $publisher->id;
             //note from future Jus, CHECK THE SPELLINGS OF YOUR VARIABLES.
+            //NOTE FROM JUS FROM SLIGHTLY MORE FUTURE THAN THAT PREVIOUS FUTURE GUY, FUCKING CHECK YOUR VARIABLE NAMES CHRIST PHP HAS DYNAMIC VARIABLES IT DOESN'T THROW AN ERROR WHEN IT CAN'T FIND WHERE SOMETHING WAS DECLARED
         }
 
         $am->publish_date = $articlePubDate;
@@ -111,6 +111,9 @@ class UserController extends Controller{
         //avg_score is null
         //note to self, make sure js deals with null satire and opinion fields because they should both be null by default
         $am->save();
+
+        $info = "Article has been submitted.";
+        $this->f3->set('SESSION.info', $info);
     }
 
     function submitReview(){

@@ -199,5 +199,18 @@ class MainController extends Controller{
 		echo $count;
 	}
 
+	function suggestPublisher()
+	{
+		$hostURL = $this->f3->get("GET.hostURL");
+
+		$pm = new PublisherMapper($this->db);
+		$pm->load(array("url = ?", $hostURL));
+
+		if($pm->dry())
+			echo false;
+		else
+			echo $pm->name;
+	}
+
 }
 ?>
