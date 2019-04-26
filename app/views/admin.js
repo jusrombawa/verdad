@@ -84,6 +84,46 @@ $(document).ready(function(){
 
     });
 
+    $("#loginPasswordDesktop").keypress(function(e){
+        if (e.which == 13)
+        {
+            //login if enter is pressed
+            var username = $("#loginUsernameDesktop").val().trim();
+            var password = $("#loginPasswordDesktop").val().trim();
+            
+            if(username != '' && password != '')
+            {
+                $.ajax({
+                    type:"POST",
+                    url:"/adminLogin",
+                    data: {
+                        "username": username,
+                        "password": password
+                    },
+
+                    success: function(data)
+                    {
+                        window.location.assign("/admin");
+                    },
+
+                    error: function(jqXHR, exception)
+                    {
+                        alert(jqXHR.responseText);
+                    }
+                });
+            }
+
+            else if (username == '')
+                alert("Username field cannot be empty.");
+
+            else if (password == '')
+                alert("Password field cannot be empty.");
+
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        }
+    });
+
     $("#loginButtonMobile").click(function(e){
         var username = $("#loginUsernameMobile").val().trim();
         var password = $("#loginPasswordMobile").val().trim();
