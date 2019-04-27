@@ -38,6 +38,10 @@ class MainController extends Controller{
     	$this->renderView("checkreports.htm");
     }
 
+    function faqPage(){
+    	$this->renderView("faq.htm");
+    }
+
 	function getArticles()
 	{
 		$artList = array();

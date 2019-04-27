@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 						text += '<div class="collapsible-body">'
 							
-							text += '<h5 class="blue-text text-darken-2">Article details</h5> <br/>'
+							text += '<h5 class="blue-text text-darken-3">Article details</h5> <br/>'
 							text += '<a target="_blank" "rel="noopener noreferrer" href="' + reportList[i][1] + '">' + reportList[i][0] + '</a><br/>'
 							text += 'Average rating: ' + reportList[i][2] + '/5<br/>'
 							//check if satire or opinion
@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 							text += '<br/><div class="row divider"></div>'
 
-							text += '<h5 class="blue-text text-darken-2">Review details</h5> <br/>'
+							text += '<h5 class="blue-text text-darken-3">Review details</h5> <br/>'
 							text += 'Review rating: ' + reportList[i][5] + '/5<br/>'
 							text += 'Review written by: ' + reportList[i][6] + '<br/>'
 							text += 'Review comments: <i>'  + reportList[i][7] + '</i><br/>'
@@ -44,7 +44,7 @@ $(document).ready(function(){
 
 							text += '<br/><div class="row divider"></div>'
 
-							text += '<h5 class="blue-text text-darken-2">Report details</h5><br/>'
+							text += '<h5 class="blue-text text-darken-3">Report details</h5><br/>'
 							text += 'Report submitted by: ' + reportList[i][10] + '<br/>'
 							text += 'Reasons for reporting: <br/>'
 							//check reasons
@@ -68,7 +68,7 @@ $(document).ready(function(){
 							text += '</ol></i>'
 							text += 'Report comments: <i>' + reportList[i][12] + '</i><br/><br/>'
 
-							text += '<a id="confirm'+reportList[i][13]+'"class="confirm-report waves-effect waves-light btn blue darken-2"><i class="material-icons left">check</i>confirm report</a><br/><br/>'
+							text += '<a id="confirm'+reportList[i][13]+'"class="confirm-report waves-effect waves-light btn blue darken-3"><i class="material-icons left">check</i>confirm report</a><br/><br/>'
 							text += '<a id="deny'+reportList[i][13]+'"class="deny-report waves-effect waves-light btn orange darken-3"><i class="material-icons left">clear</i>deny report</a>'
 
 						text += '</div>'

@@ -32,7 +32,7 @@
                   <li><a href="/checkReportsPage">Check Reported Reviews <span data-badge-caption="" class="report-count new badge orange lighten-1"></span></a></li>
                 
               <?php endif; ?>
-              <li><a id="faq">FAQs</a></li>
+              <li><a id="faq" href="/faqPage">FAQs</a></li>
               <li><a id="logoutDesktop">Logout</a></li>
             </ul>
 
@@ -46,7 +46,7 @@
                 <li><a href="/checkReportsPage">Check Reported Reviews <span data-badge-caption="" class="report-count new badge orange lighten-1"></span></a></li>
               
             <?php endif; ?>
-            <li><a id="">Frequently Asked Questions</a></li>
+            <li><a id="" href="/faqPage">Frequently Asked Questions</a></li>
             <li><a id="logoutMobile">Logout</a></li>
 
           </ul>
@@ -62,7 +62,7 @@
         <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Verdad</a>
           
           <ul id="nav-desktop" class="right hide-on-med-and-down">
-              <li><a id="faq" href="">FAQs</a></li>
+              <li><a id="faq" href="/faqPage">FAQs</a></li>
               <li><a href="/register">Register</a></li>
               <li><a id="login-popup">Login</a></li>
             </ul>
@@ -75,10 +75,10 @@
               <li><h6>Password<h6></li>
               <li><input id="loginPasswordMobile" type="password">
               </li>
-              <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button></li>
+              <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue darken-3" type="button" name="action">Log In</button></li>
             </form>
               <li><a href="/register">Register</a></li>
-              <li><a id="faq">Frequently Asked Questions</a></li>
+              <li><a id="faq" href="/faqPage">Frequently Asked Questions</a></li>
           </div>
           </ul>
 
@@ -91,11 +91,11 @@
 
     <div id="user-profile-page" class="container">
       <div class="row">
-        <h5 class="blue-text"><?= ($SESSION['profileFirstName']) ?> <?= ($SESSION['profileLastName']) ?><?php if ($SESSION['profileNameSuffix'] != ''): ?> <?= ($SESSION['profileNameSuffix']) ?> <?php endif; ?></h5>
+        <h5 class="blue-text text-darken-3"><?= ($SESSION['profileFirstName']) ?> <?= ($SESSION['profileLastName']) ?><?php if ($SESSION['profileNameSuffix'] != ''): ?> <?= ($SESSION['profileNameSuffix']) ?> <?php endif; ?></h5>
       </div>
       <?php if ($SESSION['profileReviewerStatus'] == true): ?>
         <div class="row">
-          <h6 class="blue-text text-darken-2">Verified Reviewer <i class="material-icons">verified_user</i></h6>
+          <h6 class="blue-text text-darken-3">Verified Reviewer <i class="material-icons">verified_user</i></h6>
         </div>
       <?php endif; ?>
       <div class="row">Username: <?= ($SESSION['profileUsername']) ?></div>
@@ -111,13 +111,13 @@
         <?php endif; ?>
 
         <?php if ($SESSION['profileUsername'] == $SESSION['user']): ?>
-          <div class="row"><a href="#change-pic-modal" class="btn waves-effect waves-light blue modal-trigger">Change Profile Picture</a></div>
+          <div class="row"><a href="#change-pic-modal" class="btn waves-effect waves-light blue modal-trigger darken-3">Change Profile Picture</a></div>
         <?php endif; ?>
 
         <div class="row">Contact number: <?php if ($SESSION['profilePhoneArea'] != ''): ?>(<?= ($SESSION['profilePhoneArea']) ?>) <?php endif; ?><?= ($SESSION['profilePhoneNumber']) ?></div>
         <!-- then show occupation and organization -->
         <?php if ($SESSION['profileAffiliations'] != null): ?>
-          <div class="row"><h6 class="blue-text text-darken-2">Affiliations</h6></div>
+          <div class="row"><h6 class="blue-text text-darken-3">Affiliations</h6></div>
           <div class="row">
             <ul>
               <?php foreach (($SESSION['profileAffiliations']?:[]) as $affiliation): ?>

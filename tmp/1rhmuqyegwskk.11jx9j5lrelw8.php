@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Verdad - Home</title>
+  <title>Verdad - Verify User Registration</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,7 +18,7 @@
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Verdad</a>
       
       <ul id="nav-desktop" class="right hide-on-med-and-down">
-          <li><a href="#">FAQs</a></li>
+          <li><a href="/faqPage">FAQs</a></li>
           <li><a href="/register">Register</a></li>
           <li><a id="login-popup">Login</a></li>
         </ul>
@@ -31,10 +31,10 @@
           <li><h6>Password<h6></li>
           <li><input id="loginPasswordMobile" type="password">
           </li>
-          <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button></li>
+          <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue darken-3" type="button" name="action">Log In</button></li>
         </form>
           <li><a href="/register">Register</a></li>
-          <li><a href="">Frequently Asked Questions</a></li>
+          <li><a href="/faqPage">Frequently Asked Questions</a></li>
       </div>
       </ul>
 
@@ -56,7 +56,7 @@
               <label for="loginPasswordDesktop">Password</label>
             </div>
 
-            <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
+            <button id="loginButtonDesktop" class="btn waves-effect waves-light blue darken-3" type="button" name="action">Log In</button>
           </form>
           <br/>
         </div>  
@@ -65,7 +65,7 @@
 
     <div class="container">
       <div class="row">
-        <h5 class="blue-text">Verify your personal account</h5>
+        <h5 class="blue-text text-darken-3">Verify your personal account</h5>
       </div>
       <div class="row">
         <p> Thank you for registering for Verdad, the community-driven news fact-checking service. To verify your registration, please copy the verification code from the email that we sent to you below.</p>
@@ -79,7 +79,7 @@
         </div>
         <div class="row center-align">
           <div class="col s4 offset-s4">
-            <a id="verify-submit" class="waves-effect waves-light btn blue">verify</a>
+            <a id="verify-submit" class="waves-effect waves-light btn blue darken-3">verify</a>
           </div>
         </div>
 

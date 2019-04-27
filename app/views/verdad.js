@@ -6,6 +6,7 @@ $(document).ready(function(){
     $('.sidenav').sidenav();
     $('.fixed-action-btn').floatingActionButton();
     $('.materialboxed').materialbox();
+    $('.tooltipped').tooltip();
 
     //hide initially hidden components
     $("#articles_sect").hide();
@@ -163,7 +164,7 @@ $(document).ready(function(){
                             text += "<a href='"+ articleList[i][7] +"' target='_blank' rel='noopener noreferrer'>Read article</a>";
                         }
                         else
-                            text += "<a class='article-button waves-effect waves-light btn-small blue darken-2' href='"+ articleList[i][7] +"' target='article_frame'><i class='material-icons'>link</i> Read article</a><br/><br/>";
+                            text += "<a class='article-button waves-effect waves-light btn-small blue darken-3' href='"+ articleList[i][7] +"' target='article_frame'><i class='material-icons'>link</i> Read article</a><br/><br/>";
 
                         //date published
                         artdate = new Date(articleList[i][2]);
@@ -186,7 +187,7 @@ $(document).ready(function(){
                         
                         //add button to allow review submission
                         if($("#reviewerStatus").text() == 1)
-                            text += "<a id='review"+articleList[i][9]+"' class='btn waves-effect waves-light blue darken-2 submit-review'><i class='material-icons'>rate_review</i> Write a review</a>"
+                            text += "<a id='review"+articleList[i][9]+"' class='btn waves-effect waves-light blue darken-3 submit-review'><i class='material-icons'>rate_review</i> Write a review</a>"
                     
                         //check if there are reviews
 
@@ -213,7 +214,7 @@ $(document).ready(function(){
                                 //add in report button
                                 if($("#loggedInUser").text().trim() != articleList[i][8][k][4] && $("#reviewerStatus").text() == 1)
                                 {
-                                    text += '<a id="report' + articleList[i][8][k][5] + '"class="report-button waves-effect waves-blue blue darken-2 btn"><i class="material-icons">report</i> Report</a><br/><br/>'
+                                    text += '<a id="report' + articleList[i][8][k][5] + '"class="report-button waves-effect waves-blue blue darken-3 btn"><i class="material-icons">report</i> Report</a><br/><br/>'
                                 }
                                 //end of row
                                 text += "<div class='row divider'></div>"
@@ -237,7 +238,7 @@ $(document).ready(function(){
 
                     for(var i=1; i<= pages; i++){
                         if(i==1)
-                            text += '<li id="page-'+ i +'" class="page-num waves-effect active blue"><a href="#!">'+ i +'</a></li>';
+                            text += '<li id="page-'+ i +'" class="page-num waves-effect active blue darken-3"><a href="#!">'+ i +'</a></li>';
                         else
                             text += '<li id="page-'+ i +'"class="page-num waves-effect"><a href="#!">'+ i +'</a></li>'
                     }
@@ -275,20 +276,20 @@ $(document).ready(function(){
         var selPage = $(this).text();
 
         //remove currently active
-        $("#art-pagination li").removeClass("active blue");
+        $("#art-pagination li").removeClass("active blue darken-3");
         //add to active class to this instance
         
 
         if(selPage == 'chevron_left' && pageNumber > 1) {
             --pageNumber;
-            $("#page-" + pageNumber).addClass("active blue");
+            $("#page-" + pageNumber).addClass("active blue darken-3");
         }
         else if (selPage == 'chevron_right' && pageNumber < pages){
             pageNumber++;
-            $("#page-" + pageNumber).addClass("active blue");
+            $("#page-" + pageNumber).addClass("active blue darken-3");
         }
         else if (Number.isInteger(parseInt(selPage))){
-            $(this).addClass("active blue");
+            $(this).addClass("active blue darken-3");
             pageNumber = parseInt(selPage);
         }
 
@@ -730,12 +731,12 @@ $(document).ready(function(){
         {
             $("#regPassword").attr("type","text");
             $("#passToggle").removeClass("grey-text");
-            $("#passToggle").addClass("blue-text blue lighten-5");
+            $("#passToggle").addClass("blue-text text-darken-3 blue lighten-5");
         }
         else
         {
             $("#regPassword").attr("type","password");
-            $("#passToggle").removeClass("blue-text blue lighten-5");
+            $("#passToggle").removeClass("blue-text text-darken-3 blue lighten-5");
             $("#passToggle").addClass("grey-text");
         }
     });
@@ -745,12 +746,12 @@ $(document).ready(function(){
         {
             $("#regVerifyPassword").attr("type","text");
             $("#verifyToggle").removeClass("grey-text");
-            $("#verifyToggle").addClass("blue-text blue lighten-5");
+            $("#verifyToggle").addClass("blue-text text-darken-3 blue lighten-5");
         }
         else
         {
             $("#regVerifyPassword").attr("type","password");
-            $("#verifyToggle").removeClass("blue-text blue lighten-5");
+            $("#verifyToggle").removeClass("blue-text text-darken-3 blue lighten-5");
             $("#verifyToggle").addClass("grey-text");
         }
     });
@@ -858,7 +859,7 @@ $(document).ready(function(){
         text += '</div>';
 
         text += '<div class="row">';
-            text += '<div class="col s12"><h6 class="blue-text text-darken-2">Scanned copy/photograph of organization ID</h6>';
+            text += '<div class="col s12"><h6 class="blue-text text-darken-3">Scanned copy/photograph of organization ID</h6>';
             text += '<input type="file" name="orgIDupload'+affiliationcounter+'" id="orgIDupload"></div>'
         text += '</div>';
 

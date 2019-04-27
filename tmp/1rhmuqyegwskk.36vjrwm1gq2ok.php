@@ -3,16 +3,16 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Verdad - Verify User Registration</title>
+  <title>Verdad - Frequently Asked Questions</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="{{ @UI . 'css/materialize.css' }}" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{{ @UI . 'css/style.css' }}" rel="stylesheet" media="screen,projection"/>
+  <link href="<?= ($UI . 'css/materialize.css') ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="<?= ($UI . 'css/style.css') ?>" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 
-  <span id="info" hidden> {{ @SESSION.info }} </span>
+  <span id="info" hidden> <?= ($SESSION['info']) ?> </span>
   
   <nav class="blue darken-3" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Verdad</a>
@@ -34,7 +34,7 @@
           <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue darken-3" type="button" name="action">Log In</button></li>
         </form>
           <li><a href="/register">Register</a></li>
-          <li><a href="/faqPage">Frequently Asked Questions</a></li>
+          <li><a href="">Frequently Asked Questions</a></li>
       </div>
       </ul>
 
@@ -63,39 +63,21 @@
       </div>
     </div>
 
+
     <div class="container">
       <div class="row">
-        <h5 class="blue-text text-darken-3">Verify your personal account</h5>
-      </div>
-      <div class="row">
-        <p> Thank you for registering for Verdad, the community-driven news fact-checking service. To verify your registration, please copy the verification code from the email that we sent to you below.</p>
-      </div>
-      <form>
-        <div class="row center-align">
-          <div class="col s4 offset-s4">
-            <input id="verificationCode" type="text">
-            <label for="verificationCode">Verification Code</label>
-          </div>
+        <div class="col s12">
+          <h4 class="blue-text text-darken-3">Frequently Asked Questions</h4>
         </div>
-        <div class="row center-align">
-          <div class="col s4 offset-s4">
-            <a id="verify-submit" class="waves-effect waves-light btn blue darken-3">verify</a>
-          </div>
-        </div>
-
-      </form>
+      </div>
     </div>
-
-  <!-- Modals -->
-
-  
 
   <!--  Scripts-->
   <!--  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
-  <script src="{{ @UI. 'js/jquery.min.js'}}"></script>
-  <script src="{{ @UI . 'js/jquery-ui.min.js' }}"></script>
-  <script src="{{ @UI . 'js/materialize.js' }}"></script>
-  <script src="{{ @UI . 'js/init.js' }}"></script>
+  <script src="<?= ($UI. 'js/jquery.min.js') ?>"></script>
+  <script src="<?= ($UI . 'js/jquery-ui.min.js') ?>"></script>
+  <script src="<?= ($UI . 'js/materialize.js') ?>"></script>
+  <script src="<?= ($UI . 'js/init.js') ?>"></script>
   <script src="app/views/verdad.js" type="application/javascript"></script>
   </body>
 </html>
