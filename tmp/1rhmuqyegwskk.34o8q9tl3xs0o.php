@@ -32,7 +32,7 @@
                   <li><a href="/checkReportsPage">Check Reported Reviews <span data-badge-caption="" class="report-count new badge orange lighten-1"></span></a></li>
                 
               <?php endif; ?>
-              <li><a id="faq" href="/faqPage">FAQs</a></li>
+              <li><a href="/faqPage">FAQs</a></li>
               <li><a id="logoutDesktop">Logout</a></li>
             </ul>
 
@@ -46,7 +46,7 @@
                 <li><a href="/checkReportsPage">Check Reported Reviews <span data-badge-caption="" class="report-count new badge orange lighten-1"></span></a></li>
               
             <?php endif; ?>
-            <li><a id="" href="/faqPage">Frequently Asked Questions</a></li>
+            <li><a href="/faqPage">Frequently Asked Questions</a></li>
             <li><a id="logoutMobile">Logout</a></li>
 
           </ul>
@@ -62,7 +62,7 @@
         <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Verdad</a>
           
           <ul id="nav-desktop" class="right hide-on-med-and-down">
-              <li><a id="faq" href="/faqPage">FAQs</a></li>
+              <li><a href="/faqPage">FAQs</a></li>
               <li><a href="/register">Register</a></li>
               <li><a id="login-popup">Login</a></li>
             </ul>
@@ -78,7 +78,7 @@
               <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue darken-3" type="button" name="action">Log In</button></li>
             </form>
               <li><a href="/register">Register</a></li>
-              <li><a id="faq" href="/faqPage">Frequently Asked Questions</a></li>
+              <li><a href="/faqPage">Frequently Asked Questions</a></li>
           </div>
           </ul>
 

@@ -91,6 +91,9 @@ $(document).ready(function(){
         }
     }
 
+    //on profile page, resize profile image
+
+
     //start reading articles
     $("#read_button").click(function(){
         //hide extra stuff
@@ -137,6 +140,9 @@ $(document).ready(function(){
                 success: function(data) {
                     var articleList = $.parseJSON(data);
                     var text = "";
+                    if(isMobile)
+                        $("#article_list").removeClass("popout");
+
                     for (var i=0; i<articleList.length; i++)
                     {         
                         //row opening tag
@@ -161,7 +167,7 @@ $(document).ready(function(){
                         //check if satire and/or opinion
 
                         if(isMobile){
-                            text += "<a href='"+ articleList[i][7] +"' target='_blank' rel='noopener noreferrer'>Read article</a>";
+                            text += "<a href='"+ articleList[i][7] +"' target='_blank' rel='noopener noreferrer'>Read article</a><br/><br/>";
                         }
                         else
                             text += "<a class='article-button waves-effect waves-light btn-small blue darken-3' href='"+ articleList[i][7] +"' target='article_frame'><i class='material-icons'>link</i> Read article</a><br/><br/>";
