@@ -6,7 +6,7 @@
   <title>Verdad - Verify User Registration</title>
 
   <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
   <link href="<?= ($UI . 'css/materialize.css') ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="<?= ($UI . 'css/style.css') ?>" rel="stylesheet" media="screen,projection"/>
 </head>
@@ -86,7 +86,38 @@
       </form>
     </div>
 
-  <!-- Modals -->
+  <!-- Footer -->
+  
+  <footer class="page-footer fixed-footer blue lighten-4">
+    <div class="container blue-text text-darken-4">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5>We would like to know about your experience with Verdad!</h5>
+          <p>If you have the time, please take Verdad's user experience survey.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5>Survey forms</h5>
+          <ul>
+            <?php if ($SESSION['reviewerStatus'] == true): ?>
+              
+                <li><a href="#!">Reviewer survey form</a></li>
+              
+              <?php else: ?>
+                <li><a href="#!">User survey form</a></li>
+              
+            <?php endif; ?>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container blue-text text-darken-4">
+      © 2019 by Justin Aaron Rombawa
+      <a class="right" href="https://sites.google.com/site/verdadpeerreview/home" target='_blank' rel='noopener noreferrer'>Verdad's Google Sites page</a><br/>
+      <a class="right" href="https://github.com/jusrombawa/verdad" target='_blank' rel='noopener noreferrer'>Verdad's GitHub page</a>
+      </div>
+    </div>
+  </footer>
 
   
 

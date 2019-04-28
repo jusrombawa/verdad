@@ -6,7 +6,7 @@
   <title>Verdad - Reviewer Signup Received</title>
 
   <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
   <link href="<?= ($UI . 'css/materialize.css') ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="<?= ($UI . 'css/style.css') ?>" rel="stylesheet" media="screen,projection"/>
 </head>
@@ -23,13 +23,13 @@
           
           <ul id="nav-desktop" class="right hide-on-med-and-down">
               <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
-              <li><a id="faq">FAQs</a></li>
+              <li><a href="/faqPage">FAQs</a></li>
               <li><a id="logoutDesktop">Logout</a></li>
             </ul>
 
           <ul id="nav-mobile" class="sidenav">
             <li><a id="<?= ($SESSION['user']) ?>" class="user-profile">Hello, <?= ($SESSION['user']) ?></a></li>
-            <li><a id="">Frequently Asked Questions</a></li>
+            <li><a href="/faqPage">Frequently Asked Questions</a></li>
             <li><a id="logoutMobile">Logout</a></li>
 
           </ul>
@@ -45,7 +45,7 @@
         <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Verdad</a>
           
           <ul id="nav-desktop" class="right hide-on-med-and-down">
-              <li><a id="faq" href="">FAQs</a></li>
+              <li><a href="/faqPage">FAQs</a></li>
               <li><a href="/register">Register</a></li>
               <li><a id="login-popup">Login</a></li>
             </ul>
@@ -58,10 +58,10 @@
               <li><h6>Password<h6></li>
               <li><input id="loginPasswordMobile" type="password">
               </li>
-              <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button></li>
+              <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue darken-3" type="button" name="action">Log In</button></li>
             </form>
               <li><a href="/register">Register</a></li>
-              <li><a id="faq">Frequently Asked Questions</a></li>
+              <li><a href="/faqPage">Frequently Asked Questions</a></li>
           </div>
           </ul>
 
@@ -85,7 +85,7 @@
               <label for="loginPasswordDesktop">Password</label>
             </div>
 
-            <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
+            <button id="loginButtonDesktop" class="btn waves-effect waves-light blue darken-3" type="button" name="action">Log In</button>
           </form>
           <br/>
         </div>  
@@ -93,19 +93,50 @@
     </div>
 
   <div class="container">
-    <div class="row"><div class="col s12"><h4 class="blue-text text-darken-2">Thank you, <?= ($SESSION['user']) ?> for signing up as a reviewer.</h4></div></div>
+    <div class="row"><div class="col s12"><h4 class="blue-text text-darken-3">Thank you, <?= ($SESSION['user']) ?> for signing up as a reviewer.</h4></div></div>
     <div class="row"><div class="col s12">
-      <p>Thank you for your interest in participating in Verdad as a reviewer. I will personally look into your registration and follow up with the result in less than two days. This is to make sure that your application is valid. Please expect an email notifying you of the result. Meanwhile, you could still participate in the community by submitting articles for review. If you would like to contact me regarding your sign up, please send an email to <a class="blue-text text-darken-2" href="mailto:verdadnewsreview@gmail.com">verdadnewsreview@gmail.com</a> and I will reply as soon as I can.
+      <p>Thank you for your interest in participating in Verdad as a reviewer. I will personally look into your registration and follow up with the result in less than two days. This is to make sure that your application is valid. Please expect an email notifying you of the result. Meanwhile, you could still participate in the community by submitting articles for review. If you would like to contact me regarding your sign up, please send an email to <a class="blue-text text-darken-3" href="mailto:verdadnewsreview@gmail.com">verdadnewsreview@gmail.com</a> and I will reply as soon as I can.
       <br /><br />
       Thank you, not only for your dedication to the truth, but also for helping this schmuck graduate.
       <br /><br />
-      <h6 class="blue-text text-darken-2">- Justin</h6>
+      <h6 class="blue-text text-darken-3">- Justin</h6>
 
       </p>
     </div></div>
   </div>
 
-  <!-- Modals -->
+  <!-- Footer -->
+  
+  <footer class="page-footer fixed-footer blue lighten-4">
+    <div class="container blue-text text-darken-4">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5>We would like to know about your experience with Verdad!</h5>
+          <p>If you have the time, please take Verdad's user experience survey.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5>Survey forms</h5>
+          <ul>
+            <?php if ($SESSION['reviewerStatus'] == true): ?>
+              
+                <li><a href="#!">Reviewer survey form</a></li>
+              
+              <?php else: ?>
+                <li><a href="#!">User survey form</a></li>
+              
+            <?php endif; ?>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container blue-text text-darken-4">
+      © 2019 by Justin Aaron Rombawa
+      <a class="right" href="https://sites.google.com/site/verdadpeerreview/home" target='_blank' rel='noopener noreferrer'>Verdad's Google Sites page</a><br/>
+      <a class="right" href="https://github.com/jusrombawa/verdad" target='_blank' rel='noopener noreferrer'>Verdad's GitHub page</a>
+      </div>
+    </div>
+  </footer>
 
   <!--  Scripts-->
   <!--  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
