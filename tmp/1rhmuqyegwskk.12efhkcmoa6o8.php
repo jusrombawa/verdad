@@ -200,6 +200,7 @@
                 <?php else: ?>
                   <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdwBF5kpzRYhxxRDybkzbiGI3Z0PWsbhZZ28t10R3x_kS4cdw/viewform?usp=sf_link">User survey form</a></li>
                 
+                <li>Encountered a bug? Send an email to verdadnewsreview@gmail.com</li>
               <?php endif; ?>
             </ul>
           </div>
@@ -208,7 +209,8 @@
       
       <?php else: ?>
         <div class="container blue-text text-darken-4">
-          <div class="row"><div class="col s12">Verdad is a peer review system for news articles.</div></div>
+          <div class="row"><div class="col s12"><h5>Verdad is a peer review system for news articles.</h5></div></div>
+          <div class="row"><div class="col s12">Encountered a bug? Send an email to verdadnewsreview@gmail.com</div></div>
         </div>
       
     <?php endif; ?>
