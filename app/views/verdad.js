@@ -91,8 +91,6 @@ $(document).ready(function(){
         }
     }
 
-    //on profile page, resize profile image
-
 
     //start reading articles
     $("#read_button").click(function(){
@@ -896,9 +894,10 @@ $(document).ready(function(){
                 cache: false,
                 timeout: 600000,
                 success: function(data){
-                    window.location.assign("/revSignupPending");
-                    alert("Report has been denied.");
-                    
+                    if(data == true)
+                        window.location.assign("/revSignupPending");
+                    else
+                        alert("Photo upload failed.")
                 },
                 error: function(jqXHR, exception)
                 {

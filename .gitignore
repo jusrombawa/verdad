@@ -1,15 +1,16 @@
 #Sensitive info
-/uploads
-/sslforfree
+uploads
+sslforfree
 
 #Cache
-/tmp
+tmp
 
 #Database
 verdad.sql
 
 # Fat-Free Framework
-/app/lib
+app/lib
 
-# Materialize CSS
-/ui
+/ui*.png
+*.jpeg
+*.gif

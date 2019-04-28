@@ -6,7 +6,7 @@
   <title>Verdad - Admin</title>
 
   <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
   <link href="<?= ($UI . 'css/materialize.css') ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="<?= ($UI . 'css/style.css') ?>" rel="stylesheet" media="screen,projection"/>
 </head>
@@ -23,13 +23,13 @@
           
           <ul id="nav-desktop" class="right hide-on-med-and-down">
               <li><a id="<?= ($SESSION['admin']) ?>" class="admin-profile">Hello, <?= ($SESSION['admin']) ?></a></li>
-              <li><a id="faq">FAQs</a></li>
+              <li><a href="/faqPage">FAQs</a></li>
               <li><a id="logoutDesktop">Logout</a></li>
             </ul>
 
           <ul id="nav-mobile" class="sidenav">
             <li><a id="<?= ($SESSION['admin']) ?>" class="admin-profile">Hello, <?= ($SESSION['admin']) ?></a></li>
-            <li><a id="">Frequently Asked Questions</a></li>
+            <li><a href="/faqPage">Frequently Asked Questions</a></li>
             <li><a id="logoutMobile">Logout</a></li>
 
           </ul>
@@ -56,7 +56,7 @@
               <li><h6>Password<h6></li>
               <li><input id="loginPasswordMobile" type="password">
               </li>
-              <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button></li>
+              <li><button id="loginButtonMobile" class="btn waves-effect waves-light blue darken-3" type="button" name="action">Log In</button></li>
             </form>
           </div>
           </ul>
@@ -80,7 +80,7 @@
               <input id="loginPasswordDesktop" type="password">
             </div>
             <div class="right-align">
-              <button id="loginButtonDesktop" class="btn waves-effect waves-light blue" type="button" name="action">Log In</button>
+              <button id="loginButtonDesktop" class="btn waves-effect waves-light blue darken-3" type="button" name="action">Log In</button>
             </div>
           </form>
           <br/>
@@ -94,7 +94,7 @@
   	<div class="container" id="admin_sect">
   		
       <div class="row">
-        <div class="col s12"><h3 class="blue-text text-darken-2">Admin Login</h3></div>
+        <div class="col s12"><h3 class="blue-text text-darken-3">Admin Login</h3></div>
       </div>
       <div class="row">
         <div class="col s12">
@@ -110,7 +110,7 @@
       
         <div class="container">
           <div class="row"><div class="col s12">
-            <h4 class="blue-text text-darken-2">Check Reported Reviews</h4> 
+            <h4 class="blue-text text-darken-3">Check Reported Reviews</h4> 
           </div></div>
 
           <div class="row">

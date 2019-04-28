@@ -124,28 +124,37 @@
 
   <!-- Footer -->
 
-  <footer class="page-footer fixed-footer blue lighten-4">
-    <div class="container blue-text text-darken-4">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5>We would like to know about your experience with Verdad!</h5>
-          <p>If you have the time, please take Verdad's user experience survey.</p>
+  <footer class="page-footer blue lighten-4">
+    <?php if ($SESSION['user'] != ''): ?>
+      
+        <div class="container blue-text text-darken-4">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5>We would like to know about your experience with Verdad!</h5>
+            <p>If you have the time, please take Verdad's user experience survey.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5>Survey forms</h5>
+            <ul>
+              <?php if ($SESSION['reviewerStatus'] == true): ?>
+                
+                  <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSe5H27dQHl3CqnrcllHksT3j4jXbZ6WPln7SzQqg1GOrnJUDw/viewform?usp=sf_link">Reviewer survey form</a></li>
+                
+                <?php else: ?>
+                  <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdwBF5kpzRYhxxRDybkzbiGI3Z0PWsbhZZ28t10R3x_kS4cdw/viewform?usp=sf_link">User survey form</a></li>
+                
+              <?php endif; ?>
+            </ul>
+          </div>
         </div>
-        <div class="col l4 offset-l2 s12">
-          <h5>Survey forms</h5>
-          <ul>
-            <?php if ($SESSION['reviewerStatus'] == true): ?>
-              
-                <li><a href="#!">Reviewer survey form</a></li>
-              
-              <?php else: ?>
-                <li><a href="#!">User survey form</a></li>
-              
-            <?php endif; ?>
-          </ul>
         </div>
-      </div>
-    </div>
+      
+      <?php else: ?>
+        <div class="container blue-text text-darken-4">
+          <div class="row"><div class="col s12">Verdad is a peer review system for news articles.</div></div>
+        </div>
+      
+    <?php endif; ?>
     <div class="footer-copyright">
       <div class="container blue-text text-darken-4">
       © 2019 by Justin Aaron Rombawa

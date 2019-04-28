@@ -124,7 +124,7 @@ class MainController extends Controller{
         $web = \Web::instance();
 
 		$files = $web->receive(function($file,$formFieldName){
-		        $vardump = var_dump($file);
+		        var_dump($file);
 		        /* looks like:
 		          array(5) {
 		              ["name"] =>     string(19) "csshat_quittung.png"
@@ -148,30 +148,38 @@ class MainController extends Controller{
 		    $slug
 		);
 
-		//get filename, actually the key for first (and only) array element of $files
-		$filename =  key($files); //old path: /uploads/filename.ext
-		$username = $this->f3->get("SESSION.user");
-		$newfile = "uploads/". $username ."/profile.".pathinfo($filename)["extension"]; //new path: /uploads/current username/profile.ext
+		if($files[0] == true)
+		{	
+			//get filename, actually the key for first (and only) array element of $files
+			$filename =  key($files); //old path: /uploads/filename.ext
+			$username = $this->f3->get("SESSION.user");
+			$newfile = "uploads/". $username ."/profile.".pathinfo($filename)["extension"]; //new path: /uploads/current username/profile.ext
 
-		//create folder if not yet made
-		if (!file_exists("uploads/". $username ."/")) {
-			mkdir("uploads/". $username ."/", 0777, true);
+			//create folder if not yet made
+			if (!file_exists("uploads/". $username ."/")) {
+				mkdir("uploads/". $username ."/", 0777, true);
+			}
+
+			rename($filename, $newfile);
+
+			//change user profile path
+			$um = new UserMapper($this->db);
+			$rm = new ReviewerMapper($this->db);
+
+			$um->load(array("username = ?", $username));
+			$rm->load(array("user_fk = ?", $um->id));
+
+			$rm->profile_img_path = $newfile;
+			$rm->save();
+
+			$this->f3->set("SESSION.profileImagePath", $newfile);
+
 		}
-		
-		rename($filename, $newfile);
-
-		//change user profile path
-		$um = new UserMapper($this->db);
-		$rm = new ReviewerMapper($this->db);
-
-		$um->load(array("username = ?", $username));
-		$rm->load(array("user_fk = ?", $um->id));
-
-		$rm->profile_img_path = $newfile;
-		$rm->save();
-
-		$this->f3->set("SESSION.profileImagePath", $newfile);
-
+		else
+		{
+			$info = "Upload failed.";
+			$this->f3->set('SESSION.info', $info);
+		}
 	}
 
 	function clearInfo()

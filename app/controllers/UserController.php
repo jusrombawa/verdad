@@ -459,70 +459,78 @@ class UserController extends Controller{
             }
         );
 
-        $dir = scandir($path,SCANDIR_SORT_DESCENDING);
-
-        //echo var_dump($dir) . sizeOf($dir)-3;
-
-        $prm = new PendingReviewerMapper($this->db);
-        $pam = new PendingAffiliationMapper($this->db);
-        $um = new UserMapper($this->db);
-        $om = new OrganizationMapper($this->db);
-        
-        //write other stuff first
-        $um->load(array("username = ?",$user));
-        $userid = $um->id;
-
-        //id default auto-increment
-        $prm->profile_img_path = $path . $dir[0];
-        $prm->phone = $this->f3->get("POST.revRegPhone");
-        $prm->phone_area = $this->f3->get("POST.revRegPhoneArea");
-        $prm->user_fk = $userid;
-        //request_time default is current timestamp
-        $prm->approved_reviewer = false;
-        $prm->approved_reviewer_fk = null;
-        $prm->save();
-
-        $prm->load(array("user_fk = ?", $userid));
-
-        $pendingReviewerID = $prm->id;
-
-        $loop = sizeOf($dir) - 2;
-
-        echo json_encode($dir);
-
-        for($i = 1; $i < $loop; $i++) //last two entries are . and ..
+        if($files == true)
         {
-            //$post = $this->f3->get("POST.position1");
+            $dir = scandir($path,SCANDIR_SORT_DESCENDING);
 
-            $occupation = $this->f3->get("POST.position" . $i);
-            $orgName = $this->f3->get("POST.organization" . $i);
+            //echo var_dump($dir) . sizeOf($dir)-3;
 
-            $om->load(array("org_name = ?", $orgName));
-            //if non-existent, write new
-            if($om->dry())
+            $prm = new PendingReviewerMapper($this->db);
+            $pam = new PendingAffiliationMapper($this->db);
+            $um = new UserMapper($this->db);
+            $om = new OrganizationMapper($this->db);
+            
+            //write other stuff first
+            $um->load(array("username = ?",$user));
+            $userid = $um->id;
+
+            //id default auto-increment
+            $prm->profile_img_path = $path . $dir[0];
+            $prm->phone = $this->f3->get("POST.revRegPhone");
+            $prm->phone_area = $this->f3->get("POST.revRegPhoneArea");
+            $prm->user_fk = $userid;
+            //request_time default is current timestamp
+            $prm->approved_reviewer = false;
+            $prm->approved_reviewer_fk = null;
+            $prm->save();
+
+            $prm->load(array("user_fk = ?", $userid));
+
+            $pendingReviewerID = $prm->id;
+
+            $loop = sizeOf($dir) - 2;
+
+
+            for($i = 1; $i < $loop; $i++) //last two entries are . and ..
             {
-                //id is default
-                $om->org_name = $orgName;
-                $om->save();
-                //then get new id
+                //$post = $this->f3->get("POST.position1");
+
+                $occupation = $this->f3->get("POST.position" . $i);
+                $orgName = $this->f3->get("POST.organization" . $i);
+
                 $om->load(array("org_name = ?", $orgName));
-                $orgID = $om->id;
+                //if non-existent, write new
+                if($om->dry())
+                {
+                    //id is default
+                    $om->org_name = $orgName;
+                    $om->save();
+                    //then get new id
+                    $om->load(array("org_name = ?", $orgName));
+                    $orgID = $om->id;
+                }
+                else
+                    $orgID = $om->id;
+
+                //write values to pending affiliations
+
+                //id is default
+                $pam->occupation = $occupation;
+                $pam->id_img_path = $path . $dir[$loop - $i];
+                $pam->organization_fk = $orgID;
+                $pam->pending_reviewer_fk = $pendingReviewerID;
+                $pam->save();
+
+                //don't forget to reset
+                $om->reset();
+                $pam->reset();
             }
-            else
-                $orgID = $om->id;
-
-            //write values to pending affiliations
-
-            //id is default
-            $pam->occupation = $occupation;
-            $pam->id_img_path = $path . $dir[$loop - $i];
-            $pam->organization_fk = $orgID;
-            $pam->pending_reviewer_fk = $pendingReviewerID;
-            $pam->save();
-
-            //don't forget to reset
-            $om->reset();
-            $pam->reset();
+            echo true;
+        }
+        else
+        {
+            //file upload failed
+            echo false;
         }
     }
 
