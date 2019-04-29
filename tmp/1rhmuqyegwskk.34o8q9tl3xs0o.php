@@ -155,6 +155,7 @@
                 <?php else: ?>
                   <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdwBF5kpzRYhxxRDybkzbiGI3Z0PWsbhZZ28t10R3x_kS4cdw/viewform?usp=sf_link">User survey form</a></li>
                 
+                <li>Encountered a bug? Send an email to verdadnewsreview@gmail.com</li>
               <?php endif; ?>
             </ul>
           </div>
@@ -163,7 +164,8 @@
       
       <?php else: ?>
         <div class="container blue-text text-darken-4">
-          <div class="row"><div class="col s12">Verdad is a peer review system for news articles.</div></div>
+          <div class="row"><div class="col s12"><h5>Verdad is a peer review system for news articles.</h5></div></div>
+          <div class="row"><div class="col s12">Encountered a bug? Send an email to verdadnewsreview@gmail.com</div></div>
         </div>
       
     <?php endif; ?>
@@ -190,7 +192,7 @@
           <input type="file" name="fileToUpload" id="fileToUpload">
         </div>
         <div class="row">
-          <div class="col s12"><span class="red-text">Caution: Please crop the image first before uploading. There is currently an issue with uploads of unedited images not working. I am working to fix it as soon as possible. Thank you for your patience.</span></div>
+          <div class="col s12"><span class="red-text">Caution: Please crop the image first before uploading. There is currently an issue with uploads of unedited images not working. I am working to fix it as soon as possible. If you have further questions, please send an email at verdadnewsreview@gmail.com. Thank you for your patience.</span></div>
         </div>
       </div>
       <div class="modal-footer">

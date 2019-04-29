@@ -131,7 +131,7 @@
           <div class="icon-block">
             <h5 class="center">Community-Driven Fact Checking</h5>
 
-            <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p class="light">Verdad relies on the power of the community. All articles are submitted by users and they are verified for truthfulness by verified reviewers.</p>
           </div>
         </div>
 
@@ -139,7 +139,7 @@
           <div class="icon-block">
             <h5 class="center">Reliable and Unbiased</h5>
 
-            <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p class="light">We strive to be reliable and unbiased in our fact-checking, so we welcome everyone in the community in the fight against fake news, despite political leanings. At the same time, we make sure that verified reviewers are qualified enough to fact-check news stories.</p>
           </div>
         </div>
 
@@ -147,7 +147,7 @@
           <div class="icon-block">
             <h5 class="center">Free... As The Truth Should Be</h5>
 
-            <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p class="light">We envision Verdad to be free both as free beer and as free speech. We won't ask for monetize the service, and we will not censor people based solely on political beliefs.</p>
           </div>
         </div>
       </div>
