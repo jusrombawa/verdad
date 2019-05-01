@@ -263,7 +263,7 @@ class UserController extends Controller{
             //set up SMTP
             $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "philtyphilphilantropist" );
 
-            $txt = "Hello " . $regFirstName . "! It seems that you are trying to register to Verdad again. To start using Verdad, please click on the verify account link bellow the register button then enter your verification code below. Thank you.\n\n\n " . $rando . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
+            $txt = "Hello " . $regFirstName . "! It seems that you are trying to register to Verdad again. To start using Verdad, please click on the verify account link bellow the register button then enter your verification code below. Thank you.\n\n\n " . $pm->verification_code . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
 
             $smtp->set("From", 'verdadnewsreview@gmail.com');
             $smtp->set("To",  $regEmail);
