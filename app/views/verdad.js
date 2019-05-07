@@ -688,8 +688,8 @@ $(document).ready(function(){
             alert("Please input a valid email address.");
         else if(regFirstName == '')
             alert("Please input your first name.");
-        else if(regMiddleName == '')
-            alert("Please input your middle name.");
+        /*else if(regMiddleName == '')
+            alert("Please input your middle name.");*/
         else if(regLastName == '')
             alert("Please input your last name.");
         else if(!suffixMatch && regNameSuffix != '')
