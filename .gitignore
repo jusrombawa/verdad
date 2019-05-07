@@ -1,6 +1,7 @@
 #Sensitive info
 uploads
 sslforfree
+/app/controllers/
 
 #Cache
 tmp
@@ -15,3 +16,5 @@ app/lib
 *.png
 *.jpeg
 *.gif
+app/controllers/UserController.php
+app/controllers/AdminController.php

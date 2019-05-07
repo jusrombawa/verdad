@@ -142,7 +142,7 @@
 	    	$username = $um->username;
 	    	$email = $um->email;
 
-	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "philtyphilphilantropist" );
+	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "thepresscorpse" );
 
 			$txt = "Hello " . $username . "! We would like to inquire further about your registration as reviewer for Verdad. Specifically, we would like to ask the following: \n\n" . $inquiry . "\n\nYou may send your reply to the inquiry to this email. Thank you.";
 
@@ -174,7 +174,7 @@
 	    	$username = $um->username;
 	    	$email = $um->email;
 
-			$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "philtyphilphilantropist" );
+			$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "thepresscorpse" );
 
 			$txt = "Hello " . $username . ". We regret to inform you that your registration as reviewer has been denied. Your registration has been denied because of the following: \n\n" . $reason . "\n\nYou may still contribute to the community by submitting articles for review. You may also try to register as a reviewer again. If you have any concerns, please reply to this email. Thank you.";
 
@@ -252,7 +252,7 @@
 
 	    	//send email
 
-	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "philtyphilphilantropist" );
+	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "thepresscorpse" );
 
 			$txt = "Hello " . $username . "! We would like to inform you that your registration as reviewer has been approved. You may now review articles for Verdad. You may also contribute to the community by submitting articles for review. If you have any concerns, please reply to this email. Thank you.";
 
