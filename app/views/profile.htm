@@ -191,9 +191,9 @@
           Select image to upload:
           <input type="file" name="fileToUpload" id="fileToUpload">
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col s12"><span class="red-text">Caution: Please crop the image first before uploading. There is currently an issue with uploads of unedited images not working. I am working to fix it as soon as possible. If you have further questions, please send an email at verdadnewsreview@gmail.com. Thank you for your patience.</span></div>
-        </div>
+        </div> -->
       </div>
       <div class="modal-footer">
         <a class="modal-close waves-effect waves-blue btn-flat">Cancel</a>
