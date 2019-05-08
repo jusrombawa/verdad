@@ -459,11 +459,15 @@ class UserController extends Controller{
             }
         );
 
+        //echo var_dump($files);
+
         if($files == true)
         {
             $dir = scandir($path,SCANDIR_SORT_DESCENDING);
 
             //echo var_dump($dir) . sizeOf($dir)-3;
+
+            $firstfile = basename($dir[0], "." . pathinfo($dir[0])['extension']); //get first file w/o file extension
 
             $prm = new PendingReviewerMapper($this->db);
             $pam = new PendingAffiliationMapper($this->db);
@@ -475,7 +479,19 @@ class UserController extends Controller{
             $userid = $um->id;
 
             //id default auto-increment
-            $prm->profile_img_path = $path . $dir[0];
+            //if first file is profileUpload, then proceed and make i = 1
+            if($firstfile == 'profileUpload'){
+                $prm->profile_img_path = $path . $dir[0];
+            }
+            //else make empty then i = 0;
+            else{
+                //copy default profile image
+                copy("uploads/default_profile.png", $path."profileUpload.png");
+                //refresh $dir
+                $dir = scandir($path,SCANDIR_SORT_DESCENDING);
+                $prm->profile_img_path = $path.$dir[0];
+            }
+            
             $prm->phone = $this->f3->get("POST.revRegPhone");
             $prm->phone_area = $this->f3->get("POST.revRegPhoneArea");
             $prm->user_fk = $userid;
@@ -490,13 +506,11 @@ class UserController extends Controller{
 
             $loop = sizeOf($dir) - 2;
 
-
+            
             for($i = 1; $i < $loop; $i++) //last two entries are . and ..
             {
-                //$post = $this->f3->get("POST.position1");
-
-                $occupation = $this->f3->get("POST.position" . $i);
-                $orgName = $this->f3->get("POST.organization" . $i);
+                $occupation = $this->f3->get("POST.position" . ($i-1));
+                $orgName = $this->f3->get("POST.organization" . ($i-1));
 
                 $om->load(array("org_name = ?", $orgName));
                 //if non-existent, write new
@@ -513,7 +527,6 @@ class UserController extends Controller{
                     $orgID = $om->id;
 
                 //write values to pending affiliations
-
                 //id is default
                 $pam->occupation = $occupation;
                 $pam->id_img_path = $path . $dir[$loop - $i];

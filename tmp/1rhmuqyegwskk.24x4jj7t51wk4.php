@@ -148,9 +148,9 @@
   <div id="termsModal" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Terms and Conditions</h4>
-      <p>By clicking on "I agree", the user agrees to give their personal information to Verdad. As user, Verdad requires only the user's email address and full name, and as reviewer, Verdad requires the user's office phone number , an optional profile picture, and information about their occupations/affiliations. These data are only used to identify and contact the user during Verdad's test run, and will be deleted at the end of the test (latest on May 30, 2019).<br/><br/>
+      <p>By clicking on "I agree", the user agrees to give their personal information to Verdad. As user, Verdad requires only the user's email address and full name, and as reviewer, Verdad requires the user's office phone number , an optional profile picture, and information about their occupations/affiliations. These data are only used to identify and contact the user during Verdad's test run, and will be deleted at the end of the test (latest on May 30, 2019). If anyone asked for your personal information beyond what is asked from the website, after the test run, or not through our official email address (verdadnewsreview@gmail.com), please do not give any information to them and notify us immediately.<br/><br/>
 
-      Under the Republic Act 10173 AKA The Data Privacy Act of 2012, I, Justin Aaron S. Rombawa, am tasked to safeguard your data. In case of a data breach from the system, I personally will face any legal repercussions.<br/><br/>
+      Under the Republic Act 10173 AKA The Data Privacy Act of 2012, I, Justin Aaron S. Rombawa, am tasked to safeguard your data. In case of a data breach to the system, I personally will face any legal repercussions caused by my inability to protect your data.<br/><br/>
 
       These terms will be updated if the system will be implemented as a continuous service.
       </p>

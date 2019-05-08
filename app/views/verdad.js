@@ -845,26 +845,26 @@ $(document).ready(function(){
         });
     });
 
-    affiliationcounter = 1;
+    affiliationcounter = 0;
 
     $("#add-affiliation").click(function(){
 
         text = '<div class="row">';
 
             text += '<div class="col s6">';
-                text += '<input id="position'+affiliationcounter+'" name="position'+affiliationcounter+'" class="regRevPosition" type="text"> ';
+                text += '<input id="position'+affiliationcounter+'" name="position'+affiliationcounter+'" class="revRegPosition" type="text"> ';
                 text += '<label for="position'+affiliationcounter+'">Position</label>'
             text += '</div>';
 
             text += '<div class="col s6">';
-                text += '<input id="organization'+affiliationcounter+'" name="organization'+affiliationcounter+'" class="regRevOrganization" type="text"> ';
+                text += '<input id="organization'+affiliationcounter+'" name="organization'+affiliationcounter+'" class="revRegOrganization" type="text"> ';
                 text += '<label for="organization'+affiliationcounter+'">Organization</label>'
             text += '</div>';
         text += '</div>';
 
         text += '<div class="row">';
             text += '<div class="col s12"><h6 class="blue-text text-darken-3">Scanned copy/photograph of organization ID</h6>';
-            text += '<input type="file" name="orgIDupload'+affiliationcounter+'" id="orgIDupload"></div>'
+            text += '<input type="file" name="orgIDupload'+affiliationcounter+'" id="orgIDupload" class="orgIDupload"></div>'
         text += '</div>';
 
 
@@ -876,36 +876,59 @@ $(document).ready(function(){
         /*var positions = $(".regRevPosition").map(function(){ return $(this).val().trim()}).get(); //get values from regRevPosition class then put into array
         var organizations = $(".regRevOrganization").map(function(){ return $(this).val().trim()}).get();*/
 
+        //check affiliations
+        countedPosition = 0;
+        countedOrganization = 0;
+        $(".revRegPosition").each(function(i){
+            if($(this).val().trim() != '')
+                countedPosition++;
+        });
+        //check organizations
+        $(".revRegOrganization").each(function(i){
+            if($(this).val().trim() != '')
+                countedOrganization++;
+        });
 
-        var form = $("#revRegForm")[0];
-        if(form.length > 0)
+        if($("#revRegPhone").val().trim() == '')
+            alert("Please input your phone number.")
+        else if(affiliationcounter == 0)
+            alert("Please click on Add Affiliation to add an affiliation.")
+        else if(countedPosition < affiliationcounter)
+            alert("Please fill out all position fields.")
+        else if(countedOrganization < affiliationcounter)
+            alert("Please fill out all organization fields.")
+        else
         {
-            var data = new FormData(form);
-            $.each(form.files, function(k,file){
-                data.append('form[]', file);
-            });
-            $.ajax({
-                type: "POST",
-                enctype: "multipart/form-data",
-                url: "/registerReviewer",
-                data: data,
-                processData: false,
-                contentType: false,
-                cache: false,
-                timeout: 600000,
-                success: function(data){
-                    if(data == true)
-                        window.location.assign("/revSignupPending");
-                    else
-                        alert("Photo upload failed.")
-                },
-                error: function(jqXHR, exception)
-                {
-                    alert(jqXHR.responseText);
-                }
+            var form = $("#revRegForm")[0];
+            if(form.length > 0)
+            {
+                var data = new FormData(form);
+                $.each(form.files, function(k,file){
+                    data.append('form[]', file);
+                });
+                $.ajax({
+                    type: "POST",
+                    enctype: "multipart/form-data",
+                    url: "/registerReviewer",
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 600000,
+                    success: function(data){
+                        if(data == true)
+                            window.location.assign("/revSignupPending");
+                        else
+                            alert("Photo upload failed.")
+                    },
+                    error: function(jqXHR, exception)
+                    {
+                        alert(jqXHR.responseText);
+                    }
 
 
-            });
+                });
+            }
         }
 
     });
