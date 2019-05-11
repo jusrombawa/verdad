@@ -16,5 +16,6 @@ app/lib
 *.png
 *.jpeg
 *.gif
-app/controllers/UserController.php
-app/controllers/AdminController.php
+
+
+email pass.txt

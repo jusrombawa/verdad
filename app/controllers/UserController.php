@@ -261,7 +261,13 @@ class UserController extends Controller{
         {
             //send verification email
             //set up SMTP
-            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "thepresscorpse" );
+
+            //get email password from file
+            $fh = fopen('email pass.txt','r');
+            $emailpassword = fgets($fh);
+            fclose($fh);
+
+            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", $emailpassword);
 
             $txt = "Hello " . $regFirstName . "! It seems that you are trying to register to Verdad again. To start using Verdad, please click on the verify account link bellow the register button then enter your verification code below. Thank you.\n\n\n " . $pm->verification_code . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
 
@@ -431,119 +437,131 @@ class UserController extends Controller{
     function registerReviewer()
     {
         $user = $this->f3->get("SESSION.user");
-        $path = 'uploads/' . $user . "/";
 
-        $this->f3->set('UPLOADS', $path);
+        //check if user already submitted a pending reviewer registration
+        $um = new UserMapper($this->db);
+        $um->load(array("username = ?", $user));
 
-        $overwrite = true;
-        $slug = true;
+        $prm = new PendingReviewerMapper($this->db);
+        $prm->load(array("user_fk = ? AND approved_reviewer = 0", $um->id));
 
-        $web = \Web::instance();
-
-        $files = $web->receive(function($file,$formFieldName){
-                var_dump($file);
-
-                //check if image
-                /*if($file["type"] != "image/png" || $file["type"] != "image/gif" || $file["type"] != "image/jpeg" || $file["type"] != "image/pjpeg")
-                    return false;*/
-                //check if < 8 MB
-                if($file['size'] > (8 * 1024 * 1024))
-                   return false;
-
-                return true;
-            },
-            $overwrite,
-            function($fileBaseName, $formFieldName){
-                // input field name + file extension
-                return $formFieldName . ".". pathinfo($fileBaseName, PATHINFO_EXTENSION);
-            }
-        );
-
-        //echo var_dump($files);
-
-        if($files == true)
+        if(!$prm->dry())
         {
-            $dir = scandir($path,SCANDIR_SORT_DESCENDING);
-
-            //echo var_dump($dir) . sizeOf($dir)-3;
-
-            $firstfile = basename($dir[0], "." . pathinfo($dir[0])['extension']); //get first file w/o file extension
-
-            $prm = new PendingReviewerMapper($this->db);
-            $pam = new PendingAffiliationMapper($this->db);
-            $um = new UserMapper($this->db);
-            $om = new OrganizationMapper($this->db);
-            
-            //write other stuff first
-            $um->load(array("username = ?",$user));
-            $userid = $um->id;
-
-            //id default auto-increment
-            //if first file is profileUpload, then proceed and make i = 1
-            if($firstfile == 'profileUpload'){
-                $prm->profile_img_path = $path . $dir[0];
-            }
-            //else make empty then i = 0;
-            else{
-                //copy default profile image
-                copy("uploads/default_profile.png", $path."profileUpload.png");
-                //refresh $dir
-                $dir = scandir($path,SCANDIR_SORT_DESCENDING);
-                $prm->profile_img_path = $path.$dir[0];
-            }
-            
-            $prm->phone = $this->f3->get("POST.revRegPhone");
-            $prm->phone_area = $this->f3->get("POST.revRegPhoneArea");
-            $prm->user_fk = $userid;
-            //request_time default is current timestamp
-            $prm->approved_reviewer = false;
-            $prm->approved_reviewer_fk = null;
-            $prm->save();
-
-            $prm->load(array("user_fk = ?", $userid));
-
-            $pendingReviewerID = $prm->id;
-
-            $loop = sizeOf($dir) - 2;
-
-            
-            for($i = 1; $i < $loop; $i++) //last two entries are . and ..
-            {
-                $occupation = $this->f3->get("POST.position" . ($i-1));
-                $orgName = $this->f3->get("POST.organization" . ($i-1));
-
-                $om->load(array("org_name = ?", $orgName));
-                //if non-existent, write new
-                if($om->dry())
-                {
-                    //id is default
-                    $om->org_name = $orgName;
-                    $om->save();
-                    //then get new id
-                    $om->load(array("org_name = ?", $orgName));
-                    $orgID = $om->id;
-                }
-                else
-                    $orgID = $om->id;
-
-                //write values to pending affiliations
-                //id is default
-                $pam->occupation = $occupation;
-                $pam->id_img_path = $path . $dir[$loop - $i];
-                $pam->organization_fk = $orgID;
-                $pam->pending_reviewer_fk = $pendingReviewerID;
-                $pam->save();
-
-                //don't forget to reset
-                $om->reset();
-                $pam->reset();
-            }
-            echo true;
+            echo "You still have a pending reviewer registration.";
+            echo false;
         }
+
         else
         {
-            //file upload failed
-            echo false;
+            $path = 'uploads/' . $user . "/";
+
+            $this->f3->set('UPLOADS', $path);
+
+            $overwrite = true;
+            $slug = true;
+
+            $web = \Web::instance();
+
+            $files = $web->receive(function($file,$formFieldName){
+                    var_dump($file);
+
+                    //check if < 8 MB
+                    if($file['size'] > (8 * 1024 * 1024))
+                       return false;
+
+                    return true;
+                },
+                $overwrite,
+                function($fileBaseName, $formFieldName){
+                    // input field name + file extension
+                    return $formFieldName . ".". pathinfo($fileBaseName, PATHINFO_EXTENSION);
+                }
+            );
+
+            if($files == true)
+            {
+                $dir = scandir($path,SCANDIR_SORT_DESCENDING);
+
+                $firstfile = basename($dir[0], "." . pathinfo($dir[0])['extension']); //get first file w/o file extension
+
+                $prm = new PendingReviewerMapper($this->db);
+                $pam = new PendingAffiliationMapper($this->db);
+                $um = new UserMapper($this->db);
+                $om = new OrganizationMapper($this->db);
+                
+                //write other stuff first
+                $um->load(array("username = ?",$user));
+                $userid = $um->id;
+
+                //id default auto-increment
+                //if first file is profileUpload, then proceed and make i = 1
+                if($firstfile == 'profileUpload'){
+                    $prm->profile_img_path = $path . $dir[0];
+                }
+                //else make empty then i = 0;
+                else{
+                    //copy default profile image
+                    copy("uploads/default_profile.png", $path."profileUpload.png");
+                    //refresh $dir
+                    $dir = scandir($path,SCANDIR_SORT_DESCENDING);
+                    $prm->profile_img_path = $path.$dir[0];
+                }
+                
+                $prm->phone = $this->f3->get("POST.revRegPhone");
+                $prm->phone_area = $this->f3->get("POST.revRegPhoneArea");
+                $prm->user_fk = $userid;
+                //request_time default is current timestamp
+                $prm->approved_reviewer = false;
+                $prm->approved_reviewer_fk = null;
+                $prm->save();
+
+                $prm->load(array("user_fk = ? AND approved_reviewer = 0", $userid));
+
+                $pendingReviewerID = $prm->id;
+
+                $loop = sizeOf($dir) - 2;
+
+                
+                for($i = 1; $i < $loop; $i++) //last two entries are . and ..
+                {
+                    $occupation = $this->f3->get("POST.position" . ($i-1));
+                    $orgName = $this->f3->get("POST.organization" . ($i-1));
+
+                    $om->load(array("org_name = ?", $orgName));
+                    //if non-existent, write new
+                    if($om->dry())
+                    {
+                        //id is default
+                        $om->org_name = $orgName;
+                        $om->save();
+                        //then get new id
+                        $om->load(array("org_name = ?", $orgName));
+                        $orgID = $om->id;
+                    }
+                    else
+                        $orgID = $om->id;
+
+                    //write values to pending affiliations
+                    //id is default
+                    $pam->occupation = $occupation;
+                    $pam->id_img_path = $path . $dir[$loop - $i];
+                    $pam->organization_fk = $orgID;
+                    $pam->pending_reviewer_fk = $pendingReviewerID;
+                    $pam->save();
+
+                    //don't forget to reset
+                    $om->reset();
+                    $pam->reset();
+                }
+                ob_end_clean();
+                echo true;
+            }
+            else
+            {
+                //file upload failed
+                echo "Photo upload failed";
+                
+            }
         }
     }
 

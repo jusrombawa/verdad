@@ -133,6 +133,11 @@
 	    	$id = $this->f3->get("POST.inquireID");
 	    	$inquiry = $this->f3->get("POST.inquireText");
 
+	    	//get email password from file
+			$fh = fopen('email pass.txt','r');
+			$emailpassword = fgets($fh);
+			fclose($fh);
+
 	    	$prm = new PendingReviewerMapper($this->db);
 	    	$um = new UserMapper($this->db);
 
@@ -142,7 +147,7 @@
 	    	$username = $um->username;
 	    	$email = $um->email;
 
-	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "thepresscorpse" );
+	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", $emailpassword);
 
 			$txt = "Hello " . $username . "! We would like to inquire further about your registration as reviewer for Verdad. Specifically, we would like to ask the following: \n\n" . $inquiry . "\n\nYou may send your reply to the inquiry to this email. Thank you.";
 
@@ -156,6 +161,7 @@
 			else
 				echo $smtp->log();
 
+
 	    }
 
 	    function denyRegistration()
@@ -167,6 +173,12 @@
 	    	$pam = new PendingAffiliationMapper($this->db);
 	    	$um = new UserMapper($this->db);
 
+	    	//get email password from file
+			$fh = fopen('email pass.txt','r');
+			$emailpassword = fgets($fh);
+			fclose($fh);
+
+
 	    	$prm->load(array("id=?", $id));
 	    	$pam->load(array("pending_reviewer_fk = ?", $prm->id));
 	    	$um->load(array("id=?", $prm->user_fk));
@@ -174,7 +186,7 @@
 	    	$username = $um->username;
 	    	$email = $um->email;
 
-			$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "thepresscorpse" );
+			$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", $emailpassword );
 
 			$txt = "Hello " . $username . ". We regret to inform you that your registration as reviewer has been denied. Your registration has been denied because of the following: \n\n" . $reason . "\n\nYou may still contribute to the community by submitting articles for review. You may also try to register as a reviewer again. If you have any concerns, please reply to this email. Thank you.";
 
@@ -252,7 +264,13 @@
 
 	    	//send email
 
-	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "thepresscorpse" );
+	    	//get email password from file
+			$fh = fopen('email pass.txt','r');
+			$emailpassword = fgets($fh);
+			fclose($fh);
+
+
+	    	$smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", $emailpassword);
 
 			$txt = "Hello " . $username . "! We would like to inform you that your registration as reviewer has been approved. You may now review articles for Verdad. You may also contribute to the community by submitting articles for review. If you have any concerns, please reply to this email. Thank you.";
 

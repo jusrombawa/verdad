@@ -824,6 +824,9 @@ $(document).ready(function(){
         var form = $("#change-pic-form")[0];
         var data = new FormData(form);
 
+        var fileVal=document.getElementById("profileUpload");
+        alert(fileVal.value);
+
         $.ajax({
             type: "POST",
             enctype: "multipart/form-data",
@@ -919,7 +922,7 @@ $(document).ready(function(){
                         if(data == true)
                             window.location.assign("/revSignupPending");
                         else
-                            alert("Photo upload failed.")
+                            alert(data);
                     },
                     error: function(jqXHR, exception)
                     {
