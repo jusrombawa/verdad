@@ -63,6 +63,7 @@ class UserController extends Controller{
     function submitArticle()
     {
         $am = new ArticleMapper($this->db);
+        $am2 = new ArticleMapper($this->db);
         $pm = new PublisherMapper($this->db);
 
         $articleURL = $this->f3->get('POST.articleURL');
@@ -73,47 +74,57 @@ class UserController extends Controller{
         $articlePubTime = $this->f3->get('POST.articlePubTime');
         $hostURL = $this->f3->get('POST.hostURL');
 
-        //id is autoincrement
-        $am->title = $articleTitle;
-        $am->author = $articleAuthor;
-        $am->url = $articleURL;
+        $am2->load(array("url=?", $articleURL));
 
-        //write publisher to publish_sites
-        //check if publisher is already in database
-        $publisher = $pm->load(array("url=?",$hostURL));
-
-        //new publisher, add to publish_sites then write new id as fk to article publisher
-        if($pm->dry())
+        if($am2->dry())
         {
-            //use new mapper just to be safe
-            $pm2 = new PublisherMapper($this->db);
-            //id is auto increment
-            $pm2->name = $articlePublisher;
-            $pm2->url = $hostURL;
-            //apparently I didn't need to use regex, just regular-ass JS URL stuff. Yaaaaay!
-            //but I think imma have to deal with some multiple url bullshit. Example: opinion.inquirer.net vs newsinfo.inquirer.net are all inquirer.
-            //avg_score and published_by fk are all null by default
-            $pm2->save();
-            $am->publisher_fk = $pm2->id;
-            
+            //id is autoincrement
+            $am->title = $articleTitle;
+            $am->author = $articleAuthor;
+            $am->url = $articleURL;
+
+            //write publisher to publish_sites
+            //check if publisher is already in database
+            $publisher = $pm->load(array("url=?",$hostURL));
+
+            //new publisher, add to publish_sites then write new id as fk to article publisher
+            if($pm->dry())
+            {
+                //use new mapper just to be safe
+                $pm2 = new PublisherMapper($this->db);
+                //id is auto increment
+                $pm2->name = $articlePublisher;
+                $pm2->url = $hostURL;
+                //apparently I didn't need to use regex, just regular-ass JS URL stuff. Yaaaaay!
+                //but I think imma have to deal with some multiple url bullshit. Example: opinion.inquirer.net vs newsinfo.inquirer.net are all inquirer.
+                //avg_score and published_by fk are all null by default
+                $pm2->save();
+                $am->publisher_fk = $pm2->id;
+                
+            }
+            //found in publish_sites
+            else
+            {
+                $am->publisher_fk = $publisher->id;
+                //note from future Jus, CHECK THE SPELLINGS OF YOUR VARIABLES.
+                //NOTE FROM JUS FROM SLIGHTLY MORE FUTURE THAN THAT PREVIOUS FUTURE GUY, FUCKING CHECK YOUR VARIABLE NAMES CHRIST PHP HAS DYNAMIC VARIABLES IT DOESN'T THROW AN ERROR WHEN IT CAN'T FIND WHERE SOMETHING WAS DECLARED
+            }
+
+            $am->publish_date = $articlePubDate;
+            $am->publish_time = $articlePubTime;
+            //submit_date is current_timestamp
+            //avg_score is null
+            //note to self, make sure js deals with null satire and opinion fields because they should both be null by default
+            $am->save();
+
+            $info = "Article has been submitted.";
+            $this->f3->set('SESSION.info', $info);
         }
-        //found in publish_sites
         else
         {
-            $am->publisher_fk = $publisher->id;
-            //note from future Jus, CHECK THE SPELLINGS OF YOUR VARIABLES.
-            //NOTE FROM JUS FROM SLIGHTLY MORE FUTURE THAN THAT PREVIOUS FUTURE GUY, FUCKING CHECK YOUR VARIABLE NAMES CHRIST PHP HAS DYNAMIC VARIABLES IT DOESN'T THROW AN ERROR WHEN IT CAN'T FIND WHERE SOMETHING WAS DECLARED
+            $info = "The article you tried to submit was already submitted to Verdad for review. Please submit another article.";
+            $this->f3->set('SESSION.info', $info);   
         }
-
-        $am->publish_date = $articlePubDate;
-        $am->publish_time = $articlePubTime;
-        //submit_date is current_timestamp
-        //avg_score is null
-        //note to self, make sure js deals with null satire and opinion fields because they should both be null by default
-        $am->save();
-
-        $info = "Article has been submitted.";
-        $this->f3->set('SESSION.info', $info);
     }
 
     function submitReview(){
@@ -158,6 +169,7 @@ class UserController extends Controller{
             $rm->opinion_flag = $reviewOpinion;
             //erroneous flag is default false
             $rm->erroneous_flag = false;
+            //datetime_submitted is default current timestamp
 
             $rm->save();
 
@@ -299,7 +311,12 @@ class UserController extends Controller{
             
             //send verification email
             //set up SMTP
-            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", "thepresscorpse" );
+            //get email password from file
+            $fh = fopen('email pass.txt','r');
+            $emailpassword = fgets($fh);
+            fclose($fh);
+
+            $smtp = new SMTP ( "smtp.gmail.com", 465, "SSL", "verdadnewsreview@gmail.com", $emailpassword);
 
             $txt = "Hello " . $regFirstName . "! Thank you for registering to Verdad News Review. To verify your email, please copy the code below to the prompt given after your user registration. Thank you.\n\n\n " . $rando . "\n\nIf you have not signed up for Verdad News Review, please reply to this message stating so. Thank you.";
 

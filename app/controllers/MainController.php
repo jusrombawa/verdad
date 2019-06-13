@@ -90,6 +90,9 @@ class MainController extends Controller{
 				//push review id in case of report
 				array_push($review_entry, $rm->id);
 
+				//push datetime_submitted
+				array_push($review_entry, $rm->datetime_submitted);
+
 				array_push($review_list,$review_entry);
 				$rm->next();
 		

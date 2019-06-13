@@ -109,7 +109,7 @@
           </div>
           <div class="col s6">
             <input id="regMiddleName" type="text">
-            <label for="regMiddleName">Middle Name</label>
+            <label for="regMiddleName">Middle Name (optional)</label>
           </div>
         </div>
 
@@ -121,7 +121,7 @@
 
           <div class="col s3">
             <input id="regNameSuffix" type="text">
-            <label for="regNameSuffix">Name Suffix</label>
+            <label for="regNameSuffix">Name Suffix (optional)</label>
           </div>
         </div>
 

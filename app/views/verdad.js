@@ -7,6 +7,7 @@ $(document).ready(function(){
     $('.fixed-action-btn').floatingActionButton();
     $('.materialboxed').materialbox();
     $('.tooltipped').tooltip();
+    $('.datepicker').datepicker();
 
     //hide initially hidden components
     $("#articles_sect").hide();
@@ -155,14 +156,37 @@ $(document).ready(function(){
                         //check for not enough ratings (null for now)
                         if(articleList[i][4] == null)
                             text += "No reviews yet <br/>"
-                        else
-                            text += "Average score: " + articleList[i][4] + "<br/>";
+                        else{
+                            text += "Average score: " + articleList[i][4]+ "/5" + "<br/>";
+                            text += "Total reviews: " + articleList[i][8].length + "<br/>";
+                        }
                         text += "</div>"
 
                         //src=" + articleList[i][7] + "
                         text += "<div class='collapsible-body'>";
 
-                        //check if satire and/or opinion
+                        //give review meaning
+                        switch(Math.floor(articleList[i][4])){
+                            case 1:
+                                text += "<i>The article is completely false and may intentionally deceive its readers.</i>";
+                                break;
+                            case 2:
+                                text += "<i>The article is false with only slight hints of truth and may be misleading.</i>";
+                                break;
+                            case 3:
+                                text += "<i>The article is only partially truthful and may be misleading.</i>";
+                                break;
+                            case 4:
+                                text += "<i>The article is mostly truthful with only minor inconsistencies.</i>";
+                                break;
+                            case 5:
+                                text += "<i>The article is truthful and trustworthy.</i>";
+                                break;
+                            default:
+                                text += "<i>The article has not been rated yet by a reviewer.</i>"
+                        }
+
+                        text += "<br/><br/>"
 
                         if(isMobile){
                             text += "<a href='"+ articleList[i][7] +"' target='_blank' rel='noopener noreferrer'>Read article</a><br/><br/>";
@@ -182,10 +206,10 @@ $(document).ready(function(){
                         text += "Published by: " + articleList[i][3];
                         text += "<br/>";
 
-                        if(articleList[i][5] && articleList[i][6]) text += "Satire & Opinion";
-                        else if(articleList[i][5] && !articleList[i][6]) text += "Satire";
-                        else if(!articleList[i][5] && articleList[i][6]) text += "Opinion";
-                        else text += "Not satire or opinion";
+                        if(articleList[i][5] && articleList[i][6]) text += "<i>Satire & Opinion</i>";
+                        else if(articleList[i][5] && !articleList[i][6]) text += "<i>Satire</i>";
+                        else if(!articleList[i][5] && articleList[i][6]) text += "<i>Opinion</i>";
+                        else text += "<i>Not satire or opinion</i>";
 
                         text += "<br/><br/>"
                         
@@ -204,24 +228,27 @@ $(document).ready(function(){
                                 text += "<div class='row divider'></div>"
                                 text += "<div class='row'>"
                                 //score
-                                text += "Rating: " + articleList[i][8][k][0]+" stars<br/>";
+                                text += "Rating: " + articleList[i][8][k][0]+"/5 stars<br/>";
                                 //link to reviewer's profile
                                 text += "Review written by: <a id="+articleList[i][8][k][4]+" class='user-profile'>" + articleList[i][8][k][4] + "</a>";
                                 //comments
                                 text += "<p><i>" + articleList[i][8][k][1] +"</i></p>";
+                                //datetime submitted
+                                revDate = new Date(articleList[i][8][k][6]);
+                                text += "Review submitted at: " + revDate.toDateString() + "<br/>";
                                 //check if satire or not
                                 if(articleList[i][8][k][2] == true)
-                                    text += "Satire <br/>";
+                                    text += "<i>Satire</i><br/>";
                                 //check if opinion or not
                                 if(articleList[i][8][k][3] == true)
-                                    text += "Opinion <br/>";
+                                    text += "<i>Opinion</i><br/>";
                                 //add in report button
                                 if($("#loggedInUser").text().trim() != articleList[i][8][k][4] && $("#reviewerStatus").text() == 1)
                                 {
                                     text += '<a id="report' + articleList[i][8][k][5] + '"class="report-button waves-effect waves-blue blue darken-3 btn"><i class="material-icons">report</i> Report</a><br/><br/>'
                                 }
                                 //end of row
-                                text += "<div class='row divider'></div>"
+                                /*text += "<div class='row divider'></div>"*/
                                 text +="</div>";
                             }
                         }                        
